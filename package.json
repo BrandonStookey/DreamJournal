@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha",
     "start": "grunt build && nodemon server/server.js",
-    "postinstall": "bower install"
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,9 @@
     "url": "https://github.com/BrandonStookey/dreamjournal/issues"
   },
   "homepage": "https://github.com/BrandonStookey/dreamjournal#readme",
-
+    "engines": {
+    "node": "0.12.7"
+  },
   "dependencies": {
     "bluebird": "^3.3.1",
     "body-parser": "^1.15.0",
