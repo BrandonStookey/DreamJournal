@@ -33,6 +33,11 @@ module.exports = function(grunt) {
         force: true
       }
     },
+    nodemon: {
+      dev: {
+        script: 'server/server.js'
+      }
+    },    
 
     watch: {
       scripts: {
@@ -146,9 +151,7 @@ module.exports = function(grunt) {
     'upload'
   ]);  
  
-  grunt.registerTask('heroku:production', [
-    'build'
-  ]);
+  grunt.registerTask('heroku:production', 'build');
 
 
 };
