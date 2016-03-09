@@ -1,0 +1,4 @@
+node_modules/
+gamePlan/
+public/client/assets/libs
+.DS_Store
