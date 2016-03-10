@@ -30,11 +30,6 @@ var userSchema = mongoose.Schema({
     unique: false,
     required: true
   },
-  userName: { //use email for login instead of a specific username
-    type: String,
-    unique: true,
-    required: true
-  },
   email: {
     type: String,
     unique: true,
@@ -45,31 +40,16 @@ var userSchema = mongoose.Schema({
     required: true
   },
   post: {
-    type: Array
-    //It will store messages in an array, an array of string
-      //storing an array of objects
-      //array of posts
-        //blog title, post title, date, post itself
-    //Somehow include date if I want to order it by date
-  },
-  dreams:{
-  	type: Number
-    //PLACED DREAMS, NIGHTMARE and NODREAMS as a post on POST
-    //How can I store objects into an array in mongo 
-    //What if I wanted it to be a nightMare
-      //might be better to have
-      //type on the post
-      //a type can be number,0 will be a dream, 1 can be dreams, 2 nightMare
-        //user can change it on the post
-        //a query can be used to look for posts that are dreams, nightMare or no dreams
+    type: [{
+      postTitle: String,
+      postDate: Date,
+      post: String,
+      dream: String,
+      nightmare: String,
+      noDream: String
 
+    }]
   },
-  nightMares:{
-  	type: Number
-  },
-  noDreams:{
-  	type: Number
-  }
 });
 
 var User = mongoose.model('User', userSchema);
