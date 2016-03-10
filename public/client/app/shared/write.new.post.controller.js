@@ -1,5 +1,5 @@
 angular.module('dreamjournal.newPost', [])
 
-.controller('newPostController', function ($scope) {
+.controller('newPostController', ['$scope', function ($scope) {
 
-})
+}]);

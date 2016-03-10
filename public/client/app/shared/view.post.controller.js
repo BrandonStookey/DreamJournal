@@ -1,5 +1,5 @@
 angular.module('dreamjournal.viewPost', [])
 
-.controller('viewPostController', function ($scope) {
+.controller('viewPostController', ['$scope', function ($scope) {
 
-})
+}]);

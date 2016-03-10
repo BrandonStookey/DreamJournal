@@ -1,5 +1,5 @@
 angular.module('dreamjournal.signup', [])
 
-.controller('signupController', function ($scope) {
+.controller('signupController', ['$scope', function ($scope) {
 
-})
+}]);

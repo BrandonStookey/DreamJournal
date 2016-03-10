@@ -1,6 +1,6 @@
 var express = require('express');
 var morgan = require('morgan');
-var db = require("./dbConfig.js");
+var db = require('./dbConfig.js');
 var bodyParser = require('body-parser');
 var routes = require('./routes');
 
