@@ -11,68 +11,68 @@ angular.module('dreamjournal', [
 ])
 .config(["$routeProvider", "$locationProvider", function($routeProvider, $locationProvider) {
   $routeProvider
-    .when("/login", {
+    .when('/login', {
       templateUrl: 'app/shared/login.view.html',
       controller: 'loginController'
     })
-    .when("/signup", {
+    .when('/signup', {
       templateUrl: 'app/shared/signup.view.html',
       controller: 'signupController'
     })
-    .when("/graph", {
+    .when('/graph', {
       templateUrl: 'app/shared/graph.view.html',
       controller: 'graphController'
     })
-    .when("/profile", {
+    .when('/profile', {
       templateUrl: 'app/shared/profile.view.html',
       controller: 'profileController'
     })
-    .when("/viewPost", {
+    .when('/viewPost', {
       templateUrl: 'app/shared/view.post.view.html',
       controller: 'viewPostController'
     })
-    .when("/newPost", {
+    .when('/newPost', {
       templateUrl: 'app/shared/write.new.post.view.html',
       controller: 'newPostController'
     })
-    .when("/", {
+    .when('/', {
       templateUrl: 'app/shared/home.view.html',
       controller: 'homeController'
     })        
 }]);
 angular.module('dreamjournal.graph', [])
 
-.controller('graphController', ["$scope", function ($scope) {
+.controller('graphController', ['$scope', function ($scope) {
 
-}])
+}]);
 angular.module('dreamjournal.home', [])
 
-.controller('homeController', ["$scope", function ($scope) {
+.controller('homeController', ['$scope', function ($scope) {
 
-}])
+}]);
 angular.module('dreamjournal.login', [])
 
-.controller('loginController', ["$scope", function ($scope) {
+.controller('loginController', ['$scope', function ($scope) {
 
-}])
+}]);
 angular.module('dreamjournal.profile', [])
 
-.controller('profileController', ["$scope", function ($scope) {
+.controller('profileController', ['$scope', function ($scope) {
 
-}])
+}]);
 angular.module('dreamjournal.signup', [])
 
-.controller('signupController', ["$scope", function ($scope) {
+.controller('signupController', ['$scope', function ($scope) {
 
-}])
+}]);
 angular.module('dreamjournal.viewPost', [])
 
-.controller('viewPostController', ["$scope", function ($scope) {
+.controller('viewPostController', ['$scope', function ($scope) {
 
-}])
+}]);
 
 angular.module('dreamjournal.newPost', [])
 
-.controller('newPostController', ["$scope", function ($scope) {
+.controller('newPostController', ['$scope', function ($scope) {
 
-}])
+}]);

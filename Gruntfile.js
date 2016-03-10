@@ -28,7 +28,8 @@ module.exports = function(grunt) {
         jshintrc: '_.jshintrc',
         ignores: [
           'public/client/assets/libs/**/*.js',
-          'public/client/assets/js/**/*.js'
+          'public/client/assets/js/**/*.js',
+          'public/client/dist/**/*.js',
         ],
         force: true
       }
@@ -131,7 +132,7 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('build', ['ngAnnotate', 'uglify','cssmin' ]);
+  grunt.registerTask('build', ['ngAnnotate', 'uglify','cssmin', 'jshint' ]);
   
   grunt.registerTask('test', ['mochaTest']);
 

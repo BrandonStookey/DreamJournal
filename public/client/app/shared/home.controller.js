@@ -1,5 +1,5 @@
 angular.module('dreamjournal.home', [])
 
-.controller('homeController', function ($scope) {
+.controller('homeController', ['$scope', function ($scope) {
 
-})
+}]);

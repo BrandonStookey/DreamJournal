@@ -1,5 +1,5 @@
 angular.module('dreamjournal.graph', [])
 
-.controller('graphController', function ($scope) {
+.controller('graphController', ['$scope', function ($scope) {
 
-})
+}]);
