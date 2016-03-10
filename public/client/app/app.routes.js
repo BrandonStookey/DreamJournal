@@ -1,3 +1,4 @@
+'use strict';
 angular.module('dreamjournal', [
   'ngRoute',
   'dreamjournal.login',
@@ -41,11 +42,16 @@ angular.module('dreamjournal', [
       controller: 'newPostController',
       requiresLogin: true      
     })
-    .when('/', {
+    .when('/home', {
       templateUrl: 'app/shared/home.view.html',
       controller: 'homeController',
       requiresLogin: true      
     })        
+    .when('/', {
+      templateUrl: 'app/shared/home.view.html',
+      controller: 'homeController',
+      requiresLogin: true      
+    })       
 }])
 .config(['authProvider', 'jwtInterceptorProvider', '$httpProvider', function (authProvider, jwtInterceptorProvider, $httpProvider) {
   // https://manage.auth0.com/#/applications/1lZ3sYfpkqI5yJkeFXYscvLsR7dnG7q2/quickstart Just In case I need a refresher
