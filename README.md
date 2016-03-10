@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/BrandonStookey/dreamjournal.png?label=ready&title=Ready)](https://waffle.io/BrandonStookey/dreamjournal)
 Project Name
 dreamjournal
 Team
