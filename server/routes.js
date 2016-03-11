@@ -1,7 +1,4 @@
-// var express = require('express');
 var app = require('./server');
-
-//Do I need the above? Since I am exporting this...?
 
 var filePath = require('path');
 var publicPath = filePath.resolve('public') + '/';
