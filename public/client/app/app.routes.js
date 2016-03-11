@@ -2,7 +2,6 @@
 angular.module('dreamjournal', [
   'ngRoute',
   'dreamjournal.login',
-  'dreamjournal.signup',
   'dreamjournal.graph',
   'dreamjournal.profile',
   'dreamjournal.viewPost',
@@ -17,10 +16,6 @@ angular.module('dreamjournal', [
     .when('/login', {
       templateUrl: 'app/shared/login.view.html',
       controller: 'loginController'
-    })
-    .when('/signup', {
-      templateUrl: 'app/shared/signup.view.html',
-      controller: 'signupController'
     })
     .when('/graph', {
       templateUrl: 'app/shared/graph.view.html',
