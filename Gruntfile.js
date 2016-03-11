@@ -132,7 +132,7 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('build', ['ngAnnotate', 'uglify','cssmin', 'jshint' ]);
+  grunt.registerTask('build', ['test', 'jshint', 'ngAnnotate', 'uglify','cssmin', ]);
   
   grunt.registerTask('test', ['mochaTest']);
 
@@ -147,7 +147,6 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    // 'test',
     'build',
     'upload'
   ]);  

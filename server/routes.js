@@ -3,7 +3,7 @@ var app = express();
 
 //Do I need the above? Since I am exporting this...?
 
-var path = require('path');
+var filePath = require('path');
 var public = path.resolve('public') + '/';
 var helpers = require(path.resolve('server/helpers'));
 var jwt = require('express-jwt');
