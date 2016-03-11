@@ -4,7 +4,7 @@
   "description": "Online dream blogging platform",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "grunt test",,
+    "test": "grunt test",
     "start": "grunt build && nodemon server/server.js",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
