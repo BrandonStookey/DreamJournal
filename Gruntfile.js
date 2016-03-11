@@ -31,7 +31,7 @@ module.exports = function(grunt) {
           'public/client/assets/js/**/*.js',
           'public/client/dist/**/*.js',
         ],
-        force: true
+        force: false
       }
     },
     nodemon: {
