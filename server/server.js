@@ -1,12 +1,13 @@
 'use strict';
+
 var express = require('express');
 var morgan = require('morgan');
-var db = require('./dbConfig.js');
+var db = require('./../db/db.js');
 var bodyParser = require('body-parser');
+
+var app = module.exports = express();
+
 var routes = require('./routes');
-
-var app = express();
-
 app.use(morgan('tiny'));
 app.use(bodyParser());
 
@@ -18,4 +19,4 @@ app.listen(port, function () {
   console.log('Listening on port ' + port);
 });
 
-// routes(app, express);
+module.exports =  app;
