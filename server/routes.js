@@ -1,5 +1,5 @@
-var express = require('express');
-var app = express();
+// var express = require('express');
+var app = require('./server');
 
 //Do I need the above? Since I am exporting this...?
 
