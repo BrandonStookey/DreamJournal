@@ -3,9 +3,9 @@ var app = express();
 
 //Do I need the above? Since I am exporting this...?
 
-var path = require('path');
-var public = path.resolve('public') + '/';
-var helpers = require(path.resolve('server/helpers'));
+var filePath = require('path');
+var publicPath = filePath.resolve('public') + '/';
+var helpers = require(filePath.resolve('server/helpers'));
 var jwt = require('express-jwt');
 
 ///////Below is the ClientID and ClientSecret in express-jwt's configuration so that it can validate and sign JWTs for you
