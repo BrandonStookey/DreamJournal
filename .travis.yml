@@ -1,3 +1,4 @@
+sudo: false
 language: node_js
 node_js:
   - '0.8'
@@ -8,9 +9,3 @@ deploy:
   api_key:
     secure: "eB8YrvPE+yZ2REn1SuRsvzl4hP9Z81oCedv4hOQMO+nsOJvCG8ncDuEdtJCnGdlDMVT5exc6p8DGPyoy+XxVzfC5ICprpyov2+/37aKTFWfrBgxSFNP48DflvMQK6nUDUr6ihW85GRSGQ0DITuz2xfstvKA1blkmcHK+oBkXXSD0OJ/AXuac497ylWGZedZraxky5vkJjIOqqI27IdPKtVtT5oJqgXEPDFYEuEbAVgAy/TBQByzgIHCCyN6l51HOiQ6B8tiPAzHUBlU1LKFSuuQpiC02cR3HybABZGzQYfPQYWqAf/lntnGvGbFus0RRId/K6z0inzAdvSnr2N8SAeYYTY1QIRKPyf4ySe3Br+oNO8j1lYzddahkmuB3MFuW/KnSA4yDd/1vOvz9vuG8MWbOo4z0imFVidSKI8/ybM/diAbX1ttR87KkgZ7haXWObAW5390XdPTxmbTFufg8FUx8cSnOsLjVGmoGVDyoJqbkJ4GvSMxHpK92m4pUTOd+IKoPIEoOKsUDluEvIob28s3T/SwnLn1tDoFSvIBoOK851kyXkPPNTn1h0X7WK/IMWxwZR1qOUYm/la9cshVZ62H3Hcw9eoEF8OFb1bce/eK248G++ZvuUeJXj1iuAtLUFmfZOw9dmO4VN9lgMpg6mpFVDXcxd5OcluMBLBbxmPA="
 
-#Might need the below code to get travis to work with grunt 
-  #I think it is only to run tests using grunt
-  #I plan to use mocha
-# https://gist.github.com/travishorn/5869188
-  # before_script:
-  # - npm install grunt-cli -g
