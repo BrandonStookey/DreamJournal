@@ -141,7 +141,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['ngAnnotate', 'uglify','cssmin', 'jshint' ]);
   
-  grunt.registerTask('test', ['mochaTest']);
+  grunt.registerTask('test', ['karma']);
 
   grunt.registerTask('default', ['watch']);
 
