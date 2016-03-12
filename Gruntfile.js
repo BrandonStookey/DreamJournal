@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['test/**/*.js']
+        src: ['test/serverTest.js']
       }
     },
 
@@ -139,9 +139,9 @@ module.exports = function(grunt) {
 
 
 
-  grunt.registerTask('build', ['ngAnnotate', 'uglify','cssmin', 'jshint' ]);
+  grunt.registerTask('build', ['test', 'jshint', 'ngAnnotate', 'uglify','cssmin']);
   
-  grunt.registerTask('test', ['karma']);
+  grunt.registerTask('test', ['karma', 'mochaTest']);
 
   grunt.registerTask('default', ['watch']);
 
@@ -154,7 +154,7 @@ module.exports = function(grunt) {
   });
 
   grunt.registerTask('deploy', [
-    // 'test',
+    'test',
     'build',
     'upload'
   ]);  

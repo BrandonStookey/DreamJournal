@@ -36,7 +36,8 @@ module.exports = function(config) {
 
       // our spec files
       'node_modules/expect.js/index.js',
-      'test/*.js'
+      'test/appRoutesTest.js',
+      'test/loginControllerTest.js'
     ],
 
 
