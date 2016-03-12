@@ -16,9 +16,12 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // angular source
+
       'public/client/assets/libs/angular/angular.js',
       'public/client/assets/libs/angular-route/angular-route.js',
       'public/client/assets/libs/angular-mocks/angular-mocks.js',
+      'http://cdn.auth0.com/js/lock-8.2.min.js', 
+
 
       // our app code
       'public/client/app/**/*.js',
@@ -38,7 +41,7 @@ module.exports = function(config) {
     // preprocess matching files before serving them to the browser
     // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
     preprocessors: {
-
+      
     },
 
 
