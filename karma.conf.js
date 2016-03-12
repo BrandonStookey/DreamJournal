@@ -15,12 +15,20 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      // angular source
-
       'public/client/assets/libs/angular/angular.js',
       'public/client/assets/libs/angular-route/angular-route.js',
       'public/client/assets/libs/angular-mocks/angular-mocks.js',
-      'http://cdn.auth0.com/js/lock-8.2.min.js', 
+
+
+      // angular source
+      'http://code.angularjs.org/1.2.16/angular-cookies.min.js',
+      'http://cdn.auth0.com/js/lock-8.2.min.js',      
+      'http://cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js',
+      'http://cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js',
+      'http://cdn.auth0.com/w2/auth0-angular-4.js',
+
+
+
 
 
       // our app code
