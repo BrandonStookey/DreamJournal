@@ -1,5 +1,3 @@
-// var expect = require('chai').expect;
-// // var $routes = require('../public/client/app/app.routes.js')
 // describe('Routing', function () {
 //   var $route;
 //   beforeEach(module('dreamjournal'));
