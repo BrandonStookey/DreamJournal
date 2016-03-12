@@ -1,33 +1,34 @@
 // var expect = require('chai').expect;
-// var mongoose = require('mongoose');
+// // var $routes = require('../public/client/app/app.routes.js')
+// describe('Routing', function () {
+//   var $route;
+//   beforeEach(module('dreamjournal'));
 
-// var jobController = require('./jobController.js');
-// var dbURI = 'mongodb://localhost/jobquery';
+//   beforeEach(inject(function($injector){
+//     $route = $injector.get('$route');
+//   }));
 
-// var clearDB = function (done) {
-//   mongoose.connection.collections['jobs'].remove(done);
-// };
-
-// describe('Job Controller', function () {
-
-//   // Connect to database before any tests
-//     beforeEach(function (done) {
-//     clearDB(function () {
-//       // TODO: Seed database with some jobs to run tests against. You should use the controller you created to add these jobs to the database
-      
-//       var user = {
-
-//       }
-
-//       jobController.createJob(job, function(result){
-//         expect(result).to.equal('New Job Saved');
-//         done(); 
-//       });
-  
-//         // TODO
-
-//     });
+//   it('Should have /login route, template, and controller', function () {
+//     expect($route.routes['/login']).to.be.ok();
+//     expect($route.routes['/login'].controller).to.be('loginController');
+//     expect($route.routes['/login'].templateUrl).to.be('app/shared/login.view.html');
 //   });
 
+//   // it('Should have /signin route, template, and controller', function () {
+//   //   expect($route.routes['/signin']).to.be.ok();
+//   //   expect($route.routes['/signin'].controller).to.be('AuthController');
+//   //   expect($route.routes['/signin'].templateUrl).to.be('app/auth/signin.html');
+//   // });
 
-// }
+//   // it('Should have /links route, template, and controller', function () {
+//   //   expect($route.routes['/links']).to.be.ok();
+//   //   expect($route.routes['/links'].controller).to.be('LinksController');
+//   //   expect($route.routes['/links'].templateUrl).to.be('app/links/links.html');
+//   // });
+
+//   // it('Should have /shorten route, template, and controller', function () {
+//   //   expect($route.routes['/shorten']).to.be.ok();
+//   //   expect($route.routes['/shorten'].controller).to.be('ShortenController');
+//   //   expect($route.routes['/shorten'].templateUrl).to.be('app/shorten/shorten.html');
+//   // });
+// });

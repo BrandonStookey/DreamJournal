@@ -19,6 +19,12 @@ module.exports = function(grunt) {
       }
     },
 
+    karma: {
+      unit: {
+        configFile: 'karma.conf.js'
+      }
+    },
+
     jshint: {
       files: [
         'server/**/*.js',
@@ -122,6 +128,7 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-ng-annotate');  
   grunt.loadNpmTasks('grunt-contrib-cssmin');
