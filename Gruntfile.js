@@ -10,14 +10,14 @@ module.exports = function(grunt) {
         }
     },    
 
-    // mochaTest: {
-    //   test: {
-    //     options: {
-    //       reporter: 'spec'
-    //     },
-    //     src: ['test/**/*.js']
-    //   }
-    // },
+    mochaTest: {
+      test: {
+        options: {
+          reporter: 'spec'
+        },
+        src: ['test/**/*.js']
+      }
+    },
 
     karma: {
       unit: {
@@ -141,7 +141,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('build', ['ngAnnotate', 'uglify','cssmin', 'jshint' ]);
   
-  grunt.registerTask('test', ['karma']);
+  grunt.registerTask('test', ['mochaTest']);
 
   grunt.registerTask('default', ['watch']);
 
