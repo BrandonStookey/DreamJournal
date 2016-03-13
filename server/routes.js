@@ -17,13 +17,16 @@ app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app
 
 
 
-app.post('/create/post', function(req, res) {
-	console.log('createPost on route.js!');
 
-	console.log('routs.js req.body.userName ', req.body.name);
-	console.log('routs.js req.body.userEmail ', req.body.email);
-	console.log('routs.js req.body.postTitle ', req.body.postTitle);    	    	
-	console.log('routs.js req.body.post ', req.body.post);
+
+/////////////////////////////////Add new User and new Post to Database//////////////////////////////////////////////////////////////////////
+app.post('/create/post', function(req, res) {
+	// console.log('createPost on route.js!');
+
+	// console.log('routs.js req.body.userName ', req.body.name);
+	// console.log('routs.js req.body.userEmail ', req.body.email);
+	// console.log('routs.js req.body.postTitle ', req.body.postTitle);    	    	
+	// console.log('routs.js req.body.post ', req.body.post);
 
 	var userName = req.body.name;
 	var userEmail = req.body.email;    	
