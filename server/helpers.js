@@ -2,42 +2,33 @@
 
 var db = require('./../db/db');
 
-//=========================================================Add New User && New Post To DataBase===========================================================================
+//==============================================================Add New User to Database================================================================
 
-var createPostDB = function (name, email, postTitle, post, callback) {
-//Check to See if the Email is already in the Database
-  var dbEmail = db.User.find({email: email}, function(err, found){
-      if(err){
-        return undefined;
-      }
-      else{
-        return found;
-      }
-    });  
-//====If Email is not in the Database then go ahead and add it, along with the post info and name
-  if(dbEmail === undefined){
+var createNewUser = function(name, email, callback){
+    console.log('createNewUser on helpers called!');
+
     var user = new db.User({
       email: email,    
       name: name,
-      post: {
-      	postTitle: postTitle,
-      	post: post
-      }
     })
     .save(function(err) {
   ////Later check to see what your second parameter is sending back
-  ////for example .save(function(err, INFO){})      
+  ////for example .save(function(err, INFO){}) Will be needed for testing purposes     
       if(err){
-        console.log('createPostDB/Save new user and post error', err);
+        console.log('createNewUser error', err);
         callback(500);
       } else {
-        console.log('Added New User and New Post!');
+        console.log('Added New User!');
         callback(200);
       }
-    });
-  } else {
-  //====Otherwise, if the email is already in the database, then only add the new post
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:{postTitle: postTitle, post: post} } }, function(err, success) {
+    });  
+};
+
+//===============================================================Add New Post To DataBase===========================================================================
+
+var createPostDB = function (name, email, postTitle, post, callback) {
+
+    db.User.findOneAndUpdate( {email: email}, { $push: { post:{postTitle: postTitle, post: post, name: name} } }, function(err, success) {
         if (err) {
           console.log('createPostDB/findOneAndUpdate error ', err);
           callback(500);
@@ -46,10 +37,10 @@ var createPostDB = function (name, email, postTitle, post, callback) {
           callback(200);
         }   
     });
-  }          
+        
 };
 
-//========================================================================START Get All Posts========================================================================
+//========================================================================Get All Posts========================================================================
 var findAllPosts = function(callback){
   db.User.find({}, function(err, posts){
     if(err){
@@ -59,14 +50,10 @@ var findAllPosts = function(callback){
   });
 };
 
-
-
-
-
-
 //============================================================================Export all helpers===========================================================
 
 module.exports = {
+  createNewUser: createNewUser,
 	createPostDB: createPostDB,
   findAllPosts: findAllPosts
 };

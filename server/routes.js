@@ -1,7 +1,6 @@
 'use strict';
 
 var app = require('./server');
-
 var path1 = require('path');
 var public1 = path1.resolve('public') + '/';
 var helpers = require(path1.resolve('server/helpers'));
@@ -17,9 +16,20 @@ var jwtCheck = jwt({
 //Below are paths that require Authorization
 app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app/shared/write.new.post.view.html', '/api/public/client/app/shared/view.post.view.html', '/api/public/client/app/shared/profile.view.html', '/api/public/client/app/shared/graph.view.html'],  jwtCheck);
 
-//==========================================================Add new User and new Post to Database=======================================================
-//====================================================================IMPORATANT===========================================================================
-//===============================================This route is also to add only posts, if a user already exists=====================================
+//================================================================Add New User To Database=====================================================================
+app.post('/create/new/user', function(req, res) {
+  console.log('create new user on routes called!');
+  var userName = req.body.name;
+  var userEmail = req.body.email;     
+ 
+  helpers.createNewUser(userName, userEmail,
+  function(data) {
+    res.send(data);
+  });
+});
+
+//================================================================Add New Post to Database===================================================================
+
 app.post('/create/post', function(req, res) {
 	var userName = req.body.name;
 	var userEmail = req.body.email;    	
@@ -35,7 +45,7 @@ app.post('/create/post', function(req, res) {
 //==================================================================Get all Posts Request===================================================================
 
 app.get('/get/all/posts', function(req, res) {
-  console.log('routes get request!');    
+  console.log('routes get all post request!');    
   helpers.findAllPosts( 
   function(data) {
     res.send(data);

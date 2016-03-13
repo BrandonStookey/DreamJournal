@@ -1,4 +1,5 @@
 'use strict';
+
 angular.module('dreamjournal.newPost', [])
 
 .controller('newPostController', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
@@ -12,7 +13,7 @@ angular.module('dreamjournal.newPost', [])
       data: {postTitle: postTitle, post: post, name: userName, email: userEmail}
     })
     .then(function(resp){
-
+      console.log(resp);
     }, function(error){
       console.log(error);
     });
