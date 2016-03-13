@@ -15,36 +15,36 @@ angular.module('dreamjournal', [
 .config(['$routeProvider', '$httpProvider', 'authProvider', 'jwtInterceptorProvider', function($routeProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
   $routeProvider
     .when('/login', {
-      templateUrl: 'app/shared/login.view.html',
+      templateUrl: 'app/shared/login/login.view.html',
       controller: 'loginController'
     })
     .when('/graph', {
-      templateUrl: 'app/shared/graph.view.html',
+      templateUrl: 'app/shared/graph/graph.view.html',
       controller: 'graphController',
       requiresLogin: true
     })
     .when('/profile', {
-      templateUrl: 'app/shared/profile.view.html',
+      templateUrl: 'app/shared/profile/profile.view.html',
       controller: 'profileController',
       requiresLogin: true      
     })
     .when('/viewPost', {
-      templateUrl: 'app/shared/view.post.view.html',
+      templateUrl: 'app/shared/viewSinglePost/view.post.view.html',
       controller: 'viewPostController',
       requiresLogin: true      
     })
     .when('/newPost', {
-      templateUrl: 'app/shared/write.new.post.view.html',
+      templateUrl: 'app/shared/writeNewPost/write.new.post.view.html',
       controller: 'newPostController',
       requiresLogin: true      
     })
     .when('/home', {
-      templateUrl: 'app/shared/home.view.html',
+      templateUrl: 'app/shared/home/home.view.html',
       controller: 'homeController',
       requiresLogin: true      
     })        
     .when('/', {
-      templateUrl: 'app/shared/home.view.html',
+      templateUrl: 'app/shared/home/home.view.html',
       controller: 'homeController',
       requiresLogin: true      
     });       
