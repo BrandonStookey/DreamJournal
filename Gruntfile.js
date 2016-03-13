@@ -140,7 +140,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('build', ['jshint', 'ngAnnotate', 'uglify','cssmin']);
-  Prim
+
   grunt.registerTask('test', ['karma', 'mochaTest']);
 
   grunt.registerTask('default', ['watch']);
