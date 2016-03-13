@@ -25,22 +25,15 @@ app.post('/create/post', function(req, res) {
 	console.log('routs.js req.body.postTitle ', req.body.postTitle);    	    	
 	console.log('routs.js req.body.post ', req.body.post);
 
-	var userName = req.body.user;
+	var userName = req.body.name;
 	var userEmail = req.body.email;    	
 	var postTitle = req.body.postTitle;    	
 	var post = req.body.post;    	
 
-	// var email = req.body.userEmail;
-
-  helpers.createPost(userName, userEmail, postTitle, post, 
+  helpers.createPostDB(userName, userEmail, postTitle, post, 
   function(data) {
-    res.statusCode = 201;
     res.send(data);
-  }, function(error) {
-    console.error(error);
-    res.sendStatus(409);
   });
-
 });
 
 
