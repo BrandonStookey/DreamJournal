@@ -2,18 +2,9 @@
 angular.module('dreamjournal.newPost', [])
 
 .controller('newPostController', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
-
-	  $scope.createPost = function(postTitle, post){
-	  console.log('postTitle: ', postTitle);
-	  console.log('post:' , post);	
-	  console.log('createPost on controller side!');
-
+  $scope.createPost = function(postTitle, post){
 	  var userName = auth.profile.name;
     var userEmail = auth.profile.email;
-
-    console.log('controller email: ', userEmail);
-    console.log('controller name: ', userName);    
-
 
     return $http({
       method: 'POST',
@@ -26,11 +17,6 @@ angular.module('dreamjournal.newPost', [])
       console.log(error);
     });
   };
-
-
 }]);
 
-	  // var name = auth.profile.name;
-
-   //  var email = auth.profile.email;
      

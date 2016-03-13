@@ -15,19 +15,10 @@ var jwtCheck = jwt({
 //Below are paths that require Authorization////
 app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app/shared/write.new.post.view.html', '/api/public/client/app/shared/view.post.view.html', '/api/public/client/app/shared/profile.view.html', '/api/public/client/app/shared/graph.view.html'],  jwtCheck);
 
-
-
-
-
-/////////////////////////////////Add new User and new Post to Database//////////////////////////////////////////////////////////////////////
+/////////////////////////////////Add new User and new Post to Database///////////////////////////////////////
+//////////////////////////////////////IMPORATANT////////////////////////////////////////////////////////////
+/////////////////////////////This route is also to add only posts, if a user already exists////////////////
 app.post('/create/post', function(req, res) {
-	// console.log('createPost on route.js!');
-
-	// console.log('routs.js req.body.userName ', req.body.name);
-	// console.log('routs.js req.body.userEmail ', req.body.email);
-	// console.log('routs.js req.body.postTitle ', req.body.postTitle);    	    	
-	// console.log('routs.js req.body.post ', req.body.post);
-
 	var userName = req.body.name;
 	var userEmail = req.body.email;    	
 	var postTitle = req.body.postTitle;    	
