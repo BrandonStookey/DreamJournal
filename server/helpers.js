@@ -2,7 +2,7 @@
 
 var db = require('./../db/db');
 
-/////////////////////////////////////////Adds New Post To DataBase///////////////////////////////////////////////////////////////////
+//=========================================================Add New User && New Post To DataBase===========================================================================
 
 var createPostDB = function (name, email, postTitle, post, callback) {
 //Check to See if the Email is already in the Database
@@ -14,7 +14,7 @@ var createPostDB = function (name, email, postTitle, post, callback) {
         return found;
       }
     });  
-//If Email is not in the Database then go ahead and add it, along with the post info and name
+//====If Email is not in the Database then go ahead and add it, along with the post info and name
   if(dbEmail === undefined){
     var user = new db.User({
       email: email,    
@@ -28,7 +28,7 @@ var createPostDB = function (name, email, postTitle, post, callback) {
   ////Later check to see what your second parameter is sending back
   ////for example .save(function(err, INFO){})      
       if(err){
-        console.log('ERROR!', err);
+        console.log('createPostDB/Save new user and post error', err);
         callback(500);
       } else {
         console.log('Added New User and New Post!');
@@ -36,17 +36,27 @@ var createPostDB = function (name, email, postTitle, post, callback) {
       }
     });
   } else {
-  //Otherwise, if the email is already in the database, then only add the new post
+  //====Otherwise, if the email is already in the database, then only add the new post
     db.User.findOneAndUpdate( {email: email}, { $push: { post:{postTitle: postTitle, post: post} } }, function(err, success) {
         if (err) {
-          console.log('error ', err);
+          console.log('createPostDB/findOneAndUpdate error ', err);
           callback(500);
         } else {
-          console.log('Added New Post!')
+          console.log('Added New Post!');
           callback(200);
         }   
     });
   }          
+};
+
+//========================================================================START Get All Posts========================================================================
+var findAllPosts = function(callback){
+  db.User.find({}, function(err, posts){
+    if(err){
+      console.log('findAllPost Error ', err);
+    }
+    callback(posts);
+  });
 };
 
 
@@ -54,9 +64,11 @@ var createPostDB = function (name, email, postTitle, post, callback) {
 
 
 
-////////Export all helpers//////////
+//============================================================================Export all helpers===========================================================
+
 module.exports = {
-	createPostDB: createPostDB
+	createPostDB: createPostDB,
+  findAllPosts: findAllPosts
 };
 
 

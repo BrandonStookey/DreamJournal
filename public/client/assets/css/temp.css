@@ -19,12 +19,6 @@
   margin-left: 400px;
 }
 
-/*.mainDiv{
-  background-image: url("http://wallpapercave.com/wp/UV9qmUi.png");
-  background-repeat: no-repeat;
-  height:100vh;
-}*/
-
 .blogDiv{
   background-color: white;
   height: 800px;
@@ -36,6 +30,17 @@
   border-width: 1px;
   border-color: black;
   overflow-x: scroll;
+}
+
+.individualPostDiv{  
+  background-color: white;
+  height: 300x;
+  width: 595px;
+  color: green;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  overflow-x: scroll;  
 }
 .cropArea {
     background: #E4E4E4;
