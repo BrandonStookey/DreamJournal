@@ -1,12 +1,28 @@
 'use strict';
+
 angular.module('dreamjournal.home', [])
 
-.controller('homeController', ['$scope', '$http', function ($scope, $http) {
+.controller('homeController', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
 	$scope.postsData = [];
 
   $scope.init= function(){
-  	console.log('Am I being intialized!?');
-  	return $http({
+   //======================Create New User on Init=========================
+    var userName = auth.profile.name;
+    var userEmail = auth.profile.email;
+
+    $http({
+      method: 'POST',
+      url: '/create/new/user',
+      data: {name: userName, email: userEmail}
+    })
+    .then(function(resp){
+      console.log(resp);
+    }, function(err){
+      console.log('error', err);
+    });
+
+    //======================Get All Blog Posts On Init======================
+  	$http({
   		method: 'GET',
   		url: '/get/all/posts'
   	})
