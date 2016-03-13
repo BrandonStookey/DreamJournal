@@ -1,59 +1,44 @@
+// var express = require('express');
 // var expect = require('chai').expect;
-// var mongoose = require('mongoose');
-// var Job = require('../models/Job');    ////////////I added this here, since user/model was being require in the usercontroller test
-// var dbURI = 'mongodb://localhost/jobquery';
+// var app = require('../server/server.js');
 
-// // The `clearDB` helper function, when invoked, will clear the database
-// var clearDB = function (done) {
-//   mongoose.connection.collections['jobs'].remove(done);
-// };
+// var db = require('../db/config');
+// var User = require('../db/db.js');
 
-// describe('Job Controller', function () {
 
-//   // Connect to database before any tests
-//   before(function (done) {
-//     if (mongoose.connection.db) {
-//       return done();
-//     }
-//     mongoose.connect(dbURI, done);
+
+// describe('', function() {
+
+//   beforeEach(function(done) {
+//     // Log out currently signed in user
+//     request(app)
+//       .get('/logout')
+//       .end(function(err, res) {
+
+//         // Delete objects from db so they can be created later for the test
+//         Link.remove({url : 'http://www.roflzoo.com/'}).exec();
+//         User.remove({username : 'Savannah'}).exec();
+//         User.remove({username : 'Phillip'}).exec();
+
+//         done();
+//       });
 //   });
-
-//   beforeEach(function (done) {
-//     clearDB(function () {
-//       // TODO: Seed database with some jobs to run tests against. You should use the controller you created to add these jobs to the database
-//       var createJob = function (job, callback) {
-//         // TODO
-
-//         var job = new Job({
-//           name: name,
-//           title: title,
-//           description: description,
-//           datePosted: datePosted,
-//           salary: salary
+ 
+//   describe('addUser', function () {
+//     it('Should add a user to the database', function(done) {
+//       helpers.addBook({name: 'Leo Tolstoy'}, {title: 'War and Peace'}, null, null,
+//         function(data){
+//           data = JSON.parse(data);
+//           expect(typeof data.book.id).to.equal('number');
+//           expect(typeof data.author.id).to.equal('number');
+//           expect(data.book.title).to.equal('War and Peace');
+//           expect(data.author.name).to.equal('Leo Tolstoy');
+//           done();
+//         }, function (error) {
+//           console.log(error);
 //         });
-
-//          Job.save(function(err, newJob) {
-//           if(err){
-//             res.send(500, err);
-//           } else {
-//             res.send(200, newJob);
-//           }
-//         });
-//       };
 //     });
 //   });
-// ///////////////////
-// ////////I tried mimicking the tests in rest-api
-// ///////////
-//   // TODO: Write your tests for jobController here
-//     it('should have a method that adds a new job to the database', function (done) {
-//           request(Job) //I am not 100% sure what is suppose to go here, but I think it is Job since it is being required at the top,
-//           .get(dbURI)
-//           .expect(200, done);
-//   });
+  
+
 // });
-
-
-
-
-

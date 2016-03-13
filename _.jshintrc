@@ -11,7 +11,7 @@
     "latedef": true,
     "newcap": true,
     "noarg": true,
-    "predef": ["angular", "location"],
+    "predef": ["angular", "location", "res"],
     "quotmark": "single",
     "regexp": true,
     "undef": true,

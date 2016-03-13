@@ -1,4 +1,16 @@
 <h1>Write New Post View</h1>
-  <div>
+<div class = 'mainDiv'>
 
-  </div>
+
+<h3 class ="createBlogHeader">Write New Blog</h3>
+
+
+	<section class='demo'>
+
+ 	<input class = "titleBox" ng-model="postTitle" placeholder= "Place Blog Title Here"novalidate></input>
+
+ 	<textarea class = "blogBox" ng-model="post" novalidate></textarea>
+	<button ng-click ="createPost(postTitle, post)" class ="blogBoxSubmit">Submit Blog post</button>
+	
+</section>
+</div>

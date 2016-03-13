@@ -37,7 +37,7 @@ module.exports = function(grunt) {
           'public/client/assets/js/**/*.js',
           'public/client/dist/**/*.js',
         ],
-        force: false
+        force: true
       }
     },
     nodemon: {
@@ -140,7 +140,7 @@ module.exports = function(grunt) {
 
 
   grunt.registerTask('build', ['jshint', 'ngAnnotate', 'uglify','cssmin']);
-  
+  Prim
   grunt.registerTask('test', ['karma', 'mochaTest']);
 
   grunt.registerTask('default', ['watch']);

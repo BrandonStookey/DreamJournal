@@ -1,0 +1,53 @@
+.blogBox{
+  height: 500px;
+  width: 500px;
+  margin-left: 400px;
+  margin-right: auto;
+  color: green;
+}
+.titleBox{
+  margin-left: 400px;
+  width: 500px;
+  color: green;
+}
+.blogBoxSubmit{
+  margin-left: 400px;
+  position: bottom;
+}
+
+.createBlogHeader{
+  margin-left: 400px;
+}
+
+/*.mainDiv{
+  background-image: url("http://wallpapercave.com/wp/UV9qmUi.png");
+  background-repeat: no-repeat;
+  height:100vh;
+}*/
+
+.blogDiv{
+  background-color: white;
+  height: 800px;
+  width: 600px;
+  margin-left: 150px;
+  margin-right: auto;
+  color: green;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+  overflow-x: scroll;
+}
+.cropArea {
+    background: #E4E4E4;
+    overflow: hidden;
+    width:500px;
+    height:350px;
+}
+form .progress {
+    line-height: 15px;
+}
+.progress {
+    display: inline-block;
+    width: 100px;
+
+

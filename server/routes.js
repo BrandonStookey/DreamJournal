@@ -1,8 +1,9 @@
 var app = require('./server');
 
-var filePath = require('path');
-var publicPath = filePath.resolve('public') + '/';
-var helpers = require(filePath.resolve('server/helpers'));
+var path = require('path');
+var public = path.resolve('public') + '/';
+var helpers = require(path.resolve('server/helpers'));
+var url = require('url');
 var jwt = require('express-jwt');
 
 ///////Below is the ClientID and ClientSecret in express-jwt's configuration so that it can validate and sign JWTs for you
@@ -14,7 +15,41 @@ var jwtCheck = jwt({
 //Below are paths that require Authorization////
 app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app/shared/write.new.post.view.html', '/api/public/client/app/shared/view.post.view.html', '/api/public/client/app/shared/profile.view.html', '/api/public/client/app/shared/graph.view.html'],  jwtCheck);
 
-var routes = [
 
 
-];
+app.post('/create/post', function(req, res) {
+	console.log('createPost on route.js!');
+
+	console.log('routs.js req.body.userName ', req.body.name);
+	console.log('routs.js req.body.userEmail ', req.body.email);
+	console.log('routs.js req.body.postTitle ', req.body.postTitle);    	    	
+	console.log('routs.js req.body.post ', req.body.post);
+
+	var userName = req.body.user;
+	var userEmail = req.body.email;    	
+	var postTitle = req.body.postTitle;    	
+	var post = req.body.post;    	
+
+	// var email = req.body.userEmail;
+
+  helpers.createPost(userName, userEmail, postTitle, post, 
+  function(data) {
+    res.statusCode = 201;
+    res.send(data);
+  }, function(error) {
+    console.error(error);
+    res.sendStatus(409);
+  });
+
+});
+
+
+
+
+
+
+
+
+
+
+
