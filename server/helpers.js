@@ -6,23 +6,16 @@ var db = require('./../db/db');
 
 var createPostDB = function (name, email, postTitle, post, callback) {
 //Check to See if the Email is already in the Database
-  console.log('email on helpers ', email);
-
   var dbEmail = db.User.find({email: email}, function(err, found){
       if(err){
-        return false;
+        return undefined;
       }
       else{
-        console.log('found ', found[0].email);
-          if( email === found[0].email){
-            return true;
-          };
+        return found;
       }
     });  
-
-  console.log('dbEmail ', dbEmail);
-//If Email is not in the Database then go ahead and add it
-  if(dbEmail !== email){
+//If Email is not in the Database then go ahead and add it, along with the post info and name
+  if(dbEmail === undefined){
     var user = new db.User({
       email: email,    
       name: name,
@@ -43,6 +36,7 @@ var createPostDB = function (name, email, postTitle, post, callback) {
       }
     });
   } else {
+  //Otherwise, if the email is already in the database, then only add the new post
     db.User.findOneAndUpdate( {email: email}, { $push: { post:{postTitle: postTitle, post: post} } }, function(err, success) {
         if (err) {
           console.log('error ', err);
@@ -60,7 +54,7 @@ var createPostDB = function (name, email, postTitle, post, callback) {
 
 
 
-////////Great Example how to export all functions from helpers//////////
+////////Export all helpers//////////
 module.exports = {
 	createPostDB: createPostDB
 };

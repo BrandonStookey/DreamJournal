@@ -3,11 +3,7 @@ angular.module('dreamjournal.login', [])
 
 .controller('loginController', ['$scope', '$http', 'auth', 'store', '$location',
 function ($scope, $http, auth, store, $location) {
-		// will have a HTTP request that will send a post to routes.js
-		//data will contain username and password
-		//if it recieves a 200 response, it will redirect user to homepage (Remember use angular $location method)
-			//it will create a session or assign a token for Auth
-		//if it recieves 409(conflict I think) user will be redirected to login page
+/////////User will login using Auth0///////////////
   $scope.login = function () {
     auth.signin({}, function (profile, token) {
       // Success callback
@@ -18,7 +14,7 @@ function ($scope, $http, auth, store, $location) {
       // Error callback
     });
   },		
-
+///////////User logs out using Auth0////////////////
   $scope.logout = function() {
     auth.signout();
     store.remove('profile');

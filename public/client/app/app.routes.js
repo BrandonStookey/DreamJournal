@@ -1,4 +1,5 @@
 'use strict';
+
 angular.module('dreamjournal', [
   'ngRoute',
   'dreamjournal.login',
