@@ -1,4 +1,14 @@
-<h1> Profile View</h1>
-  <div>
+<h1>Profile View</h1>
+<div class ="mainDiv">
+  <div class ="blogDiv">
+
+      <li ng-repeat="post in userPostsData" >
+       <div class="individualPostDiv">
+      	<h3> {{ post.postTitle }} </h3>
+        	<p> {{ post.post }} </p>
+       </div> 
+	
+      </li>
 
   </div>
+</div>

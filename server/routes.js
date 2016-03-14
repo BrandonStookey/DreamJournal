@@ -44,8 +44,7 @@ app.post('/create/post', function(req, res) {
 
 //==================================================================Get all Posts Request===================================================================
 
-app.get('/get/all/posts', function(req, res) {
-  console.log('routes get all post request!');    
+app.get('/get/all/posts', function(req, res) {  
   helpers.findAllPosts( 
   function(data) {
     res.send(data);
@@ -53,8 +52,15 @@ app.get('/get/all/posts', function(req, res) {
 });
 
 
-
-
+//======================================================================Get all User Posts========================================================================
+app.post('/get/all/user/posts', function(req, res) {
+  console.log('routes get all USER post request!');    
+  var email = req.body.email;
+  helpers.findAllUserPosts(email, 
+  function(data) {
+    res.send(data);
+  });
+});
 
 
 
