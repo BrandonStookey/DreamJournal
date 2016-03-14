@@ -63,13 +63,38 @@ var findAllPosts = function(callback){
 
   });
 };
+//==========================================================================Find All User Posts=======================================================================
+
+var findAllUserPosts = function(email, callback){
+  db.User.find({ email: email }, function(err, posts){
+
+    if(err){
+      console.log('findAllPost Error ', err);
+    }
+
+    var postMap = [];
+
+    posts.forEach(function(post) {
+      for(var i = 0; i < post.post.length; i++){
+        if(post.post[i] === undefined){
+          break;
+        }
+        postMap.push(post.post[i]);
+      }
+    });
+    console.log('User Posts in helpers ', postMap);
+    callback(postMap);  
+
+  });
+};
 
 //============================================================================Export all helpers===========================================================
 
 module.exports = {
   createNewUser: createNewUser,
 	createPostDB: createPostDB,
-  findAllPosts: findAllPosts
+  findAllPosts: findAllPosts,
+  findAllUserPosts: findAllUserPosts
 };
 
 
