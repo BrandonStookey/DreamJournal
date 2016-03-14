@@ -16,7 +16,7 @@ var createNewUser = function(name, email, callback){
   ////for example .save(function(err, INFO){}) Will be needed for testing purposes     
       if(err){
         console.log('createNewUser error', err);
-        callback(500);
+        console.log(500);
       } else {
         console.log('Added New User!');
         callback(200);
@@ -30,8 +30,8 @@ var createPostDB = function (name, email, postTitle, post, callback) {
 
     db.User.findOneAndUpdate( {email: email}, { $push: { post:{postTitle: postTitle, post: post, name: name} } }, function(err, success) {
         if (err) {
-          console.log('createPostDB/findOneAndUpdate error ', err);
-          callback(500);
+          console.log('createPostDB error ', err);
+           console.log(500);
         } else {
           console.log('Added New Post!');
           callback(200);
@@ -41,35 +41,36 @@ var createPostDB = function (name, email, postTitle, post, callback) {
 };
 
 //========================================================================Get All Posts========================================================================
+
 var findAllPosts = function(callback){
   db.User.find({}, function(err, posts){
     if(err){
-      console.log('findAllPost Error ', err);
+      console.log('findAllPosts Error ', err);
+       callback(err);
     }
     var postMap = [];
 
     posts.forEach(function(post) {
-      console.log('post', post.post[0]);
       for(var i = 0; i < post.post.length; i++){
         if(post.post[i] === undefined){
           break;
         }
         postMap.push(post.post[i]);
-        console.log('inside for loop ', post.post[i]);
       }
     });
-    console.log(postMap);
-    callback(postMap);  
 
+    callback(postMap);  
   });
 };
+
 //==========================================================================Find All User Posts=======================================================================
 
 var findAllUserPosts = function(email, callback){
   db.User.find({ email: email }, function(err, posts){
 
     if(err){
-      console.log('findAllPost Error ', err);
+      console.log('findAllUserPosts Error ', err);
+       console.log(404);
     }
 
     var postMap = [];
@@ -82,11 +83,44 @@ var findAllUserPosts = function(email, callback){
         postMap.push(post.post[i]);
       }
     });
-    console.log('User Posts in helpers ', postMap);
-    callback(postMap);  
 
+    callback(postMap);  
   });
 };
+
+//==============================================================================Find Single Post=================================================================
+
+var findSinglePost = function(email, postID, callback){
+  console.log('helpers get SINGLE post request!'); 
+  db.User.find({}, function(err, posts){
+
+    if(err){
+      console.log('findSinglePost Error ', err);
+       console.log(404);
+    }
+    console.log('helpers posts, ', posts);
+    console.log('helpers email, ', email);
+    console.log('helpers postID, ', postID);        
+
+    posts.forEach(function(post) {
+      for(var i = 0; i < post.post.length; i++){
+        if(post.post[i] === undefined){
+          break;
+        }
+        console.log('helpers compare: ', post.post[i]._id == postID)        
+        console.log('helpers actual ', post.post[i]._id);
+        if(post.post[i]._id == postID){
+
+          console.log('helpers results: ', post.post[i]);
+          callback(post.post[i]);
+        }  
+      }
+    });
+  });   
+
+};
+
+
 
 //============================================================================Export all helpers===========================================================
 
@@ -94,7 +128,8 @@ module.exports = {
   createNewUser: createNewUser,
 	createPostDB: createPostDB,
   findAllPosts: findAllPosts,
-  findAllUserPosts: findAllUserPosts
+  findAllUserPosts: findAllUserPosts,
+  findSinglePost: findSinglePost
 };
 
 

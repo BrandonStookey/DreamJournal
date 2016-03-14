@@ -18,6 +18,7 @@ var userSchema = mongoose.Schema({
       postDate: Date,
       post: String,
       name: String,
+      email: String,
       dream: String,
       nightmare: String,
       noDream: String

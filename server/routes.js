@@ -18,12 +18,11 @@ app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app
 
 //================================================================Add New User To Database=====================================================================
 app.post('/create/new/user', function(req, res) {
-  console.log('create new user on routes called!');
   var userName = req.body.name;
   var userEmail = req.body.email;     
  
   helpers.createNewUser(userName, userEmail,
-  function(data) {
+  function(data) {  
     res.send(data);
   });
 });
@@ -53,14 +52,56 @@ app.get('/get/all/posts', function(req, res) {
 
 
 //======================================================================Get all User Posts========================================================================
-app.post('/get/all/user/posts', function(req, res) {
-  console.log('routes get all USER post request!');    
+app.post('/get/all/user/posts', function(req, res) { 
   var email = req.body.email;
+
   helpers.findAllUserPosts(email, 
+  function(data) {  
+    res.send(data);
+  });
+});
+
+///Refactor all requests to handle errors like in the below example
+  //also change all console.log for errors in helpers to return callback()
+  
+// app.post('/get/all/user/posts', function(req, res) { 
+//   var email = req.body.email;
+
+//   helpers.findAllUserPosts(email, 
+//   function(err, data) {
+//     if(err){
+//       res.status(400=).send(err);
+//     }    
+//     res.send(data);
+//   });
+// });
+
+//=====================================================================View Single Post===================================================================================
+
+app.post('/view/single/post', function(req, res) {
+  console.log('routes get SINGLE post request!');    
+
+  var email = req.body.email;
+  var postID = req.body.postid;
+
+  console.log('routes ', email);
+  console.log('routes', postID);
+
+  helpers.findSinglePost(email, postID,
   function(data) {
     res.send(data);
   });
 });
+
+
+
+
+
+
+
+
+
+
 
 
 
