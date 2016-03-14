@@ -46,7 +46,21 @@ var findAllPosts = function(callback){
     if(err){
       console.log('findAllPost Error ', err);
     }
-    callback(posts);
+    var postMap = [];
+
+    posts.forEach(function(post) {
+      console.log('post', post.post[0]);
+      for(var i = 0; i < post.post.length; i++){
+        if(post.post[i] === undefined){
+          break;
+        }
+        postMap.push(post.post[i]);
+        console.log('inside for loop ', post.post[i]);
+      }
+    });
+    console.log(postMap);
+    callback(postMap);  
+
   });
 };
 
