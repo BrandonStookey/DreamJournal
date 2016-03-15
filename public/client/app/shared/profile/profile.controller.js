@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dreamjournal.profile', [])
+angular.module('dreamjournal.profile', ['ngSanitize'])
 
 .controller('profileController', ['$scope', 'auth', '$http', 'ViewSinglePostFromHome', function ($scope, auth, $http, ViewSinglePostFromHome) {
   angular.extend($scope, ViewSinglePostFromHome);  
@@ -51,3 +51,13 @@ angular.module('dreamjournal.profile', [])
     singlePost: singlePost
   };
 }])
+
+
+
+
+
+
+
+
+
+

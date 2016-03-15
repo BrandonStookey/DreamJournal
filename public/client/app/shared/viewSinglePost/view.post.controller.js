@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dreamjournal.viewPost', [])
+angular.module('dreamjournal.viewPost', ['ngSanitize'])
 
 .controller('viewPostController', ['$scope', 'ViewSinglePostFromHome', '$http', '$location', 'auth', function ($scope, ViewSinglePostFromHome, $http, $location, auth) {
 

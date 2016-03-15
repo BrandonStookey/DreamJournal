@@ -1,4 +1,7 @@
 <h1>Write New Post View</h1>
 
+<input class = "titleBox" ng-model="postTitle" placeholder= "Place Blog Title Here"novalidate></input>		
 
-<div text-angular ng-model="htmlVariable"></div>
+<div text-angular ng-model="htmlVariable" name="post"></div>
+
+<a href ="#/home" ><button ng-click ="createPost(postTitle, htmlVariable)" class ="blogBoxSubmit">Submit Blog post</button></a>		

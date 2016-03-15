@@ -2,31 +2,14 @@
 <div class ="mainDiv">
 <div class ="blogDiv">
 
-      <li>
+
        <div class="individualPostDiv">
       	<h3> {{ postTitle }} </h3>
         <h6> {{ name }} </h6>
-        	<p> {{ post }} </p>
-        }
+        	<p ng-bind-html="post"></p>
        </div> 
 	     <button ng-click= "deletePost(postID)" ng-show = "showDeleteButton()"> Delete Post</button>
-      </li>
+
 
   </div>
 </div>
-
-<!-- <h1>Single Post View</h1>
-<div class ="mainDiv">
-<div class ="blogDiv">
-
-      <li ng-repeat="post in singlePost" >
-       <div class="individualPostDiv">
-      	<h3> {{ post.data.postTitle }} </h3>
-        	<p> {{ post.data.post }} </p>
-       </div> 
-	
-      </li>
-
-  </div>
-</div>
- -->

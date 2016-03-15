@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dreamjournal.home', [])
+angular.module('dreamjournal.home', ['ngSanitize'])
 
 .controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHome', function ($scope, $http, auth, ViewSinglePostFromHome) {
 	$scope.postsData = [];
