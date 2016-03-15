@@ -19,10 +19,7 @@ var userSchema = mongoose.Schema({
       post: String,
       name: String,
       email: String,
-      dream: String,
-      nightmare: String,
-      noDream: String
-
+      dreamType: Number, //0 === noDream , 1 === Dream, 2 === nightMare
     }]
   },
 });
