@@ -2,25 +2,10 @@
 
 angular.module('dreamjournal.home', [])
 
-.controller('homeController', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
+.controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHome', function ($scope, $http, auth, ViewSinglePostFromHome) {
 	$scope.postsData = [];
+  angular.extend($scope, ViewSinglePostFromHome);
 
-  $scope.viewSinglePost = function(postID){
-    console.log('controller get SINGLE post request!');  
-    console.log('controllers postID: ', postID);
-    var userEmail = auth.profile.email;    
-
-    $http({
-      method: 'POST',
-      url: '/view/single/post',
-      data: {email: userEmail, postid: postID}
-    })
-    .then(function(resp){
-      console.log('View single Post resp: ',resp);
-    }, function(err){
-      console.log('error', err);
-    });
-  }
 
   $scope.init= function(){
    //======================Create New User on Init=========================
@@ -55,4 +40,40 @@ angular.module('dreamjournal.home', [])
 
   $scope.init();
 
-}]);
+}])
+.factory('ViewSinglePostFromHome',['$http', 'auth','$location', function($http, auth, $location){
+  var singlePost = [];
+  var viewSinglePost = function(postID){
+    $http({
+      method: 'POST',
+      url: '/view/single/post',
+      data: {postid: postID}
+    })
+    .then(function(resp){
+      singlePost[0] = resp;
+      $location.path('/viewPost');
+      console.log('homeController: ', singlePost);
+    }, function(err){
+      console.log('error', err);
+    });
+  } 
+  
+  return{
+    viewSinglePost: viewSinglePost,
+    singlePost: singlePost
+  };
+}])
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -90,18 +90,15 @@ var findAllUserPosts = function(email, callback){
 
 //==============================================================================Find Single Post=================================================================
 
-var findSinglePost = function(email, postID, callback){
+var findSinglePost = function(postID, callback){
   console.log('helpers get SINGLE post request!'); 
   db.User.find({}, function(err, posts){
 
     if(err){
       console.log('findSinglePost Error ', err);
        console.log(404);
-    }
-    console.log('helpers posts, ', posts);
-    console.log('helpers email, ', email);
-    console.log('helpers postID, ', postID);        
-
+    }   
+    
     posts.forEach(function(post) {
       for(var i = 0; i < post.post.length; i++){
         if(post.post[i] === undefined){
@@ -113,6 +110,7 @@ var findSinglePost = function(email, postID, callback){
 
           console.log('helpers results: ', post.post[i]);
           callback(post.post[i]);
+          break;
         }  
       }
     });
