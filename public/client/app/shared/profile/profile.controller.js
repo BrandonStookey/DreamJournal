@@ -1,8 +1,10 @@
 'use strict';
+
 angular.module('dreamjournal.profile', [])
 
-.controller('profileController', ['$scope', 'auth', '$http', function ($scope, auth, $http) {
+.controller('profileController', ['$scope', 'auth', '$http', 'ViewSinglePostFromHome', function ($scope, auth, $http, ViewSinglePostFromHome) {
 	console.log('Is profile init being intiated???');
+  angular.extend($scope, ViewSinglePostFromHome);  
   $scope.userPostsData = [];	
 
 
@@ -28,4 +30,26 @@ angular.module('dreamjournal.profile', [])
 
 	$scope.init();	
 
-}]);
+}])
+.factory('ViewSinglePostFromHome',['$http', 'auth','$location', function($http, auth, $location){
+  var singlePost = [];
+  var viewSinglePost = function(postID){
+    $http({
+      method: 'POST',
+      url: '/view/single/post',
+      data: {postid: postID}
+    })
+    .then(function(resp){
+      singlePost[0] = resp;
+      $location.path('/viewPost');
+      console.log('homeController: ', singlePost);
+    }, function(err){
+      console.log('error', err);
+    });
+  } 
+  
+  return{
+    viewSinglePost: viewSinglePost,
+    singlePost: singlePost
+  };
+}])
