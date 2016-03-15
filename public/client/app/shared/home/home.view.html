@@ -5,7 +5,7 @@
       <li ng-repeat="post in postsData" >
        <div class="individualPostDiv">
       	<h3> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
-        	<png-bind-html="post.post"></p>
+        	<p  ng-bind-html="post.post"></p>
       	 </div> 
 	
       </li>
