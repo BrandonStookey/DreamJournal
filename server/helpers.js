@@ -91,9 +91,8 @@ var findAllUserPosts = function(email, callback){
 //==============================================================================Find Single Post=================================================================
 
 var findSinglePost = function(postID, callback){
-  console.log('helpers get SINGLE post request!'); 
-  db.User.find({}, function(err, posts){
 
+  db.User.find({}, function(err, posts){
     if(err){
       console.log('findSinglePost Error ', err);
        console.log(404);
@@ -104,11 +103,8 @@ var findSinglePost = function(postID, callback){
         if(post.post[i] === undefined){
           break;
         }
-        console.log('helpers compare: ', post.post[i]._id == postID)        
-        console.log('helpers actual ', post.post[i]._id);
-        if(post.post[i]._id == postID){
 
-          console.log('helpers results: ', post.post[i]);
+        if(post.post[i]._id == postID){
           callback(post.post[i]);
           break;
         }  
@@ -118,7 +114,38 @@ var findSinglePost = function(postID, callback){
 
 };
 
+//==========================================================================Delete Single Post================================================================
 
+var deleteSinglePost = function(postID, callback){
+  console.log('helpers delete SINGLE post request!'); 
+
+   db.User.find({}, function(err, posts){
+    if(err){
+      console.log('deleteSinglePost Error ', err);
+       console.log(404);
+    }   
+    
+    posts.forEach(function(post) {
+      for(var i = 0; i < post.post.length; i++){
+        if(post.post[i] === undefined){
+          break;
+        }
+
+        if(post.post[i]._id == postID){
+          console.log('helpers !! posts', post.post[i]);
+          console.log('inside if, inside for loop');
+          post.post[i].remove(function(err){
+            if(err){
+              console.log('deleteSinglePost error', err);
+            }
+            console.log('Post Deleted!');
+            // callback('Post Deleted');
+          })
+        }  
+      }
+    });
+  });   
+};
 
 //============================================================================Export all helpers===========================================================
 
@@ -127,7 +154,8 @@ module.exports = {
 	createPostDB: createPostDB,
   findAllPosts: findAllPosts,
   findAllUserPosts: findAllUserPosts,
-  findSinglePost: findSinglePost
+  findSinglePost: findSinglePost,
+  deleteSinglePost: deleteSinglePost
 };
 
 

@@ -5,9 +5,11 @@
       <li>
        <div class="individualPostDiv">
       	<h3> {{ postTitle }} </h3>
+        <h6> {{ name }} </h6>
         	<p> {{ post }} </p>
+        }
        </div> 
-	
+	     <button ng-click= "deletePost(postID)" ng-show = "showDeleteButton()"> Delete Post</button>
       </li>
 
   </div>

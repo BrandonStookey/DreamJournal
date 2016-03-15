@@ -3,7 +3,6 @@
 angular.module('dreamjournal.profile', [])
 
 .controller('profileController', ['$scope', 'auth', '$http', 'ViewSinglePostFromHome', function ($scope, auth, $http, ViewSinglePostFromHome) {
-	console.log('Is profile init being intiated???');
   angular.extend($scope, ViewSinglePostFromHome);  
   $scope.userPostsData = [];	
 
@@ -19,7 +18,6 @@ angular.module('dreamjournal.profile', [])
    		// console.log('result ', result);
    		// $scope.userPostsData = result;
 	    result.data.forEach(function(post) {
-	    	console.log('post inside of profile ', post);
 	    	$scope.userPostsData.unshift(post);
 	    });	
 	    // console.log('User Post GET successful:', $scope.userPostsData);

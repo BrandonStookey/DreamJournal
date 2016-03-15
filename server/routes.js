@@ -79,18 +79,27 @@ app.post('/get/all/user/posts', function(req, res) {
 //=====================================================================View Single Post===================================================================================
 
 app.post('/view/single/post', function(req, res) {
-  console.log('routes get SINGLE post request!');    
-
   var postID = req.body.postid;
-
-  console.log('routes', postID);
-
   helpers.findSinglePost(postID,
   function(data) {
     res.send(data);
   });
 });
 
+//====================================================================Delete Single Post======================================================================================
+
+app.post('/delete/single/post', function(req, res) {
+  console.log('routes DELETE SINGLE post request!');    
+
+  var postID = req.body.postid;
+
+  console.log('routes', postID);
+
+  helpers.deleteSinglePost(postID,
+  function(data) {
+    res.send(data);
+  });
+});
 
 
 
