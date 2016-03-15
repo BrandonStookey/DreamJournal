@@ -81,13 +81,11 @@ app.post('/get/all/user/posts', function(req, res) {
 app.post('/view/single/post', function(req, res) {
   console.log('routes get SINGLE post request!');    
 
-  var email = req.body.email;
   var postID = req.body.postid;
 
-  console.log('routes ', email);
   console.log('routes', postID);
 
-  helpers.findSinglePost(email, postID,
+  helpers.findSinglePost(postID,
   function(data) {
     res.send(data);
   });
