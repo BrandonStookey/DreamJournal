@@ -50,6 +50,7 @@ angular.module('dreamjournal.home', [])
       data: {postid: postID}
     })
     .then(function(resp){
+      console.log('viewSinglePost resp ', resp);      
       singlePost[0] = resp;
       $location.path('/viewPost');
       console.log('homeController: ', singlePost);
@@ -64,7 +65,8 @@ angular.module('dreamjournal.home', [])
   };
 }])
 
-
+//[post1]
+//[post2]
 
 
 
