@@ -20,7 +20,7 @@ var userSchema = mongoose.Schema({
       post: String,
       name: String,
       email: String,
-      dreamType: Number, //0 === noDream , 1 === Dream, 2 === nightMare
+      dreamType: String, //0 === noDream , 1 === Dream, 2 === Nightmare
       date: { type: Date, default: Date.now }
     }]
   },

@@ -33,9 +33,10 @@ app.post('/create/post', function(req, res) {
 	var userName = req.body.name;
 	var userEmail = req.body.email;    	
 	var postTitle = req.body.postTitle;    	
-	var post = req.body.post;    	
+	var post = req.body.post;    
+  var dreamType = req.body.dreamType;	
 
-  helpers.createPostDB(userName, userEmail, postTitle, post, 
+  helpers.createPostDB(userName, userEmail, postTitle, post, dreamType,
   function(data) {
     res.send(data);
   });

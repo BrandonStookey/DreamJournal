@@ -1,6 +1,13 @@
-<h1>Write New Post View</h1>
+<h1>New Post</h1>
+
 <form name ="myForm">
 	<input type = "text" class = "postTitle" ng-model="postTitle" placeholder= "Place Blog Title Here" novalidate required></input>
 	<div type="text" text-angular ng-model="htmlVariable" required></div>
+
+<label for="singleSelect"> Was it a Dream or Nightmare? </label><br>
+    <select ng-model="dreamNightmare" required>
+      <option value= "Dream">Dream</option>
+      <option value= "Nightmare">Nightmare</option>
+    </select><br>
 </form>
-<a href ="#/home" ><button ng-click ="createPost(postTitle, htmlVariable)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Submit Blog post</button></a>		
+<a href ="#/home" ><button ng-click ="createPost(postTitle, htmlVariable, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Submit Blog post</button></a>		
