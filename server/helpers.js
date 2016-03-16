@@ -61,6 +61,7 @@ var findAllPosts = function(callback){
         postMap.unshift(post.post[i]);
       }
     });
+    postMap.sort(function(p1, p2) {return p1.date - p2.date });
 
     callback(postMap);  
   });
@@ -140,40 +141,4 @@ module.exports = {
   findSinglePost: findSinglePost,
   deleteSinglePost: deleteSinglePost
 };
-
-
-
-
-// var deleteSinglePost = function(postID, callback){
-//   console.log('helpers delete SINGLE post request!'); 
-
-//    db.User.find( {}, function(err, posts){
-//     console.log('helpers POSTS!! ', posts)
-//     if(err){
-//       console.log('deleteSinglePost Error ', err);
-//        console.log(404);
-//     }   
-    
-//     posts.forEach(function(post) {
-//       for(var i = 0; i < post.post.length; i++){
-//         if(post.post[i] === undefined){
-//           break;
-//         }
-
-//         if(post.post[i]._id == postID){
-//           console.log('helpers !! posts', post.post[i]);
-//           console.log('inside if, inside for loop');
-//           post.post[i].remove(function(err){
-//             if(err){
-//               console.log('deleteSinglePost error', err);
-//             }
-//             console.log('Post Deleted!');
-//             // callback('Post Deleted');
-//           })
-//         }  
-//       }
-//     });
-//   });   
-// };
-
 
