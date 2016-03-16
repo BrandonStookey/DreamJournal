@@ -1,14 +1,11 @@
 <h1>Home View</h1>
 <div class ="mainDiv">
 <div class ="blogDiv">
-
-      <li ng-repeat="post in postsData" >
-       <div class="individualPostDiv">
-      	<h3> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
-        	<p  ng-bind-html="post.post"></p>
-      	 </div> 
-	
-      </li>
-
+	 	<div class="individualPostDiv" ng-repeat="post in postsData" >
+	  	<h3> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
+	  	<h4> {{ post.name }} </h4>
+	  	<h6> {{ post.postDate }} </h6>
+	    <p  ng-bind-html="post.post"></p>
+		</div> 
   </div>
 </div>

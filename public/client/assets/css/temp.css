@@ -3,12 +3,12 @@
   width: 500px;
   margin-left: 400px;
   margin-right: auto;
-  color: green;
+  color: black;
 }
 .titleBox{
   margin-left: 400px;
   width: 500px;
-  color: green;
+  color: black;
 }
 .blogBoxSubmit{
   margin-left: 400px;
@@ -25,7 +25,7 @@
   width: 600px;
   margin-left: 150px;
   margin-right: auto;
-  color: green;
+  color: black;
   border-style: solid;
   border-width: 1px;
   border-color: black;
@@ -36,7 +36,7 @@
   background-color: white;
   height: 300x;
   width: 595px;
-  color: green;
+  color: black;
   border-style: solid;
   border-width: 1px;
   border-color: black;

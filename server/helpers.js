@@ -1,6 +1,7 @@
 'use strict';
 
 var db = require('./../db/db');
+var moment = require ('moment');
 
 //==============================================================Add New User to Database================================================================
 
@@ -27,8 +28,10 @@ var createNewUser = function(name, email, callback){
 //===============================================================Add New Post To DataBase===========================================================================
 
 var createPostDB = function (name, email, postTitle, post, callback) {
+    var date = moment().format('MMMM Do YYYY, h:mm a');
+    console.log('createPostDB Date', date);
 
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name} } }, function(err, success) {
+    db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name, postDate: date } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
            console.log(500);
@@ -55,7 +58,7 @@ var findAllPosts = function(callback){
         if(post.post[i] === undefined){
           break;
         }
-        postMap.push(post.post[i]);
+        postMap.unshift(post.post[i]);
       }
     });
 

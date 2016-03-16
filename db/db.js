@@ -15,7 +15,7 @@ var userSchema = mongoose.Schema({
   post: {
     type: [{
       postTitle: String,
-      postDate: Date,
+      postDate: String,
       post: String,
       name: String,
       email: String,

@@ -12,6 +12,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize'])
 		$scope.post = $scope.singlePost[0].data.post;
 		$scope.name = $scope.singlePost[0].data.name;
 		$scope.postID = $scope.singlePost[0].data._id;
+		$scope.postDate = $scope.singlePost[0].data.postDate;		
 
 		console.log('$scope.postTitle on View Post ', $scope.postTitle );		
 		console.log('$scope.post on View Post ', $scope.post);
@@ -24,7 +25,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize'])
 				return isUserPost = true;
 			}
 			return isUserPost;
-	}		
+		}		
 
 	};
 
