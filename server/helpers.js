@@ -28,7 +28,7 @@ var createNewUser = function(name, email, callback){
 
 var createPostDB = function (name, email, postTitle, post, callback) {
 
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:{postTitle: postTitle, post: post, name: name} } }, function(err, success) {
+    db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name} } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
            console.log(500);
@@ -90,7 +90,7 @@ var findAllUserPosts = function(email, callback){
 
 //==============================================================================Find Single Post=================================================================
 
-var findSinglePost = function(postID, callback){
+var findSinglePost = function(postTitle, callback){
 
   db.User.find({}, function(err, posts){
     if(err){
@@ -104,7 +104,7 @@ var findSinglePost = function(postID, callback){
           break;
         }
 
-        if(post.post[i]._id == postID){
+        if(post.post[i]._id == postTitle){
           callback(post.post[i]);
           break;
         }  
@@ -116,35 +116,15 @@ var findSinglePost = function(postID, callback){
 
 //==========================================================================Delete Single Post================================================================
 
-var deleteSinglePost = function(postID, callback){
+var deleteSinglePost = function(postTitle, callback){
   console.log('helpers delete SINGLE post request!'); 
-
-   db.User.find({}, function(err, posts){
-    if(err){
-      console.log('deleteSinglePost Error ', err);
-       console.log(404);
-    }   
-    
-    posts.forEach(function(post) {
-      for(var i = 0; i < post.post.length; i++){
-        if(post.post[i] === undefined){
-          break;
-        }
-
-        if(post.post[i]._id == postID){
-          console.log('helpers !! posts', post.post[i]);
-          console.log('inside if, inside for loop');
-          post.post[i].remove(function(err){
-            if(err){
-              console.log('deleteSinglePost error', err);
-            }
-            console.log('Post Deleted!');
-            // callback('Post Deleted');
-          })
-        }  
-      }
-    });
-  });   
+  console.log('helpers postTitle ', postTitle);
+  db.User.update({}, 
+                { $pull: { post: { postTitle: postTitle } } },{multi:true}, function(err, posts){
+                  console.log('helpers error ', err);
+                  console.log('helpers posts ', posts);
+                });
+    callback(200);
 };
 
 //============================================================================Export all helpers===========================================================
@@ -161,6 +141,36 @@ module.exports = {
 
 
 
+// var deleteSinglePost = function(postTitle, callback){
+//   console.log('helpers delete SINGLE post request!'); 
 
+//    db.User.find( {}, function(err, posts){
+//     console.log('helpers POSTS!! ', posts)
+//     if(err){
+//       console.log('deleteSinglePost Error ', err);
+//        console.log(404);
+//     }   
+    
+//     posts.forEach(function(post) {
+//       for(var i = 0; i < post.post.length; i++){
+//         if(post.post[i] === undefined){
+//           break;
+//         }
+
+//         if(post.post[i]._id == postTitle){
+//           console.log('helpers !! posts', post.post[i]);
+//           console.log('inside if, inside for loop');
+//           post.post[i].remove(function(err){
+//             if(err){
+//               console.log('deleteSinglePost error', err);
+//             }
+//             console.log('Post Deleted!');
+//             // callback('Post Deleted');
+//           })
+//         }  
+//       }
+//     });
+//   });   
+// };
 
 

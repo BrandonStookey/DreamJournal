@@ -30,12 +30,12 @@ angular.module('dreamjournal.viewPost', ['ngSanitize'])
 
 	$scope.init();
 //=====================================================================Delete A Single Post=============================================================
-	$scope.deletePost = function(postID){
+	$scope.deletePost = function(postTitle){
 		console.log('deletePost is being called on controlers')
     $http({
       method: 'POST',
       url: '/delete/single/post',
-      data: {postid: postID}
+      data: {postTitle: postTitle}
     })
     .then(function(resp){    
       $location.path('/profile');

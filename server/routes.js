@@ -91,11 +91,11 @@ app.post('/view/single/post', function(req, res) {
 app.post('/delete/single/post', function(req, res) {
   console.log('routes DELETE SINGLE post request!');    
 
-  var postID = req.body.postid;
+  var postTitle = req.body.postTitle;
 
-  console.log('routes', postID);
+  console.log('routes', postTitle);
 
-  helpers.deleteSinglePost(postID,
+  helpers.deleteSinglePost(postTitle,
   function(data) {
     res.send(data);
   });
