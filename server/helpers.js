@@ -90,7 +90,7 @@ var findAllUserPosts = function(email, callback){
 
 //==============================================================================Find Single Post=================================================================
 
-var findSinglePost = function(postTitle, callback){
+var findSinglePost = function(postID, callback){
 
   db.User.find({}, function(err, posts){
     if(err){
@@ -104,7 +104,7 @@ var findSinglePost = function(postTitle, callback){
           break;
         }
 
-        if(post.post[i]._id == postTitle){
+        if(post.post[i]._id == postID){
           callback(post.post[i]);
           break;
         }  
@@ -141,7 +141,7 @@ module.exports = {
 
 
 
-// var deleteSinglePost = function(postTitle, callback){
+// var deleteSinglePost = function(postID, callback){
 //   console.log('helpers delete SINGLE post request!'); 
 
 //    db.User.find( {}, function(err, posts){
@@ -157,7 +157,7 @@ module.exports = {
 //           break;
 //         }
 
-//         if(post.post[i]._id == postTitle){
+//         if(post.post[i]._id == postID){
 //           console.log('helpers !! posts', post.post[i]);
 //           console.log('inside if, inside for loop');
 //           post.post[i].remove(function(err){
