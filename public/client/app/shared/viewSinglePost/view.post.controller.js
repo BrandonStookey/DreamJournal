@@ -2,11 +2,11 @@
 
 angular.module('dreamjournal.viewPost', ['ngSanitize'])
 
-.controller('viewPostController', ['$scope', 'ViewSinglePostFromHome', '$http', '$location', 'auth', function ($scope, ViewSinglePostFromHome, $http, $location, auth) {
+.controller('viewPostController', ['$scope', 'ViewSinglePostFromHomeAndFromProfile', '$http', '$location', 'auth', function ($scope, ViewSinglePostFromHomeAndFromProfile, $http, $location, auth) {
 
 
 	$scope.init = function(){
-		$scope.singlePost = ViewSinglePostFromHome.singlePost;
+		$scope.singlePost = ViewSinglePostFromHomeAndFromProfile.singlePost;
 		console.log('$scope.singlePost on View Post ', $scope.singlePost);		
 		$scope.postTitle = $scope.singlePost[0].data.postTitle;
 		$scope.post = $scope.singlePost[0].data.post;

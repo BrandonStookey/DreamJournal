@@ -2,8 +2,8 @@
 
 angular.module('dreamjournal.profile', ['ngSanitize'])
 
-.controller('profileController', ['$scope', 'auth', '$http', 'ViewSinglePostFromHome', function ($scope, auth, $http, ViewSinglePostFromHome) {
-  angular.extend($scope, ViewSinglePostFromHome);  
+.controller('profileController', ['$scope', 'auth', '$http', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, auth, $http, ViewSinglePostFromHomeAndFromProfile) {
+  angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);  
   $scope.userPostsData = [];	
   $scope.userName = auth.profile.name;
 
@@ -29,7 +29,7 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
 	$scope.init();	
 
 }])
-.factory('ViewSinglePostFromHome',['$http', 'auth','$location', function($http, auth, $location){
+.factory('ViewSinglePostFromHomeAndFromProfile',['$http', 'auth','$location', function($http, auth, $location){
   var singlePost = [];
   var viewSinglePost = function(postID){
     $http({
