@@ -5,7 +5,7 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
 .controller('profileController', ['$scope', 'auth', '$http', 'ViewSinglePostFromHome', function ($scope, auth, $http, ViewSinglePostFromHome) {
   angular.extend($scope, ViewSinglePostFromHome);  
   $scope.userPostsData = [];	
-
+  $scope.userName = auth.profile.name;
 
 	$scope.init = function(){
   var email = auth.profile.email;		
