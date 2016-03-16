@@ -1,7 +1,6 @@
 <h1>Write New Post View</h1>
-
-<input class = "titleBox" ng-model="postTitle" placeholder= "Place Blog Title Here"novalidate></input>		
-
-<div text-angular ng-model="htmlVariable" name="post"></div>
-
-<a href ="#/home" ><button ng-click ="createPost(postTitle, htmlVariable)" class ="blogBoxSubmit">Submit Blog post</button></a>		
+<form name ="myForm">
+	<input type = "text" class = "postTitle" ng-model="postTitle" placeholder= "Place Blog Title Here" novalidate required></input>
+	<div type="text" text-angular ng-model="htmlVariable" required></div>
+</form>
+<a href ="#/home" ><button ng-click ="createPost(postTitle, htmlVariable)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Submit Blog post</button></a>		
