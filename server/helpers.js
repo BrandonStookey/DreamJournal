@@ -34,7 +34,7 @@ var createPostDB = function (name, email, postTitle, post, dreamType, callback) 
     db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name, postDate: date, dreamType: dreamType } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
-           console.log(500);
+           callback(err);
         } else {
           console.log('Added New Post!');
           callback(200);

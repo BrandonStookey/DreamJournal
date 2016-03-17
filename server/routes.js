@@ -40,7 +40,10 @@ app.post('/create/post', function(req, res) {
   var dreamType = req.body.dreamType;	
 
   helpers.createPostDB(userName, userEmail, postTitle, post, dreamType,
-  function(data) {
+  function(err, data) {
+    if(err){
+      res.status(400).send(err);
+    }    
     res.send(data);
   });
 });
