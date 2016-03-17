@@ -99,7 +99,7 @@ var findSinglePost = function(postID, callback){
   db.User.find({}, function(err, posts){
     if(err){
       console.log('findSinglePost Error ', err);
-      callback(err);
+      return callback(err);
     }   
     
     posts.forEach(function(post) {
@@ -109,7 +109,7 @@ var findSinglePost = function(postID, callback){
         }
 
         if(post.post[i]._id == postID){
-          callback(post.post[i]);
+          callback(null, post.post[i]);
           break;
         }  
       }
@@ -125,10 +125,12 @@ var deleteSinglePost = function(postTitle, callback){
   console.log('helpers postTitle ', postTitle);
   db.User.update({}, 
                 { $pull: { post: { postTitle: postTitle } } },{multi:true}, function(err, posts){
-                  console.log('helpers error ', err);
-                  console.log('helpers posts ', posts);
+                    if(err){
+                      console.log('delete single post error: ', err);
+                      return callback(err);
+                    }
+                    callback(null, 200);
                 });
-    callback(200);
 };
 
 //========================================================================Get all Dreams and all Nightmares for Graph==============================================
@@ -139,7 +141,7 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
 
     if(err){
       console.log('findAllUserPosts Error ', err);
-       console.log(404);
+      callback(err);
     }
 
     var postMap = [];
@@ -155,7 +157,7 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
       }
     });
 
-    callback(postMap);  
+    callback(null, postMap);  
   });
 };
 

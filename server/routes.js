@@ -63,14 +63,11 @@ app.get('/get/all/posts', function(req, res) {
 
 //======================================================================Get all User Posts========================================================================
 
-
-///////////////////////////////////////////////////////Question for Cody, why does this break when I do proper error handling?
-
 app.post('/get/all/user/posts', function(req, res) { 
   var email = req.body.email;
 
   helpers.findAllUserPosts(email, 
-  function(data) { 
+  function(err, data) { 
     if(err){
       res.status(400).send(err);
     }         
@@ -78,30 +75,15 @@ app.post('/get/all/user/posts', function(req, res) {
   });
 });
 
-///Refactor all requests to handle errors like in the below example
-  //also change all console.log for errors in helpers to return callback()
-  
-// app.post('/get/all/user/posts', function(req, res) { 
-//   var email = req.body.email;
-
-//   helpers.findAllUserPosts(email, 
-//   function(err, data) {
-//     if(err){
-//       res.status(400=).send(err);
-//     }    
-//     res.send(data);
-//   });
-// });
-
 //=====================================================================View Single Post===================================================================================
-
-///////////////////////////////////////////////////////Question for Cody, why does this break when I do proper error handling?
-
 
 app.post('/view/single/post', function(req, res) {
   var postID = req.body.postid;
   helpers.findSinglePost(postID,
-  function(data) {    
+  function(err, data) {  
+    if(err){
+      res.status(400).send(err);
+    }      
     res.send(data);
   });
 });
@@ -116,7 +98,10 @@ app.post('/delete/single/post', function(req, res) {
   console.log('routes', postTitle);
 
   helpers.deleteSinglePost(postTitle,
-  function(data) {
+  function(err, data) {
+    if(err){
+      res.status(400).send(err);
+    }      
     res.send(data);
   });
 });
@@ -129,7 +114,10 @@ app.post('/get/all/dreamType/posts', function(req, res) {
   var dreamType = req.body.dreamType;   
 
   helpers.findAllDreamsNightmares(email, dreamType,
-  function(data) {  
+  function(err, data) {  
+    if(err){
+      res.status(400).send(err);
+    }       
     res.send(data);
   });
 });
