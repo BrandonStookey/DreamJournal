@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dreamjournal.graph', [])
+angular.module('dreamjournal.graph', ['d3'])
 
 .controller('graphController', ['$scope', '$http', 'auth', function ($scope, $http, auth ) {
 	console.log('graphController being called!');

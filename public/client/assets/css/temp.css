@@ -168,3 +168,5 @@ h6, .h6 {
 .postTitle{
     width: 500px;
 }
+
+.liquidFillGaugeText { font-family: Helvetica; font-weight: bold; }
