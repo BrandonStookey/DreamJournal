@@ -22,7 +22,10 @@ app.post('/create/new/user', function(req, res) {
   var userEmail = req.body.email;     
  
   helpers.createNewUser(userName, userEmail,
-  function(data) {  
+  function(err, data) {  
+    if(err){
+      res.status(400).send(err);
+    }
     res.send(data);
   });
 });
