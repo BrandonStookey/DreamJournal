@@ -20,7 +20,7 @@ var createNewUser = function(name, email, callback){
         return callback(err);
       } else {
         console.log('Added New User!');
-        callback(200);
+        callback(null, 200);
       }
     });  
 };
@@ -37,7 +37,7 @@ var createPostDB = function (name, email, postTitle, post, dreamType, callback) 
           return callback(err);
         } else {
           console.log('Added New Post!');
-          callback(200);
+          callback(null, 200);
         }   
     });
         
