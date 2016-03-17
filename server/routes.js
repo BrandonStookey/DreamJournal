@@ -50,20 +50,29 @@ app.post('/create/post', function(req, res) {
 
 //==================================================================Get all Posts Request===================================================================
 
+///////////////////////////////////////////////////////Question for Cody, why does this break when I do proper error handling?
+
 app.get('/get/all/posts', function(req, res) {  
   helpers.findAllPosts( 
-  function(data) {
+  function(err, data) {
+    if(err){
+      res.status(400).send(err);
+    }        
     res.send(data);
   });
 });
 
 
 //======================================================================Get all User Posts========================================================================
+
+
+///////////////////////////////////////////////////////Question for Cody, why does this break when I do proper error handling?
+
 app.post('/get/all/user/posts', function(req, res) { 
   var email = req.body.email;
 
   helpers.findAllUserPosts(email, 
-  function(data) {  
+  function(data) {      
     res.send(data);
   });
 });
@@ -85,10 +94,13 @@ app.post('/get/all/user/posts', function(req, res) {
 
 //=====================================================================View Single Post===================================================================================
 
+///////////////////////////////////////////////////////Question for Cody, why does this break when I do proper error handling?
+
+
 app.post('/view/single/post', function(req, res) {
   var postID = req.body.postid;
   helpers.findSinglePost(postID,
-  function(data) {
+  function(data) {    
     res.send(data);
   });
 });

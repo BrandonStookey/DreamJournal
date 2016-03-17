@@ -34,7 +34,7 @@ var createPostDB = function (name, email, postTitle, post, dreamType, callback) 
     db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name, postDate: date, dreamType: dreamType } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
-           callback(err);
+          return callback(err);
         } else {
           console.log('Added New Post!');
           callback(200);
@@ -49,7 +49,7 @@ var findAllPosts = function(callback){
   db.User.find({}, function(err, posts){
     if(err){
       console.log('findAllPosts Error ', err);
-       callback(err);
+      return callback(err);
     }
     var postMap = [];
 
@@ -63,7 +63,7 @@ var findAllPosts = function(callback){
     });
     postMap.sort(function(p1, p2) {return p1.date - p2.date });
 
-    callback(postMap);  
+    callback(null, postMap);  
   });
 };
 
@@ -74,7 +74,7 @@ var findAllUserPosts = function(email, callback){
 
     if(err){
       console.log('findAllUserPosts Error ', err);
-       console.log(404);
+      return callback(err);
     }
 
     var postMap = [];
@@ -99,7 +99,7 @@ var findSinglePost = function(postID, callback){
   db.User.find({}, function(err, posts){
     if(err){
       console.log('findSinglePost Error ', err);
-       console.log(404);
+      callback(err);
     }   
     
     posts.forEach(function(post) {
