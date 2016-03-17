@@ -28,7 +28,7 @@ var createNewUser = function(name, email, callback){
 //===============================================================Add New Post To DataBase===========================================================================
 
 var createPostDB = function (name, email, postTitle, post, dreamType, callback) {
-    var date = moment().format('MMMM Do YYYY, h:mm a');
+    var date = moment().format('llll');
     console.log('createPostDB Date', date);
 
     db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name, postDate: date, dreamType: dreamType } } }, function(err, success) {
