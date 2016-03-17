@@ -88,7 +88,7 @@ var findAllUserPosts = function(email, callback){
       }
     });
 
-    callback(postMap);  
+    callback(null, postMap);  
   });
 };
 

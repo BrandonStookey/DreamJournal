@@ -26,5 +26,8 @@
     "textAngular": "^1.5.0",
     "angular-sanitize": "^1.5.0",
     "moment": "^2.12.0"
-  }
+  },
+  "resolutions": {
+   "angular": "1.5.0"
+ }  
 }

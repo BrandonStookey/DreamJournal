@@ -50,8 +50,6 @@ app.post('/create/post', function(req, res) {
 
 //==================================================================Get all Posts Request===================================================================
 
-///////////////////////////////////////////////////////Question for Cody, why does this break when I do proper error handling?
-
 app.get('/get/all/posts', function(req, res) {  
   helpers.findAllPosts( 
   function(err, data) {
@@ -72,7 +70,10 @@ app.post('/get/all/user/posts', function(req, res) {
   var email = req.body.email;
 
   helpers.findAllUserPosts(email, 
-  function(data) {      
+  function(data) { 
+    if(err){
+      res.status(400).send(err);
+    }         
     res.send(data);
   });
 });
