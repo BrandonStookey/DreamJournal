@@ -8,6 +8,15 @@
     <script src="assets/libs/angular-route/angular-route.min.js"></script>
     <script src="assets/libs/angular-sanitize/angular-sanitize.min.js"></script>    
     <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> -->
+
+
+
+
+    <script src="http://d3js.org/d3.v3.min.js" language="JavaScript"></script>
+    <script src="liquidFillGauge.js" language="JavaScript"></script>
+
+
+        
 <!-- We use client cookies to save the user credentials -->
     <script src="//code.angularjs.org/1.2.16/angular-cookies.min.js"></script>
 
@@ -37,17 +46,17 @@
     <script src='/assets/libs/textAngular/dist/textAngular.min.js'></script>    
 
 
-    <script src="//d3js.org/d3.v3.min.js"></script>
+
 
   </head>
   <body>
     <div class="blog-masthead">
       <div class="container">
-      <a class="blog-nav-item active" href="#/home">Home</a>     
-      <a class="blog-nav-item active" href="#/profile">Profile</a>      
-      <a class="blog-nav-item active" href="#/graph">Graph</a>      
-      <a class="blog-nav-item active" href="#/newPost">Post</a>  
-      <a class="blog-nav-item active" href="#/login">Login</a>      
+      <a  class="blog-nav-item active fa fa-home" href="#/home"></a>     
+      <a class="blog-nav-item active fa fa-user" href="#/profile"></a>      
+      <a class="blog-nav-item active fa fa-bar-chart" href="#/graph"></a>      
+      <a class="blog-nav-item active fa fa-clipboard" href="#/newPost"></a>  
+      <a class="blog-nav-item active fa fa-sign-in" href="#/login"></a>      
       </div>
     </div>    
     <div ng-view> </div>

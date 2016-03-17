@@ -1,7 +1,8 @@
 'use strict';
+
 angular.module('dreamjournal.graph', [])
 
-.controller('graphController', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
+.controller('graphController', ['$scope', '$http', 'auth', function ($scope, $http, auth ) {
 	console.log('graphController being called!');
 
 	$scope.nightMare = [];
@@ -13,7 +14,8 @@ angular.module('dreamjournal.graph', [])
 	$scope.init = function(){
     var userName = auth.profile.name;
     var userEmail = auth.profile.email;
-
+//=====================================================Gets all post with a dreamType of 'Dream'========================================================
+   
     $http({
       method: 'POST',
       url: '/get/all/dreamType/posts',
@@ -29,6 +31,7 @@ angular.module('dreamjournal.graph', [])
       console.log('error', err);
     });
 
+//======================================================Gets all post with a dreamType of 'Nightmare'=======================================================
 
     $http({
       method: 'POST',
@@ -43,27 +46,10 @@ angular.module('dreamjournal.graph', [])
 	    });	
     }, function(err){
       console.log('error', err);
-    });	    
+    });	      
 	};
 
 	$scope.init();
-
-	console.log('graphController Dreams: ', $scope.dream);
-	console.log('graphController Nightmare: ', $scope.nightMare);
-
-	console.log('graphController $scope.dreamCount: ', $scope.dreamCount);	
-	console.log('graphController Dreams: ', $scope.nightMareCount);
+   
 
 }]);
-
-
-
-
-
-
-
-
-
-
-
-
