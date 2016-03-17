@@ -131,6 +131,34 @@ var deleteSinglePost = function(postTitle, callback){
     callback(200);
 };
 
+//========================================================================Get all Dreams and all Nightmares for Graph==============================================
+
+var findAllDreamsNightmares = function(email, dreamType, callback){
+  console.log('helpers for graph being called!');   
+  db.User.find({ email: email }, function(err, posts){
+
+    if(err){
+      console.log('findAllUserPosts Error ', err);
+       console.log(404);
+    }
+
+    var postMap = [];
+
+    posts.forEach(function(post) {
+      for(var i = 0; i < post.post.length; i++){
+        if(post.post[i] === undefined){
+          break;
+        }
+        if(post.post[i].dreamType === dreamType){
+          postMap.push(post.post[i]);
+        }
+      }
+    });
+
+    callback(postMap);  
+  });
+};
+
 //============================================================================Export all helpers===========================================================
 
 module.exports = {
@@ -139,6 +167,7 @@ module.exports = {
   findAllPosts: findAllPosts,
   findAllUserPosts: findAllUserPosts,
   findSinglePost: findSinglePost,
-  deleteSinglePost: deleteSinglePost
+  deleteSinglePost: deleteSinglePost,
+  findAllDreamsNightmares: findAllDreamsNightmares  
 };
 

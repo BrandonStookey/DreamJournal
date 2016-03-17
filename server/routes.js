@@ -102,8 +102,18 @@ app.post('/delete/single/post', function(req, res) {
   });
 });
 
+//================================================================Get All Dreams and Nightmares for Graph========================================================================
 
+app.post('/get/all/dreamType/posts', function(req, res) { 
+  console.log('routes for graph being called!');  
+  var email = req.body.email;
+  var dreamType = req.body.dreamType;   
 
+  helpers.findAllDreamsNightmares(email, dreamType,
+  function(data) {  
+    res.send(data);
+  });
+});
 
 
 
