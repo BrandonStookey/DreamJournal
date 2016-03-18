@@ -30,11 +30,6 @@ module.exports = function(config) {
       'http://cdn.auth0.com/w2/auth0-angular-4.js',
 
       //textAngular source(text editing tool box)
-      // 'public/client/assets/libs/textAngular/dist/textAngular.css',
-      // 'public/client/assets/libs/textAngular/dist/textAngular-rangy.min.js',
-      // 'public/client/assets/libs/textAngular/dist/textAngular-sanitize.min.js',
-      // 'public/client/assets/libs/textAngular/dist/textAngular.min.js',
-
       'public/client/assets/libs/textAngular/dist/textAngular.css',
       'public/client/assets/libs/rangy/rangy-core.js',
       'public/client/assets/libs/rangy/rangy-selectionsaverestore.js',
@@ -55,23 +50,6 @@ module.exports = function(config) {
       'test/loginControllerTest.js'
     ],
 
-    // preprocess matching files before serving them to the browser
-    // available preprocessors: https://npmjs.org/browse/keyword/karma-preprocessor
-    preprocessors: {
-      // 'public/client/assets/libs/textAngular/dist/textAngular.css': [ 'browserify' ],
-      // 'public/client/assets/libs/rangy/rangy-core.js': [ 'browserify' ],
-      // 'public/client/assets/libs/rangy/rangy-selectionsaverestore.js': [ 'browserify' ],
-      // 'public/client/assets/libs/textAngular/dist/textAngular-sanitize.min.js': [ 'browserify' ],
-      // 'public/client/assets/libs/textAngular/dist/textAngular.min.js': [ 'browserify' ],
-
-      // 'public/client/app/**/*.js': [ 'browserify' ],
-      // 'test/appRoutesTest.js': [ 'browserify' ],
-      // 'test/loginControllerTest.js': [ 'browserify' ]      
-    },
-
-    browserify: {
-      debug: true,
-    },
 
     // list of files to exclude
     exclude: [
