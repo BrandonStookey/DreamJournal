@@ -12,7 +12,6 @@ describe('homeController', function () {
     // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $httpBackend = $injector.get('$httpBackend');
-    // auth = $injector.get('auth');
     $scope = $rootScope.$new();
 
     var $controller = $injector.get('$controller');
@@ -20,7 +19,6 @@ describe('homeController', function () {
     createController = function () {
       return $controller('homeController', {
         $scope: $scope,
-        // auth: auth
       });
     };
   }));

@@ -48,7 +48,8 @@ module.exports = function(config) {
       'node_modules/expect.js/index.js',
       'test/appRoutesTest.js',
       'test/loginControllerTest.js',
-      'test/homeControllerTest.js'
+      'test/homeControllerTest.js',
+      'test/profileControllerTest.js'
     ],
 
     // preprocessor: {
