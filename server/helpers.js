@@ -12,7 +12,7 @@ var createNewUser = function(name, email, callback){
       email: email,    
       name: name,
     })
-    .save(function(err) {
+    .save(function(err, data) {
   ////Later check to see what your second parameter is sending back
   ////for example .save(function(err, INFO){}) Will be needed for testing purposes     
       if(err){
@@ -20,7 +20,7 @@ var createNewUser = function(name, email, callback){
         // return callback(err);
       } else {
         console.log('Added New User!');
-        callback(null, 200);
+        callback(null, data);
       }
     });  
 };

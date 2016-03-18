@@ -4,7 +4,7 @@
   "description": "Online dream blogging platform",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "mocha test/serverTest.js && ./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "test": "mocha test/helpersTest.js && ./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "start": "grunt build && nodemon server/server.js",
     "postinstall": "./node_modules/bower/bin/bower install"
   },
@@ -62,6 +62,7 @@
   "devDependencies": {
     "browserify": "^13.0.0",
     "karma-browserify": "^5.0.2",
+    "supertest": "^1.2.0",
     "variety-cli": "^0.4.0",
     "watchify": "^3.7.0"
   }

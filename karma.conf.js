@@ -47,10 +47,14 @@ module.exports = function(config) {
       // our spec files
       'node_modules/expect.js/index.js',
       'test/appRoutesTest.js',
-      'test/loginControllerTest.js'
+      'test/loginControllerTest.js',
+      // 'test/serverTest.js'
     ],
 
-
+    // preprocessor: {
+    //   'test/serverTest.js': [ 'browersify' ]
+    // },
+  
     // list of files to exclude
     exclude: [
         'karma.conf.js'
