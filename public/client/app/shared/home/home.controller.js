@@ -4,13 +4,14 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 
 .controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $http, auth, ViewSinglePostFromHomeAndFromProfile) {
 	$scope.postsData = [];
+  $scope.userData = [];
   angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
 
 
-  $scope.init= function(){
+  $scope.init= function(userName, userEmail){
    //======================Create New User on Init=========================
     var userName = auth.profile.name;
-    var userEmail = auth.profile.email;
+    var userEmail = auth.profile.email;  
 
     $http({
       method: 'POST',
@@ -18,7 +19,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       data: {name: userName, email: userEmail}
     })
     .then(function(resp){
-      console.log(resp);
+      console.log('resp ', resp);
+      $scope.userData.unshift(resp);
     }, function(err){
       console.log('error', err);
     });
@@ -30,6 +32,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   	})
    .then(function(result) {
 	    result.data.forEach(function(post) {
+        console.log('post');
 	    	$scope.postsData.unshift(post);
 	    });	
 	    console.log('Post GET successful');
@@ -65,8 +68,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   };
 }])
 
-//[post1]
-//[post2]
 
 
 
