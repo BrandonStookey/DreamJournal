@@ -2,7 +2,6 @@
 
 angular.module('dreamjournal', [
   'ngRoute',
-  'd3',
   'dreamjournal.login',
   'dreamjournal.graph',
   'dreamjournal.profile',
