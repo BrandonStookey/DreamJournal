@@ -4,7 +4,7 @@
   "description": "Online dream blogging platform",
   "main": "Gruntfile.js",
   "scripts": {
-    "test": "mocha test/helpersTest.js && ./node_modules/.bin/karma start --single-run --browsers PhantomJS",
+    "test": "mocha test/helpersTest.js test/serverTest.js && ./node_modules/.bin/karma start --single-run --browsers PhantomJS",
     "start": "grunt build && nodemon server/server.js",
     "postinstall": "./node_modules/bower/bin/bower install"
   },

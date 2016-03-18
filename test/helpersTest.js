@@ -75,16 +75,21 @@ beforeEach(function (done) {
     });
   });
 
+//==============================================================Add New User to Database================================================================
 
-  it('should have a method that retrieves all posts from a single user', function (done) {
-      helpers.findAllUserPosts('hatter@hatter.com',function(err, result){
+  it('should create a new user', function (done) {
+      helpers.createNewUser ('Jason', 'jason@jason.com',function(err, result){
           if(err){
             console.log(err);
           }
-          expect(result.length).to.equal(1);
+          console.log('result')
+          expect(result.name).to.equal('Jason');
           done(); 
       });
   });
+  
+
+//========================================================================Get All Posts========================================================================
 
   it('should have a method that retrieves all posts from the database at once', function (done) {
       helpers.findAllPosts(function(err, result){
@@ -96,13 +101,14 @@ beforeEach(function (done) {
       });
   });
 
-  it('should create a new user', function (done) {
-      helpers.createNewUser ('Jason', 'jason@jason.com',function(err, result){
+//==========================================================================Find All User Posts=======================================================================
+
+  it('should have a method that retrieves all posts from a single user', function (done) {
+      helpers.findAllUserPosts('hatter@hatter.com',function(err, result){
           if(err){
             console.log(err);
           }
-          console.log('result')
-          expect(result.name).to.equal('Jason');
+          expect(result.length).to.equal(1);
           done(); 
       });
   });
