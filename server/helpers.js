@@ -17,7 +17,7 @@ var createNewUser = function(name, email, callback){
   ////for example .save(function(err, INFO){}) Will be needed for testing purposes     
       if(err){
         console.log('createNewUser error', err);
-        return callback(err);
+        // return callback(err);
       } else {
         console.log('Added New User!');
         callback(null, 200);
