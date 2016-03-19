@@ -1,43 +1,56 @@
 [![Stories in Ready](https://badge.waffle.io/BrandonStookey/dreamjournal.png?label=ready&title=Ready)](https://waffle.io/BrandonStookey/dreamjournal)
-Project Name
-dreamjournal
-Team
 
+Project Name: dreamjournal
 Product Owner: Brandon Stookey
 Scrum Master: Brandon Stookey
 Development: BrandonS Stookey
-Table of Contents
 
-Usage
-Requirements
-Development
-Installing Dependencies
-Tasks
-Team
-Contributing
-Usage
+## Table of Contents
+	-Usage
+	-Requirements
+	-development
+	-Installing Dependencies
+	-Contributing
 
-Some usage instructions
-Requirements
+##Usage
+	-Fork and clone this repo.
 
-Node 0.10.x
-Redis 2.6.x
-Postgresql 9.1.x
-etc
-etc
-Development
+##Requirements
+	-Node 0.12.7
+	-Mongo
 
-Installing Dependencies
+##Development
 
-From within the root directory:
 
-sudo npm install -g bower
-npm install
-bower install
-Roadmap
+##Installing Dependencies
+	-From within the root directory:
 
-View the project roadmap here
+	```sh
+	-sudo npm install -g bower
+	-sudo npm install -g grunt-cli
 
-Contributing
+	-npm install 
+		runs bower install for you
 
-See CONTRIBUTING.md for contribution guidelines.
+	-grunt  
+		handles compilation, concatenation, and minification of files
+
+	-npm start 
+		uses nodemon
+		The server runs on port 4568 by default
+
+	In production: 
+		-node server/server.js 
+
+	-Booting up the server for the first time will create the db schema. 	
+
+	-Auth0: Create an [Auth0](https://auth0.com/) account
+		Make sure your allowed callback URLs are set up appropriately on Auth0 (include at least http://localhost:4568/ and http://127.0.0.1:4568/).	
+
+
+##Contributing
+	See _CONTRIBUTING.md for contribution guidelines.
+
+
+
+
