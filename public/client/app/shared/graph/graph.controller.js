@@ -53,13 +53,13 @@ angular.module('dreamjournal.graph', [])
    
 }])
   .directive('fillGraph', function() {
-    
+
     return{
       restrict: 'EA',
       link: link,
       scope:{
-        dreamCount: '=dreamCount',
-        nightmareCount: '=nightmareCount'
+        dreamCount: '=',
+        nightmareCount: '='
       }
     }
 
@@ -67,6 +67,22 @@ angular.module('dreamjournal.graph', [])
 //http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6 <-------Website to liquidGauge source code   
 
     function link(scope, el){
+
+      scope.$watch('dreamCount', function(newValue, oldValue) {
+          if (newValue)
+            console.log('newValue dream: ', newValue);
+            scope.dreamCount = newValue;
+            loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
+            console.log("I see a data change!");
+      }, true);
+
+      scope.$watch('nightmareCount', function(newValue, oldValue) {
+          if (newValue)
+              console.log('newValue nightmare: ', newValue);
+                scope.nightmareCount = newValue;
+                loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
+              console.log("I see a data change!");
+      }, true); 
 
       console.log('dream: ', scope.dreamCount);
       console.log('nightmare: ', scope.nightmareCount);
@@ -147,6 +163,8 @@ angular.module('dreamjournal.graph', [])
   function loadLiquidFillGauge(elementId, value, config) {
       if(config == null) config = liquidFillGaugeDefaultSettings();
 
+//====================================gauge is how the information is being appended to the html===============================================
+      
       var gauge = d3.select(el[0]).append('svg');
       var radius = Math.min(parseInt(gauge.style("width")), parseInt(gauge.style("height")))/2;
       var locationX = parseInt(gauge.style("width"))/2 - radius;
