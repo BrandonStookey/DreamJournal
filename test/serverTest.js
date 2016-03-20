@@ -3,8 +3,21 @@ var app = require('./../server/server');
 var expect = chai.expect;
 var request = require('supertest');
 var helpers = require('./../server/helpers.js');
+// I think this will solve my problem
+// https://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
 
-describe('', function () {
+
+describe('loading express', function () {
+
+  // var server;
+  // beforeEach(function () {
+  //   server = require('./../server/server', { bustCache: true });
+  // });
+  // afterEach(function (done) {
+  //   server.stop(done);
+  // });
+
+
 
 //================================================================Test Add New User To Database=====================================================================
 
