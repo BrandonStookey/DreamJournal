@@ -71,7 +71,7 @@ angular.module('dreamjournal.graph', [])
       scope.$watch('dreamCount', function(newValue, oldValue) {
           if (newValue)
             // svg.selectAll('*').remove();
-            d3.selectAll("svg > *").remove()
+            d3.selectAll("svg").remove()
             scope.dreamCount = newValue;
             loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
       }, true);
