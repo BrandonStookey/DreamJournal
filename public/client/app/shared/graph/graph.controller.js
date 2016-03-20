@@ -68,19 +68,35 @@ angular.module('dreamjournal.graph', [])
 
     function link(scope, el){
 
-      scope.$watch('dreamCount', function(newValue, oldValue) {
-          if (newValue)
-            // svg.selectAll('*').remove();
+      scope.$watchGroup(['dreamCount', 'nightmareCount'], function(newValues, oldValues, scope) {
+        // newValues array contains the current values of the watch expressions
+        // with the indexes matching those of the watchExpression array
+        // i.e.
+        // newValues[0] -> $scope.foo 
+        // and 
+        // newValues[1] -> $scope.bar 
             d3.selectAll("svg").remove()
-            scope.dreamCount = newValue;
-            loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
-      }, true);
+            scope.dreamCount = newValues[0];
+            scope.nightmareCount = newValues[1];            
+            loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);  
+            loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);                  
+      },true);
 
-      scope.$watch('nightmareCount', function(newValue, oldValue) {
-          if (newValue)
-            scope.nightmareCount = newValue;
-            loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
-      }, true); 
+
+      // scope.$watch('dreamCount', function(newValue, oldValue) {
+      //     if (newValue)
+      //       // svg.selectAll('*').remove();
+      //       d3.selectAll("svg").remove()
+      //       scope.dreamCount = newValue;
+      //       loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
+      // }, true);
+
+      // scope.$watch('nightmareCount', function(newValue, oldValue) {
+      //     if (newValue)
+      //       // d3.selectAll("svg").remove()
+      //       scope.nightmareCount = newValue;
+      //       loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
+      // }, true); 
 
       console.log('dream: ', scope.dreamCount);
       console.log('nightmare: ', scope.nightmareCount);
