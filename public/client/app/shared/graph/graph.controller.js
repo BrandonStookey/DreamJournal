@@ -70,18 +70,16 @@ angular.module('dreamjournal.graph', [])
 
       scope.$watch('dreamCount', function(newValue, oldValue) {
           if (newValue)
-            console.log('newValue dream: ', newValue);
+            // svg.selectAll('*').remove();
+            d3.selectAll("svg > *").remove()
             scope.dreamCount = newValue;
             loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
-            console.log("I see a data change!");
       }, true);
 
       scope.$watch('nightmareCount', function(newValue, oldValue) {
           if (newValue)
-              console.log('newValue nightmare: ', newValue);
-                scope.nightmareCount = newValue;
-                loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
-              console.log("I see a data change!");
+            scope.nightmareCount = newValue;
+            loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
       }, true); 
 
       console.log('dream: ', scope.dreamCount);
@@ -101,7 +99,7 @@ angular.module('dreamjournal.graph', [])
       dream.waveHeight = 0.3;
       dream.waveCount = 1
 
-      var dreamGauge = loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
+      // var dreamGauge = loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
       var configdreamGauge = liquidFillGaugeDefaultSettings();
 
       var nightmare = liquidFillGaugeDefaultSettings();
@@ -116,7 +114,7 @@ angular.module('dreamjournal.graph', [])
       nightmare.waveHeight = 0.3;
       nightmare.waveCount = 1;    
 
-      var nightmareGauge = loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
+      // var nightmareGauge = loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
       var confignightmareGauge = liquidFillGaugeDefaultSettings();
 
       
