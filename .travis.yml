@@ -4,6 +4,8 @@ sudo: required
 language: node_js
 node_js:
 - '0.12'
+services: 
+- mongodb
 deploy:
   provider: heroku
   api_key:

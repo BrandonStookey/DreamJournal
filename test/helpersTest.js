@@ -3,7 +3,7 @@ var expect = chai.expect;
 var mongoose = require('mongoose');
 var helpers = require('./../server/helpers.js');
 var db = require('./../db/db');
-var dbURI = 'mongodb://localhost/jobquery';
+var dbURI = 'mongodb://localhost/dreamjournal';
 
 var clearDB = function (done) {
   mongoose.connection.collections['users'].remove(done);
