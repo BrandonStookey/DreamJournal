@@ -1,14 +1,12 @@
-<h1>Total Dreams and Nightmares to Date</h1>
+<h1>Total Percentages of Dreams and Nightmares to Date</h1>
+
+<!-- This allows our directive on the graph controller to render the d3 to the graph view. 
+	The night-mare count is referring to $scope.nightmareCount on the graph controller
+	The dream-count is referring to $scope.dreamCount on the graph controller
+	By doing it this way, gives our directives access to updated data -->
+<fill-graph width="19%" height="200" dream-count = 'dreamCount' nightmare-count = 'nightmareCount' total-count = 'totalCount'></fill-graph>
 
 
-<fill-graph width="19%" height="200" dream-count = 'dreamCount' nightmare-count = 'nightmareCount'></fill-graph>
-
-
-  <p> {{ nightmareCount }} </p> total Nightmare(s)
-  <p> {{ dreamCount }} </p> total Dream(s)
-
-
-  </div>
 
 
 

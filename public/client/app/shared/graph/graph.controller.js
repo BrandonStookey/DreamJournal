@@ -3,10 +3,6 @@
 angular.module('dreamjournal.graph', [])
 
 .controller('graphController', ['$scope', '$http', 'auth',  function ($scope, $http, auth) {
-	console.log('graphController being called!');
-
-	$scope.nightMare = [];
-	$scope.dream = [];
 
 	$scope.dreamCount = 0;
 	$scope.nightmareCount = 0;
@@ -25,7 +21,6 @@ angular.module('dreamjournal.graph', [])
     	console.log('Dream result: ', result );    	
 	    result.data.forEach(function(post) {
 	    	$scope.dreamCount++;
-	    	$scope.dream.unshift(post);
 	    });	
     }, function(err){
       console.log('error', err);
@@ -42,7 +37,6 @@ angular.module('dreamjournal.graph', [])
     	console.log('Nightmare result: ', result );
 	    result.data.forEach(function(post) {
 	    	$scope.nightmareCount++;
-	    	$scope.nightMare.unshift(post);
 	    });	
     }, function(err){
       console.log('error', err);
@@ -53,6 +47,7 @@ angular.module('dreamjournal.graph', [])
    
 }])
   .directive('fillGraph', function() {
+//=====Here we are referencing both dreamCount and nightmareCount, so our directive has access to it from the graphController
 
     return{
       restrict: 'EA',
@@ -67,47 +62,29 @@ angular.module('dreamjournal.graph', [])
 //http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6 <-------Website to liquidGauge source code   
 
     function link(scope, el){
+//================================================This watches for any updates to the dreamCount and nightmareCount on the $scope. Below calculates new percentages for dreams and nightmares
+      scope.$watchGroup(['totalCount', 'dreamCount', 'nightmareCount'], function(newValues, oldValues, scope) {
+            
+            d3.selectAll("svg").remove();
 
-      scope.$watchGroup(['dreamCount', 'nightmareCount'], function(newValues, oldValues, scope) {
-        // newValues array contains the current values of the watch expressions
-        // with the indexes matching those of the watchExpression array
-        // i.e.
-        // newValues[0] -> $scope.foo 
-        // and 
-        // newValues[1] -> $scope.bar 
-            d3.selectAll("svg").remove()
-            scope.dreamCount = newValues[0];
-            scope.nightmareCount = newValues[1];            
-            loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);  
-            loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);                  
+            var totalCount = newValues[1] + newValues[2];
+
+            var dreamNum = newValues[1];
+            var dreamPercent = Math.ceil((dreamNum / totalCount) * 100);
+
+            var nightmareNum = newValues[2];
+            var nightmarePercent = Math.ceil((nightmareNum / totalCount) * 100);
+
+            loadLiquidFillGauge("dreamersGauge",  dreamPercent , dream);  
+            loadLiquidFillGauge("nigthmarersGauge",  nightmarePercent , nightmare);                  
       },true);
 
-
-      // scope.$watch('dreamCount', function(newValue, oldValue) {
-      //     if (newValue)
-      //       // svg.selectAll('*').remove();
-      //       d3.selectAll("svg").remove()
-      //       scope.dreamCount = newValue;
-      //       loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
-      // }, true);
-
-      // scope.$watch('nightmareCount', function(newValue, oldValue) {
-      //     if (newValue)
-      //       // d3.selectAll("svg").remove()
-      //       scope.nightmareCount = newValue;
-      //       loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
-      // }, true); 
-
-      console.log('dream: ', scope.dreamCount);
-      console.log('nightmare: ', scope.nightmareCount);
-
-
-
+//====================================================Below you can change the color and wave timings
       var dream = liquidFillGaugeDefaultSettings();
-      dream.circleColor = "#4DADFF";
-      dream.textColor = "#0077FF";
-      dream.waveTextColor = "#0077FF";
-      dream.waveColor = "#4DADFF";
+      dream.circleColor = "#A190FF";
+      dream.textColor = "#7680FF";
+      dream.waveTextColor = "#7680FF";
+      dream.waveColor = "#A190FF";
       dream.circleThickness = 0.1;
       dream.circleFillGap = 0.2;
       dream.textVertPosition = 0.8;
@@ -115,14 +92,13 @@ angular.module('dreamjournal.graph', [])
       dream.waveHeight = 0.3;
       dream.waveCount = 1
 
-      // var dreamGauge = loadLiquidFillGauge("dreamersGauge",  scope.dreamCount , dream);
       var configdreamGauge = liquidFillGaugeDefaultSettings();
 
       var nightmare = liquidFillGaugeDefaultSettings();
-      nightmare.circleColor = "#7A1418";
-      nightmare.textColor = "#5D1418";
-      nightmare.waveTextColor = "#5D1418";
-      nightmare.waveColor = "#7A1418";
+      nightmare.circleColor = "#000000";
+      nightmare.textColor = "#191918";
+      nightmare.waveTextColor = "#191918";
+      nightmare.waveColor = "#000000";
       nightmare.circleThickness = 0.1;
       nightmare.circleFillGap = 0.2;
       nightmare.textVertPosition = 0.8;
@@ -130,20 +106,10 @@ angular.module('dreamjournal.graph', [])
       nightmare.waveHeight = 0.3;
       nightmare.waveCount = 1;    
 
-      // var nightmareGauge = loadLiquidFillGauge("nigthmarersGauger",  scope.nightmareCount , nightmare);
       var confignightmareGauge = liquidFillGaugeDefaultSettings();
 
       
-      
-
-      function NewValue(){
-          if(Math.random() > .5){
-              return Math.round(Math.random()*100);
-          } else {
-              return (Math.random()*100).toFixed(1);
-          }
-      }
-
+    
 //=============================================================Main d3 liquidGauge Javascript=========================================================================
 // /http://bl.ocks.org/brattonc/5e5ce9beee483220e2f6 <----------Website to source code for liquid graph
   function liquidFillGaugeDefaultSettings(){
