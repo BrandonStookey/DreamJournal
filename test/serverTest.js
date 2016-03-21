@@ -9,14 +9,6 @@ var helpers = require('./../server/helpers.js');
 
 describe(' ', function () {
 
-  // var server;
-  // beforeEach(function () {
-  //   server = require('./../server/server', { bustCache: true });
-  // });
-  // afterEach(function (done) {
-  //   server.stop(done);
-  // });
-
   beforeEach(function() {
     
   });
@@ -35,7 +27,7 @@ describe('http://localhost:4568/create/new/user', function () {
         request(app)
           .post('/create/new/user')
           .send(newUser)
-          .expect(200, done);
+          .expect(201, done);
       });
   	});
   });

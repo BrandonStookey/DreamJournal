@@ -26,7 +26,7 @@ app.post('/create/new/user', function(req, res) {
     if(err){
       res.status(400).send(err);
     }
-    res.send(data);
+    res.status(201).send(data);
   });
 });
 
