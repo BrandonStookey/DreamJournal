@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dreamjournal.viewPost', ['ngSanitize'])
+angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
 .controller('viewPostController', ['$scope', 'ViewSinglePostFromHomeAndFromProfile', '$http', '$location', 'auth', function ($scope, ViewSinglePostFromHomeAndFromProfile, $http, $location, auth) {
 
@@ -46,19 +46,13 @@ angular.module('dreamjournal.viewPost', ['ngSanitize'])
 	}
 
 //=======================================================================Edit a Single Post=====================================================================
+	$scope.viewEditOptions = true;
 
-	$scope.editPost = function(postTitle){
-		console.log('deletePost is being called on controlers')
-    $http({
-      method: 'POST',
-      url: '/edit/single/post',
-      data: {postTitle: postTitle}
-    })
-    .then(function(resp){    
-      $location.path('/profile');
-    }, function(err){
-      console.log('error', err);
-    });
+	$scope.editPost = function(){
+		console.log('Click!');
+		$scope.viewEditOptions = false;		
+		
+		return $scope.viewEditOptions;
 	}
 
 

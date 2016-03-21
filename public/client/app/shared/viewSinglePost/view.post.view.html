@@ -1,4 +1,5 @@
-<div class="container">
+
+<div class="container" ng-show = 'viewEditOptions'>
 <div class="blog-header">
 	<h1 class="blog-title">{{ postTitle }}</h1>
 </div>  
@@ -12,8 +13,8 @@
 		    <h6 class="blog-post-meta"> {{ postDate }}</h6>
 		    <p ng-bind-html="post"></p>
 		  </div> 
-			<button ng-click= "deletePost(postTitle)" ng-show = "showButton()">Delete Post</button>
-			<button ng-click= "editPost(postTitle)" ng-show = "showButton()">Edit Post</button>			
+			<button ng-click= "deletePost(postTitle)" ng-show = "showButton()"> Delete Post </button>
+			<button ng-click= "editPost()" ng-show = "showButton()"> Edit Post </button>			
 	  </div>
 </div>
 
@@ -21,7 +22,21 @@
 
 </div>
 
+<div ng-hide = "viewEditOptions">
+	<h1>Edit Post</h1>
+	<form name ="myForm">
+		<input type = "text" class = "postTitle" ng-model="postTitle" placeholder= "Place Blog Title Here" novalidate required></input>
+		
+		<div type="text" text-angular ng-model="post" required></div>
 
+	<label for="singleSelect"> Was it a Dream or Nightmare? </label><br>
+	    <select ng-model="dreamNightmare" required>
+	      <option value= "Dream">Dream</option>
+	      <option value= "Nightmare">Nigtmare</option>
+	    </select><br>
+	</form>
+	<a href ="#/profile" ng-hide = "viewEditOptions" ><button ng-click ="createPost(postTitle, htmlVariable, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Update Blog post</button></a>		
+</div>
 
 
 
