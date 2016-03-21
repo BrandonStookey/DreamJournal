@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html ng-app="dreamjournal">
+<html ng-app="dreamjournal" ng-controller = 'indexLoginController'>
   <head>
     <meta charset="utf-8">
     <title>Dream Journal</title>
@@ -45,11 +45,12 @@
   <body>
     <div class="blog-masthead">
       <div class="container">
-      <a  class="blog-nav-item active fa fa-home" href="#/home"></a>     
+      <a class="blog-nav-item active fa fa-home" href="#/home"></a>     
       <a class="blog-nav-item active fa fa-user" href="#/profile"></a>      
       <a class="blog-nav-item active fa fa-bar-chart" href="#/graph"></a>      
-      <a class="blog-nav-item active fa fa-clipboard" href="#/newPost"></a>  
-      <a class="blog-nav-item active fa fa-sign-in" href="#/login"></a>      
+      <a class="blog-nav-item active fa fa-file-text" href="#/newPost"></a>  
+      <a class="blog-nav-item active fa fa-sign-in" href="#/" ng-click="login()" ng-show = "showButton()">Login</a>      
+      <a class="blog-nav-item active fa fa-sign-in" href="#/" ng-click="logout()" ng-hide = "showButton()">Logout</a>       
       </div>
     </div>    
     <div ng-view> </div>
@@ -73,11 +74,44 @@
          js.src = "//connect.facebook.net/en_US/sdk.js";
          fjs.parentNode.insertBefore(js, fjs);
        }(document, 'script', 'facebook-jssdk'));
-    </script>    
 
-<!--     <script src='app/shared/graph/graph.controller.js'></script>
+
+      var app = angular.module('dreamjournal.indexLogin', [])
+
+        app.controller('indexLoginController', ['$scope', '$http', 'auth', 'store', '$location',
+        function ($scope, $http, auth, store, $location) {
+        /////////User will login using Auth0///////////////
+          $scope.found = true;
+
+          $scope.login = function () {
+            auth.signin({}, function (profile, token) {
+              // Success callback
+              $scope.found = false;
+              store.set('profile', profile);
+              store.set('token', token);
+              $location.path('/home');
+            }, function () {
+              // Error callback
+            });
+          },    
+        ///////////User logs out using Auth0////////////////
+          $scope.logout = function() {
+            $scope.found = true;
+            auth.signout();
+            store.remove('profile');
+            store.remove('token');
+          };
+
+        $scope.showButton = function(){
+          return $scope.found;
+        }        
+      }]);
+
+
+    </script>    
+<!-- 
+    <script src='app/shared/graph/graph.controller.js'></script>
     <script src='app/shared/home/home.controller.js'></script>
-    <script src='app/shared/login/login.controller.js'></script>
     <script src='app/shared/profile/profile.controller.js'></script>      
     <script src='app/shared/viewSinglePost/view.post.controller.js'></script> 
     <script src='app/shared/writeNewPost/write.new.post.controller.js'></script>  

@@ -2,7 +2,7 @@
 
 angular.module('dreamjournal', [
   'ngRoute',
-  'dreamjournal.login',
+  'dreamjournal.indexLogin',  
   'dreamjournal.graph',
   'dreamjournal.profile',
   'dreamjournal.viewPost',
@@ -14,10 +14,6 @@ angular.module('dreamjournal', [
 ])
 .config(['$routeProvider', '$httpProvider', 'authProvider', 'jwtInterceptorProvider', function($routeProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
   $routeProvider
-    .when('/login', {
-      templateUrl: 'app/shared/login/login.view.html',
-      controller: 'loginController'
-    })
     .when('/graph', {
       templateUrl: 'app/shared/graph/graph.view.html',
       controller: 'graphController',
@@ -36,18 +32,18 @@ angular.module('dreamjournal', [
     .when('/newPost', {
       templateUrl: 'app/shared/writeNewPost/write.new.post.view.html',
       controller: 'newPostController',
-      requiresLogin: true      
+      requiresLogin: true        
     })
     .when('/home', {
       templateUrl: 'app/shared/home/home.view.html',
-      controller: 'homeController',
-      requiresLogin: true      
+      controller: 'homeController',   
+      requiresLogin: true              
     })        
     .when('/', {
-      templateUrl: 'app/shared/home/home.view.html',
-      controller: 'homeController',
-      requiresLogin: true      
-    });       
+      templateUrl: 'app/shared/login/login.view.html',
+      controller: 'indexLoginController'    
+    })
+
 }])
 .config(['authProvider', 'jwtInterceptorProvider', '$httpProvider', function (authProvider, jwtInterceptorProvider, $httpProvider) {
   // https://manage.auth0.com/#/applications/1lZ3sYfpkqI5yJkeFXYscvLsR7dnG7q2/quickstart Just In case I need a refresher
@@ -55,7 +51,7 @@ angular.module('dreamjournal', [
     domain: 'dreamjournal.auth0.com',
     clientID: '1lZ3sYfpkqI5yJkeFXYscvLsR7dnG7q2',
     callbackURL: location.href,    
-    loginUrl: '/login'
+    loginUrl: '/'
       // We're annotating this function so that the `store` is injected correctly when this file is minified
   });
   jwtInterceptorProvider.tokenGetter = ['store', function(store) {
@@ -76,7 +72,7 @@ angular.module('dreamjournal', [
         }
       } else {
         // Either show the login page or use the refresh token to get a new idToken
-        $location.path('/login');
+        $location.path('/');
       }
     }
   });

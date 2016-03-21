@@ -12,7 +12,8 @@
 		    <h6 class="blog-post-meta"> {{ postDate }}</h6>
 		    <p ng-bind-html="post"></p>
 		  </div> 
-			<button ng-click= "deletePost(postTitle)" ng-show = "showDeleteButton()">Delete Post</button>
+			<button ng-click= "deletePost(postTitle)" ng-show = "showButton()">Delete Post</button>
+			<button ng-click= "editPost(postTitle)" ng-show = "showButton()">Edit Post</button>			
 	  </div>
 </div>
 
@@ -20,23 +21,7 @@
 
 </div>
 
-<!-- <div class="container">
-<div class="blog-header">
-	<h1 class="blog-title">{{ userName }}</h1>
-</div>  
 
-<div class="row">
-  <div class="blog-post">
-			<div class ="mainDiv">
-			<div class ="blogDiv">
-				 	<div ng-repeat="post in userPostsData" >
-				  	<h3 class="blog-post-title"> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
-				  	<p class="blog-post-meta"> {{ post.postDate }}</p>
-				  	<p class="blog-post-meta"> {{ post.name }} </p>
-				    <p  ng-bind-html="post.post"></p>
-					</div> 
-			  </div>
-			</div>
-	</div>		
 
-</div> -->
+
+

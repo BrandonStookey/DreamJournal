@@ -16,8 +16,8 @@ angular.module('dreamjournal.viewPost', ['ngSanitize'])
 
 		console.log('$scope.postTitle on View Post ', $scope.postTitle );		
 		console.log('$scope.post on View Post ', $scope.post);
-//==========================================================Show Delete Button if Post Belongs to User=================================================
-		$scope.showDeleteButton = function(){
+//==========================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
+		$scope.showButton = function(){
 			var userName = auth.profile.name; 
 			var isUserPost = false;
 
@@ -44,6 +44,23 @@ angular.module('dreamjournal.viewPost', ['ngSanitize'])
       console.log('error', err);
     });
 	}
+
+//=======================================================================Edit a Single Post=====================================================================
+
+	$scope.editPost = function(postTitle){
+		console.log('deletePost is being called on controlers')
+    $http({
+      method: 'POST',
+      url: '/edit/single/post',
+      data: {postTitle: postTitle}
+    })
+    .then(function(resp){    
+      $location.path('/profile');
+    }, function(err){
+      console.log('error', err);
+    });
+	}
+
 
 
 }]);
