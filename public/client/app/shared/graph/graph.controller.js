@@ -63,17 +63,17 @@ angular.module('dreamjournal.graph', [])
 
     function link(scope, el){
 //================================================This watches for any updates to the dreamCount and nightmareCount on the $scope. Below calculates new percentages for dreams and nightmares
-      scope.$watchGroup(['totalCount', 'dreamCount', 'nightmareCount'], function(newValues, oldValues, scope) {
+      scope.$watchGroup(['dreamCount', 'nightmareCount'], function(newValues, oldValues, scope) {
             
             d3.selectAll("svg").remove();
 
-            var totalCount = newValues[1] + newValues[2];
+            var totalCount = newValues[0] + newValues[1];
 
-            var dreamNum = newValues[1];
-            var dreamPercent = Math.ceil((dreamNum / totalCount) * 100);
+            var dreamNum = newValues[0];
+            var dreamPercent = Math.round((dreamNum / totalCount) * 100);
 
-            var nightmareNum = newValues[2];
-            var nightmarePercent = Math.ceil((nightmareNum / totalCount) * 100);
+            var nightmareNum = newValues[1];
+            var nightmarePercent = Math.round((nightmareNum / totalCount) * 100);
 
             loadLiquidFillGauge("dreamersGauge",  dreamPercent , dream);  
             loadLiquidFillGauge("nigthmarersGauge",  nightmarePercent , nightmare);                  

@@ -17,6 +17,7 @@ var jwtCheck = jwt({
 app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app/shared/write.new.post.view.html', '/api/public/client/app/shared/view.post.view.html', '/api/public/client/app/shared/profile.view.html', '/api/public/client/app/shared/graph.view.html'],  jwtCheck);
 
 //================================================================Add New User To Database=====================================================================
+//    /user
 app.post('/create/new/user', function(req, res) {
   var userName = req.body.name;
   var userEmail = req.body.email;     
