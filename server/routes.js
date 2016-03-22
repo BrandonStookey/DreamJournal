@@ -14,7 +14,7 @@ var jwtCheck = jwt({
 });
 
 //Below are paths that require Authorization
-app.use(['/api/public/client/app/shared/home.view.html', '/api/public/client/app/shared/write.new.post.view.html', '/api/public/client/app/shared/view.post.view.html', '/api/public/client/app/shared/profile.view.html', '/api/public/client/app/shared/graph.view.html'],  jwtCheck);
+app.use(['/api/public/client/app/shared/home/home.view.html', '/api/public/client/app/shared/writeNewPost/write.new.post.view.html', '/api/public/client/app/shared/viewSinglePost/view.post.view.html', '/api/public/client/app/shared/profile/profile.view.html', '/api/public/client/app/shared/graph/graph.view.html', '/api/public/client/app/shared/login/login.view.html' ],  jwtCheck);
 
 //================================================================Add New User To Database=====================================================================
 //    /user

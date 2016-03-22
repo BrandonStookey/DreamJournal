@@ -63,7 +63,6 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
     $http({
       method: 'PUT',
       url: '/delete/single/post',
-      headers: ("Content-Type", "multipart/form-data; boundary=l3iPy71otz"),
       data: {email: userEmail, postID: $scope.postID, postTitle: postTitle, post: post, dreamType: dreamNightmare}
     })
     .then(function(resp){    
