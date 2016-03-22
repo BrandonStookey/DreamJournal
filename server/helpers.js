@@ -167,17 +167,15 @@ var updateSinglePost = function(email, postID, postTitle, post, dreamType, callb
   console.log('helpers update SINGLE post request!'); 
   console.log('postID ', postID);
   // https://docs.mongodb.org/manual/reference/operator/update/positional/#up._S_  <-----Might be my answer 
+  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle } }, function(err, model) {
+      if(err){
+          console.log(err);
+          return callback(err);
+        }
+        callback(model);
+ });
 
 
-
-  // db.User.update({email: email, 'post._id': postID} }, {$set: {'post.$.postTitle': postTitle, 'post.$.post': post, 'post.$.dreamType': dreamType } }, function(err, posts){
-  //                   if(err){
-  //                     console.log('update single post error: ', err);
-  //                     return callback(err);
-  //                   }
-  //                   console.log('Updated Post! ', posts);
-  //                   callback(null, 200);
-  //               });
 };
 
 //============================================================================Export all helpers===========================================================
