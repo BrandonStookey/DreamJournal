@@ -91,21 +91,44 @@ app.post('/view/single/post', function(req, res) {
 
 //====================================================================Delete Single Post======================================================================================
 
-app.post('/delete/single/post', function(req, res) {
-  console.log('routes DELETE SINGLE post request!');    
 
-  var postTitle = req.body.postTitle;
 
-  console.log('routes', postTitle);
+app.route('/delete/single/post') 
+  .post(function( req, res) { 
+    console.log('routes DELETE SINGLE post request!');    
+    
+    var postID = req.body.postID;
+    
+    // console.log('routes', postTitle);
 
-  helpers.deleteSinglePost(postTitle,
-  function(err, data) {
-    if(err){
-      res.status(400).send(err);
-    }      
-    res.send(data);
-  });
-});
+    helpers.deleteSinglePost(postID,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })
+  .put(function( req, res) { 
+    console.log('routes UPDATE SINGLE post request!');    
+
+    var userName = req.body.name;
+    var userEmail = req.body.email;     
+    var postTitle = req.body.postTitle;     
+    var post = req.body.post;    
+    var dreamType = req.body.dreamType;     
+    var postID = req.body.postID;  
+
+    helpers.updateSinglePost(userEmail, postID, postTitle, post, dreamType,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })
+
+
 
 //================================================================Get All Dreams and Nightmares for Graph========================================================================
 
@@ -122,7 +145,6 @@ app.post('/get/all/dreamType/posts', function(req, res) {
     res.send(data);
   });
 });
-
 
 
 

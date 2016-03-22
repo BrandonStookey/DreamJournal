@@ -7,7 +7,8 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
 	$scope.init = function(){
 		$scope.singlePost = ViewSinglePostFromHomeAndFromProfile.singlePost;
-		console.log('$scope.singlePost on View Post ', $scope.singlePost);		
+		console.log('$scope.singlePost on View Post ', $scope.singlePost);	
+
 		$scope.postTitle = $scope.singlePost[0].data.postTitle;
 		$scope.post = $scope.singlePost[0].data.post;
 		$scope.name = $scope.singlePost[0].data.name;
@@ -15,7 +16,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 		$scope.postDate = $scope.singlePost[0].data.postDate;		
 
 		console.log('$scope.postTitle on View Post ', $scope.postTitle );		
-		console.log('$scope.post on View Post ', $scope.post);
+		console.log('$scope.postID on View Post ', $scope.postID);
 //==========================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
 		$scope.showButton = function(){
 			var userName = auth.profile.name; 
@@ -36,7 +37,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
     $http({
       method: 'POST',
       url: '/delete/single/post',
-      data: {postTitle: postTitle}
+      data: {postID: $scope.postID}
     })
     .then(function(resp){    
       $location.path('/profile');
@@ -51,10 +52,39 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 	$scope.editPost = function(){
 		console.log('Click!');
 		$scope.viewEditOptions = false;		
-		
+
 		return $scope.viewEditOptions;
 	}
 
+	$scope.updatePost = function(postTitle, post, dreamNightmare){
+		console.log('update post is being called on controlers')
+
+		var userEmail = auth.profile.email;
+		$scope.viewEditOptions = true
+    $http({
+      method: 'PUT',
+      url: '/delete/single/post',
+      data: {email: userEmail, postID: $scope.postID, postTitle: postTitle, post: post, dreamType: dreamNightmare}
+    })
+    .then(function(resp){    
+      $location.path('/profile');
+    }, function(err){
+      console.log('error', err);
+    });
+	}
 
 
 }]);
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -22,7 +22,7 @@
 
 </div>
 
-<div ng-hide = "viewEditOptions">
+<div ng-hide = "viewEditOptions"  ng-show = "showButton()">
 	<h1>Edit Post</h1>
 	<form name ="myForm">
 		<input type = "text" class = "postTitle" ng-model="postTitle" placeholder= "Place Blog Title Here" novalidate required></input>
@@ -35,7 +35,7 @@
 	      <option value= "Nightmare">Nigtmare</option>
 	    </select><br>
 	</form>
-	<a href ="#/profile" ng-hide = "viewEditOptions" ><button ng-click ="createPost(postTitle, htmlVariable, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Update Blog post</button></a>		
+	<a href ="#/profile" ng-hide = "viewEditOptions" ><button ng-click ="updatePost(postTitle, post, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Update Blog post</button></a>		
 </div>
 
 

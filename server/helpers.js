@@ -120,11 +120,11 @@ var findSinglePost = function(postID, callback){
 
 //==========================================================================Delete Single Post================================================================
 
-var deleteSinglePost = function(postTitle, callback){
+var deleteSinglePost = function(postID, callback){
   console.log('helpers delete SINGLE post request!'); 
-  console.log('helpers postTitle ', postTitle);
+  // console.log('helpers postTitle ', postTitle);
   db.User.update({}, 
-                { $pull: { post: { postTitle: postTitle } } },{multi:true}, function(err, posts){
+                { $pull: { post: { _id: postID } } },{multi:true}, function(err, posts){
                     if(err){
                       console.log('delete single post error: ', err);
                       return callback(err);
@@ -161,6 +161,21 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
   });
 };
 
+//=============================================================================Update Single Post===========================================================
+
+var updateSinglePost = function(email, postID, postTitle, post, dreamType, callback){
+  console.log('helpers update SINGLE post request!'); 
+  console.log('postID ', postID);
+  db.User.find({post: { _id: postID}}, {post: {postTitle: postTitle, post: post, dreamType: dreamType } }, {multi:true} , function(err, posts){
+                    if(err){
+                      console.log('update single post error: ', err);
+                      return callback(err);
+                    }
+                    console.log('Updated Post! ', posts);
+                    callback(null, 200);
+                });
+};
+
 //============================================================================Export all helpers===========================================================
 
 module.exports = {
@@ -170,6 +185,7 @@ module.exports = {
   findAllUserPosts: findAllUserPosts,
   findSinglePost: findSinglePost,
   deleteSinglePost: deleteSinglePost,
-  findAllDreamsNightmares: findAllDreamsNightmares  
+  findAllDreamsNightmares: findAllDreamsNightmares,
+  updateSinglePost: updateSinglePost  
 };
 
