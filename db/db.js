@@ -24,13 +24,16 @@ var userSchema = mongoose.Schema({
       date: { type: Date, default: Date.now },
       comment: { 
         type: [{
-        userEmail: String,
-        comment: String
+        commentDate: String,  
+        userName: String,
+        comment: String,
+        date: { type: Date, default: Date.now }
       }]},
       like: { 
         type: [{
-          userEmail: String,
-          like: Boolean
+          userName: String,
+          like: Boolean,
+          date: { type: Date, default: Date.now }
       }]},
     }],
   },

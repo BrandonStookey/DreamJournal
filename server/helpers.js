@@ -31,7 +31,7 @@ var createPostDB = function (name, email, postTitle, post, dreamType, callback) 
     var date = moment().format('llll');
     console.log('createPostDB Date', date);
 
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:{ postTitle: postTitle, post: post, name: name, postDate: date, dreamType: dreamType } } }, function(err, success) {
+    db.User.findOneAndUpdate( {email: email}, { $push: { post: { postTitle: postTitle, post: post, name: name, postDate: date, dreamType: dreamType } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
           return callback(err);
@@ -133,6 +133,21 @@ var deleteSinglePost = function(postID, callback){
                 });
 };
 
+//=============================================================================Update Single Post===========================================================
+
+var updateSinglePost = function(email, postID, postTitle, post, dreamType, callback){
+  console.log('helpers update SINGLE post request!'); 
+  console.log('postID ', postID);
+  // http://tech-blog.maddyzone.com/node/add-update-delete-object-array-schema-mongoosemongodb <-----Might be my answer 
+  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle, 'post.$.post': post, 'dream.$.dreamType': dreamType }  }, function(err, model) {
+      if(err){
+          console.log(err);
+          return callback(err);
+        }
+        callback(null, model);
+      });
+};
+
 //========================================================================Get all Dreams and all Nightmares for Graph==============================================
 
 var findAllDreamsNightmares = function(email, dreamType, callback){
@@ -161,20 +176,28 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
   });
 };
 
-//=============================================================================Update Single Post===========================================================
 
-var updateSinglePost = function(email, postID, postTitle, post, dreamType, callback){
-  console.log('helpers update SINGLE post request!'); 
-  console.log('postID ', postID);
-  // http://tech-blog.maddyzone.com/node/add-update-delete-object-array-schema-mongoosemongodb <-----Might be my answer 
-  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle, 'post.$.post': post, 'dream.$.dreamType': dreamType }  }, function(err, model) {
-      if(err){
-          console.log(err);
+//===================================================================Create new comment========================================================================
+
+var createNewComment = function(postID, userName, userComment, callback){
+  console.log('createNewComment on Helpers!');
+  console.log('allDataOnHelpers: ', postID, userName, userComment, callback);
+
+    var date = moment().format('llll');
+
+    db.User.findOneAndUpdate( { 'post._id' : postID} , { $push: { post: { comment: {  comment: userComment, userName: userName, commentDate: date } } } }, function(err, success) {
+        if (err) {
+          console.log('comment on post error ', err);
           return callback(err);
-        }
-        callback(null, model);
-      });
-};
+        } else {
+          console.log('Added New Comment! ', success);
+          callback(null, 200);
+        }   
+    });
+
+
+}
+
 
 //============================================================================Export all helpers===========================================================
 
@@ -185,7 +208,8 @@ module.exports = {
   findAllUserPosts: findAllUserPosts,
   findSinglePost: findSinglePost,
   deleteSinglePost: deleteSinglePost,
+  updateSinglePost: updateSinglePost,  
   findAllDreamsNightmares: findAllDreamsNightmares,
-  updateSinglePost: updateSinglePost  
+  createNewComment: createNewComment
 };
 

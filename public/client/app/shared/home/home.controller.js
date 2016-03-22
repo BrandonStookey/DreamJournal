@@ -5,8 +5,10 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 .controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $http, auth, ViewSinglePostFromHomeAndFromProfile) {
 	$scope.postsData = [];
   $scope.userData = [];
+  
   angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
-
+  $scope.userName = auth.profile.name;
+  $scope.userEmail = auth.profile.email;  
 
   $scope.init= function(userName, userEmail){
    //======================Create New User on Init=========================
@@ -42,6 +44,24 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   };
 
   $scope.init();
+
+  //======================Create Comment====================================
+     
+  $scope.commentOnPost = function(comment, postID){
+    console.log('commentOnPost controller!');
+
+     $http({
+      method: 'POST',
+      url: '/create/new/comment',
+      data: {postID: postID, name: $scope.userName, comment: comment}
+    })
+    .then(function(resp){
+      console.log('resp ', resp);
+      $scope.userData.unshift(resp);
+    }, function(err){
+      console.log('error', err);
+    }); 
+  };
 
 }])
 .factory('ViewSinglePostFromHomeAndFromProfile',['$http', 'auth','$location', function($http, auth, $location){

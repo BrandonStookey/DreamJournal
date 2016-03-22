@@ -91,14 +91,10 @@ app.post('/view/single/post', function(req, res) {
 
 //====================================================================Delete Single Post======================================================================================
 
-
-
 app.route('/delete/single/post') 
-  .post(function( req, res) { 
-    console.log('routes DELETE SINGLE post request!');    
-    
+  .post(function( req, res) {   
     var postID = req.body.postID;
-    
+
     helpers.deleteSinglePost(postID,
     function(err, data) {
       if(err){
@@ -107,8 +103,8 @@ app.route('/delete/single/post')
       res.send(data);
     });
   })
+ //=====================================================Update Single Post 
   .put(function( req, res) { 
-    console.log('routes UPDATE SINGLE post request!');    
 
     var userEmail = req.body.email;     
     var postTitle = req.body.postTitle;     
@@ -142,6 +138,25 @@ app.post('/get/all/dreamType/posts', function(req, res) {
     res.send(data);
   });
 });
+
+//=======================================================================Create a new comment================================================================================================
+
+app.post('/create/new/comment', function(req, res) { 
+  console.log('create new comment on ROUTES');
+
+  var postID = req.body.postID;
+  var userName = req.body.name;
+  var userComment = req.body.comment;
+
+  helpers.createNewComment(postID, userName, userComment, 
+  function(err, data) { 
+    if(err){
+      res.status(400).send(err);
+    }         
+    res.send(data);
+  });
+});
+
 
 
 
