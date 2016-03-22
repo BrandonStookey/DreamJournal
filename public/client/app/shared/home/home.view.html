@@ -12,6 +12,8 @@
 				  	<p class="blog-post-meta"> {{ post.postDate }}</p>
 				  	<p class="blog-post-meta"> {{ post.name }} </p>
 				    <p  ng-bind-html="post.post"></p>
+				    <input type = "text" class = "postTitle" ng-model="comment" placeholder= "Write Comment" novalidate required>
+				    <button ng-click= "commentOnPost(comment)"> Comment </button>		
 					</div> 
 			  </div>
 			</div>
