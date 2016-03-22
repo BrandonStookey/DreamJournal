@@ -99,8 +99,6 @@ app.route('/delete/single/post')
     
     var postID = req.body.postID;
     
-    // console.log('routes', postTitle);
-
     helpers.deleteSinglePost(postID,
     function(err, data) {
       if(err){

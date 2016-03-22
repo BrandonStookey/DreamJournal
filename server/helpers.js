@@ -166,14 +166,18 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
 var updateSinglePost = function(email, postID, postTitle, post, dreamType, callback){
   console.log('helpers update SINGLE post request!'); 
   console.log('postID ', postID);
-  db.User.find({post: { _id: postID}}, {post: {postTitle: postTitle, post: post, dreamType: dreamType } }, {multi:true} , function(err, posts){
-                    if(err){
-                      console.log('update single post error: ', err);
-                      return callback(err);
-                    }
-                    console.log('Updated Post! ', posts);
-                    callback(null, 200);
-                });
+  // https://docs.mongodb.org/manual/reference/operator/update/positional/#up._S_  <-----Might be my answer 
+
+
+
+  // db.User.update({email: email, 'post._id': postID} }, {$set: {'post.$.postTitle': postTitle, 'post.$.post': post, 'post.$.dreamType': dreamType } }, function(err, posts){
+  //                   if(err){
+  //                     console.log('update single post error: ', err);
+  //                     return callback(err);
+  //                   }
+  //                   console.log('Updated Post! ', posts);
+  //                   callback(null, 200);
+  //               });
 };
 
 //============================================================================Export all helpers===========================================================
