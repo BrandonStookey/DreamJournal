@@ -110,7 +110,6 @@ app.route('/delete/single/post')
   .put(function( req, res) { 
     console.log('routes UPDATE SINGLE post request!');    
 
-    var userName = req.body.name;
     var userEmail = req.body.email;     
     var postTitle = req.body.postTitle;     
     var post = req.body.post;    

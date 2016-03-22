@@ -166,16 +166,14 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
 var updateSinglePost = function(email, postID, postTitle, post, dreamType, callback){
   console.log('helpers update SINGLE post request!'); 
   console.log('postID ', postID);
-  // https://docs.mongodb.org/manual/reference/operator/update/positional/#up._S_  <-----Might be my answer 
-  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle } }, function(err, model) {
+  // http://tech-blog.maddyzone.com/node/add-update-delete-object-array-schema-mongoosemongodb <-----Might be my answer 
+  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle, 'post.$.post': post, 'dream.$.dreamType': dreamType }  }, function(err, model) {
       if(err){
           console.log(err);
           return callback(err);
         }
-        callback(model);
- });
-
-
+        callback(null, model);
+      });
 };
 
 //============================================================================Export all helpers===========================================================

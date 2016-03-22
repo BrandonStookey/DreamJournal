@@ -7,7 +7,6 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
 	$scope.init = function(){
 		$scope.singlePost = ViewSinglePostFromHomeAndFromProfile.singlePost;
-		console.log('$scope.singlePost on View Post ', $scope.singlePost);	
 
 		$scope.postTitle = $scope.singlePost[0].data.postTitle;
 		$scope.post = $scope.singlePost[0].data.post;
@@ -15,8 +14,6 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 		$scope.postID = $scope.singlePost[0].data._id;
 		$scope.postDate = $scope.singlePost[0].data.postDate;		
 
-		console.log('$scope.postTitle on View Post ', $scope.postTitle );		
-		console.log('$scope.postID on View Post ', $scope.postID);
 //==========================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
 		$scope.showButton = function(){
 			var userName = auth.profile.name; 
@@ -60,10 +57,13 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 		console.log('update post is being called on controlers')
 
 		var userEmail = auth.profile.email;
+		
 		$scope.viewEditOptions = true
+
     $http({
       method: 'PUT',
       url: '/delete/single/post',
+      headers: ("Content-Type", "multipart/form-data; boundary=l3iPy71otz"),
       data: {email: userEmail, postID: $scope.postID, postTitle: postTitle, post: post, dreamType: dreamNightmare}
     })
     .then(function(resp){    
