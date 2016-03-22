@@ -2,7 +2,7 @@
 
 angular.module('dreamjournal', [
   'ngRoute',
-  'dreamjournal.indexLogin',  
+  'dreamjournal.login',  
   'dreamjournal.graph',
   'dreamjournal.profile',
   'dreamjournal.viewPost',
@@ -41,7 +41,7 @@ angular.module('dreamjournal', [
     })        
     .when('/', {
       templateUrl: 'app/shared/login/login.view.html',
-      controller: 'indexLoginController'    
+      controller: 'loginController'    
     })
 
 }])
