@@ -17,7 +17,7 @@
 						  	<p class="blog-post-meta"> {{ post.name }} </p>
 						    <p  ng-bind-html="post.post"></p>
 
-					  	<div ng-repeat ="comment in post.comment">
+					  	<div ng-repeat ="comment in post.postComment">
 						  	<h6 class="blog-post-meta"> {{ comment.userName }} {{comment.commentDate}}   </h6> 
 						  	<p class="blog-post-meta"> {{ comment.comment }}  </p>
 						  </div>
