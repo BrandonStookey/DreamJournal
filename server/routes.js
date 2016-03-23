@@ -142,7 +142,7 @@ app.post('/get/all/dreamType/posts', function(req, res) {
 //=======================================================================Create a new comment================================================================================================
 
 app.post('/create/new/comment', function(req, res) { 
-  console.log('create new comment on ROUTES');
+
 
   var postID = req.body.postID;
   var userName = req.body.name;

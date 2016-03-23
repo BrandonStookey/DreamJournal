@@ -5,6 +5,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 .controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $http, auth, ViewSinglePostFromHomeAndFromProfile) {
 	$scope.postsData = [];
   $scope.userData = [];
+  $scope.commentsData = [];
 
   angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
   $scope.userName = auth.profile.name;
@@ -29,7 +30,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       });
     }
     //======================Get All Blog Posts On Init======================
-    
+
   	$http({
   		method: 'GET',
   		url: '/get/all/posts'
@@ -48,10 +49,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.init();
 
   //======================Create Comment====================================
-     
-  $scope.commentOnPost = function(comment, postID){
-    console.log('commentOnPost controller!');
 
+  $scope.commentOnPost = function(comment, postID){
      $http({
       method: 'POST',
       url: '/create/new/comment',
@@ -64,6 +63,21 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       console.log('error', err);
     }); 
   };
+  
+//=========================Shows/Hide Comments===============================
+  $scope.viewComments;
+  $scope.counter = 0;
+
+  $scope.showComments = function(postID){
+    if($scope.counter % 2 === 0){
+      $scope.counter++;
+      $scope.viewComments = postID;
+      return $scope.viewComments;
+    }
+    $scope.counter++;
+    $scope.viewComments = 0;
+    return $scope.viewComments;
+  }
 
 }])
 

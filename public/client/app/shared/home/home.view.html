@@ -16,13 +16,14 @@
 						  	<p class="blog-post-meta"> {{ post.postDate }}</p>
 						  	<p class="blog-post-meta"> {{ post.name }} </p>
 						    <p  ng-bind-html="post.post"></p>
+						  	<button> Like </button> <button ng-click ="showComments(post._id); getPostComment(post._id)"> Comment </button><br>
 
-					  	<div ng-repeat ="comment in post.postComment">
+					  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
 						  	<h6 class="blog-post-meta"> {{ comment.userName }} {{comment.commentDate}}   </h6> 
-						  	<p class="blog-post-meta"> {{ comment.comment }}  </p>
+						  	<p class="blog-post-meta"> {{ comment.comment }}  </p> 
 						  </div>
 
-					    <input type = "text"  class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id)" novalidate required>	
+					    <input type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id)" novalidate required>
 						</div> 
 				  </div> 
 				</div> 
