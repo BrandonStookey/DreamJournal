@@ -29,6 +29,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       });
     }
     //======================Get All Blog Posts On Init======================
+    
   	$http({
   		method: 'GET',
   		url: '/get/all/posts'
@@ -65,6 +66,9 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   };
 
 }])
+
+//==================================================================Allow user to view a single post========================================================================
+
 .factory('ViewSinglePostFromHomeAndFromProfile',['$http', 'auth','$location', function($http, auth, $location){
   var singlePost = [];
   var viewSinglePost = function(postID){
@@ -88,7 +92,26 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     singlePost: singlePost
   };
 }])
+//===========================================================Allows comments to be posted by hitting enter key=========================================================
 
+.directive('dlEnterKey', function() {
+    return function(scope, element, attrs) {
+
+        element.bind("keydown keypress", function(event) {
+            var keyCode = event.which || event.keyCode;
+
+            // If enter key is pressed
+            if (keyCode === 13) {
+                scope.$apply(function() {
+                        // Evaluate the expression
+                    scope.$eval(attrs.dlEnterKey);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
 
 
 

@@ -12,6 +12,9 @@ var userSchema = mongoose.Schema({
   name: {
     type: String,
   },
+  image: {
+    type: Buffer,
+  },
   date: { type: Date, default: Date.now },   
 
   post: {
