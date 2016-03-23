@@ -153,7 +153,7 @@ app.post('/create/new/comment', function(req, res) {
     if(err){
       res.status(400).send(err);
     }         
-    res.send(data);
+    res.status(200).send(data);
   });
 });
 

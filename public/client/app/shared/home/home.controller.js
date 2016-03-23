@@ -15,18 +15,19 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     var userName = auth.profile.name;
     var userEmail = auth.profile.email;  
 
-    $http({
-      method: 'POST',
-      url: '/create/new/user',
-      data: {name: userName, email: userEmail}
-    })
-    .then(function(resp){
-      console.log('resp ', resp);
-      $scope.userData.unshift(resp);
-    }, function(err){
-      console.log('error', err);
-    });
-
+    var getAllPosts = function(){
+      $http({
+        method: 'POST',
+        url: '/create/new/user',
+        data: {name: userName, email: userEmail}
+      })
+      .then(function(resp){
+        console.log('resp ', resp);
+        $scope.userData.unshift(resp);
+      }, function(err){
+        console.log('error', err);
+      });
+    }
     //======================Get All Blog Posts On Init======================
   	$http({
   		method: 'GET',
@@ -56,8 +57,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       data: {postID: postID, name: $scope.userName, comment: comment}
     })
     .then(function(resp){
-      console.log('resp ', resp);
-      $scope.userData.unshift(resp);
+      //refreshes and updates the page
+      $scope.init();
     }, function(err){
       console.log('error', err);
     }); 
@@ -87,6 +88,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     singlePost: singlePost
   };
 }])
+
 
 
 
