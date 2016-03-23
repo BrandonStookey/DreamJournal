@@ -157,8 +157,22 @@ app.post('/create/new/comment', function(req, res) {
   });
 });
 
+//========================================================================Delete Comment==========================================================================================================
 
+app.post('/delete/comment', function(req, res) { 
+  console.log('deleteComment on routes');
+  var postID = req.body.postID;
+  var commentID = req.body.commentID;
 
+  console.log('commentID on routes', commentID);
+  helpers.deleteComment(postID, commentID, 
+  function(err, data) { 
+    if(err){
+      res.status(400).send(err);
+    }         
+    res.status(200).send(data);
+  });
+});
 
 
 

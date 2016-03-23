@@ -23,7 +23,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
         data: {name: userName, email: userEmail}
       })
       .then(function(resp){
-        console.log('resp ', resp);
         $scope.userData.unshift(resp);
       }, function(err){
         console.log('error', err);
@@ -37,7 +36,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   	})
    .then(function(result) {
 	    result.data.forEach(function(post) {
-        console.log('post ', post);
 	    	$scope.postsData.unshift(post);
 	    });	
 	    console.log('Post GET successful');
@@ -64,9 +62,27 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     }); 
   };
   
+//==========================Delete Comment==================================
+
+$scope.deleteComment = function(postID, commentID){
+     $http({
+      method: 'POST',
+      url: '/delete/comment',
+      data: {postID: postID, commentID: commentID}
+    })
+    .then(function(resp){
+      //refreshes and updates the page
+      $scope.init();
+    }, function(err){
+      console.log('error', err);
+    }); 
+};
+
+
 //=========================Shows/Hide Comments===============================
   $scope.viewComments;
   $scope.counter = 0;
+  $scope.isUser;
 
   $scope.showComments = function(postID){
     if($scope.counter % 2 === 0){
@@ -77,7 +93,15 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     $scope.counter++;
     $scope.viewComments = 0;
     return $scope.viewComments;
-  }
+  };
+
+  $scope.showButton = function(){
+    $scope.isUser = $scope.userName;
+    console.log('showButton ', $scope.isUser);
+    return $scope.isUser;
+  };
+
+
 
 }])
 

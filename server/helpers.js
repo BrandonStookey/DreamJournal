@@ -194,6 +194,25 @@ var createNewComment = function(postID, userName, userComment, callback){
           callback(null, 200);
         }   
     });
+};
+
+//=========================================================================Delete Single Comment=======================================================================
+
+var deleteComment = function(postID, commentID, callback){
+  console.log('helpers postID ', postID);
+  console.log('helpers commentID ', commentID);
+  console.log('deleteComment on helpers!');
+
+  db.User.update({'post._id': postID}, { $pull: { 'post.$.postComment': { _id: commentID } } },{multi:true}, function(err, posts){
+                    if(err){
+                      console.log('delete single post error: ', err);
+                      return callback(err);
+                    }
+                    console.log('deleteComment Posts: ', posts);
+                    callback(null, 200);
+                });
+
+
 }
 
 //============================================================================Export all helpers=========================================================================
@@ -207,6 +226,7 @@ module.exports = {
   deleteSinglePost: deleteSinglePost,
   updateSinglePost: updateSinglePost,  
   findAllDreamsNightmares: findAllDreamsNightmares,
-  createNewComment: createNewComment
+  createNewComment: createNewComment,
+  deleteComment: deleteComment
 };
 
