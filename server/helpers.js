@@ -185,7 +185,7 @@ var createNewComment = function(postID, userName, userComment, callback){
 
     var date = moment().format('llll');
 
-    db.User.findOneAndUpdate( { 'post._id' : postID} , { $push: { post: { comment: {  comment: userComment, userName: userName, commentDate: date } } } }, function(err, success) {
+    db.User.update( { 'post._id': postID }, { $push: { 'post.$.postComment': {  comment: userComment, userName: userName, commentDate: date } } }, function(err, success) {
         if (err) {
           console.log('comment on post error ', err);
           return callback(err);
@@ -194,8 +194,6 @@ var createNewComment = function(postID, userName, userComment, callback){
           callback(null, 200);
         }   
     });
-
-
 }
 
 

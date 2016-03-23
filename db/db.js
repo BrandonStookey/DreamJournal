@@ -13,6 +13,7 @@ var userSchema = mongoose.Schema({
     type: String,
   },
   date: { type: Date, default: Date.now },   
+
   post: {
     type: [{
       postTitle: String,
@@ -22,21 +23,25 @@ var userSchema = mongoose.Schema({
       email: String,
       dreamType: String,
       date: { type: Date, default: Date.now },
-      comment: { 
+
+      postComment: { 
         type: [{
-        commentDate: String,  
-        userName: String,
-        comment: String,
-        date: { type: Date, default: Date.now }
+          commentDate: String,  
+          userName: String,
+          comment: String,
+          date: { type: Date, default: Date.now }
       }]},
+
       like: { 
         type: [{
           userName: String,
           like: Boolean,
           date: { type: Date, default: Date.now }
       }]},
+
     }],
   },
+
   friendList:{ 
     type: [{
       userEmail: String

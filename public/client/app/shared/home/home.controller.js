@@ -5,7 +5,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 .controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $http, auth, ViewSinglePostFromHomeAndFromProfile) {
 	$scope.postsData = [];
   $scope.userData = [];
-  
+
   angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
@@ -34,7 +34,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   	})
    .then(function(result) {
 	    result.data.forEach(function(post) {
-        console.log('post');
+        console.log('post ', post);
 	    	$scope.postsData.unshift(post);
 	    });	
 	    console.log('Post GET successful');

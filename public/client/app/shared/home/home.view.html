@@ -1,35 +1,32 @@
-<div class="container">
-<div class="blog-header">
-	<h1 class="blog-title">Dream Journal</h1>
-</div>  
+<div class="container"> 
 
-<div class="row">
-  <div class="blog-post">
-			<div class ="mainDiv">
-			<div class ="blogDiv">
-				 	<div class="individualPostDiv" ng-repeat="post in postsData" >
+	<div class="blog-header">
+		<h1 class="blog-title">Dream Journal</h1>
+	</div>  
 
-				  	<h3 class="blog-post-title"> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
-				  	
-				  	<p class="blog-post-meta"> {{ post.postDate }}</p>
-				  	<p class="blog-post-meta"> {{ post.name }} </p>
-				    <p  ng-bind-html="post.post"></p>
+	<div class="row"> 
+	  <div class="blog-post"> 
+			<div class ="mainDiv"> 
+				<div class ="blogDiv"> 
+					 <div class="individualPostDiv" ng-repeat="post in postsData" > 
+
+					  	<h3 class="blog-post-title"> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
 
 
-				  	<p class="blog-post-meta"> {{ post.comment.userName }} </p>
-				  	<p class="blog-post-meta"> {{ post.comment.commentDate }} </p>
-				  	<p class="blog-post-meta"> {{ post.comment.comment }}  </p>
+						  	<p class="blog-post-meta"> {{ post.postDate }}</p>
+						  	<p class="blog-post-meta"> {{ post.name }} </p>
+						    <p  ng-bind-html="post.post"></p>
 
-				    <form>
-				    <input type = "text" class = "postTitle" ng-model="comment" placeholder= "Write Comment" novalidate required>
-				    <button ng-click= "commentOnPost(comment, post._id)"> Comment </button>		
-				    </form>
+					  	<div ng-repeat ="comment in post.comment">
+						  	<h6 class="blog-post-meta"> {{ comment.userName }} {{comment.commentDate}}   </h6> 
+						  	<p class="blog-post-meta"> {{ comment.comment }}  </p>
+						  </div>
 
-					</div> 
-			  </div>
-			</div>
-	</div>		
-
-</div>
-
+					    <input type = "text" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment" novalidate required>
+					    <button ng-click= "commentOnPost(commentInput, post._id)"> Comment </button>		
+						</div> 
+				  </div> 
+				</div> 
+			</div>		
+		</div>
 </div>
