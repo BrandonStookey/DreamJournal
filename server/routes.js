@@ -160,7 +160,7 @@ app.post('/create/new/comment', function(req, res) {
 //========================================================================Delete Comment==========================================================================================================
 
 app.post('/delete/comment', function(req, res) { 
-  console.log('deleteComment on routes');
+
   var postID = req.body.postID;
   var commentID = req.body.commentID;
 
@@ -174,7 +174,25 @@ app.post('/delete/comment', function(req, res) {
   });
 });
 
+//=====================================================================Like Comment=====================================================================================================================
 
+app.post('/like/comment', function(req, res) { 
+  console.log('like Comment on routes');
+
+  var postID = req.body.postID;
+  var commentID = req.body.commentID;
+  var userName = req.body.name;  
+  var likeComment = req.body.like;
+
+  console.log('commentID on routes', commentID);
+  helpers.likeComment(postID, commentID, userName, likeComment,
+  function(err, data) { 
+    if(err){
+      res.status(400).send(err);
+    }         
+    res.status(200).send(data);
+  });
+});
 
 
 

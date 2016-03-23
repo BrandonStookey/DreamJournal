@@ -5,7 +5,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 .controller('homeController', ['$scope', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $http, auth, ViewSinglePostFromHomeAndFromProfile) {
 	$scope.postsData = [];
   $scope.userData = [];
-  $scope.commentsData = [];
 
   angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
   $scope.userName = auth.profile.name;
@@ -56,6 +55,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     })
     .then(function(resp){
       //refreshes and updates the page
+      $scope.postsData = [];
       $scope.init();
     }, function(err){
       console.log('error', err);
@@ -72,6 +72,7 @@ $scope.deleteComment = function(postID, commentID){
     })
     .then(function(resp){
       //refreshes and updates the page
+      $scope.postsData = [];      
       $scope.init();
     }, function(err){
       console.log('error', err);
@@ -95,13 +96,38 @@ $scope.deleteComment = function(postID, commentID){
     return $scope.viewComments;
   };
 
+//===================Shows delete button only if it is user's comment  
+
   $scope.showButton = function(){
     $scope.isUser = $scope.userName;
     console.log('showButton ', $scope.isUser);
     return $scope.isUser;
   };
 
+//===========================Like Post
 
+$scope.likeCounter = 0;
+$scope.userLikePost = false;
+
+$scope.likePost = function(postID, commentID){
+    if($scope.counter % 2 === 0){
+      $scope.likeCounter++;
+      $scope.userLikePost = true;
+    }
+
+   $http({
+    method: 'POST',
+    url: '/like/comment',
+    data: {postID: postID, commentID: commentID, name: $scope.userName, like: $scope.userLikePost}
+  })
+  .then(function(resp){
+    //refreshes and updates the page
+    $scope.postsData = [];      
+    $scope.init();
+  }, function(err){
+    console.log('error', err);
+  });     
+};
 
 }])
 

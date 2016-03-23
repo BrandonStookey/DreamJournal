@@ -213,7 +213,25 @@ var deleteComment = function(postID, commentID, callback){
                 });
 
 
-}
+};
+
+//=============================================================================Like Comment===============================================================================
+
+var likeComment = function(postID, commentID, userName, likeComment, callback){
+
+    db.User.update( { 'post._id': postID }, { $push: { 'post.$.like': {  userName: userName, like: likeComment } } }, function(err, success) {
+        if (err) {
+          console.log('comment on post error ', err);
+          return callback(err);
+        } else {
+          console.log('Added New Like! ', success);
+          callback(null, 200);
+        }   
+    });
+
+
+};
+
 
 //============================================================================Export all helpers=========================================================================
 
@@ -227,6 +245,7 @@ module.exports = {
   updateSinglePost: updateSinglePost,  
   findAllDreamsNightmares: findAllDreamsNightmares,
   createNewComment: createNewComment,
-  deleteComment: deleteComment
+  deleteComment: deleteComment,
+  likeComment: likeComment
 };
 

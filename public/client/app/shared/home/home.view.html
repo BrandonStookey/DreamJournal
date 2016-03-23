@@ -16,15 +16,17 @@
 						  	<p class="blog-post-meta"> {{ post.postDate }}</p>
 						  	<p class="blog-post-meta"> {{ post.name }} </p>
 						    <p  ng-bind-html="post.post"></p>
-						  	<button> Like </button> <button ng-click ="showComments(post._id); showButton()"> Comment </button><br>
+						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id, post.postComment._id)">{{ userLikePost }} {{ post.like.length }}</button> 
+
+						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showButton()"> {{ post.postComment.length }}</button><br>
 
 					  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
-						  	<h6 class="blog-post-meta"> {{ comment.userName }} {{comment.commentDate}}   </h6> 
-						  	<p class="blog-post-meta"> {{ comment.comment }}  </p>
-						  	<button ng-click= "deleteComment(post._id, comment._id);"ng-show ="comment.userName === isUser">X</button>
+						  	<h5 class="blog-post-meta"> {{ comment.userName }} {{comment.commentDate}} <button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);"ng-show ="comment.userName === isUser"></button></h5> 
+						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
+
 						  </div>
 
-					    <input type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id)" novalidate required>
+					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id)" novalidate required></textarea>
 						</div> 
 				  </div> 
 				</div> 
