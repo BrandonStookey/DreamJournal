@@ -50,7 +50,7 @@
 						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(postID); showButton()"> {{ postComment.length }}</button><br>
 
 					  	<div ng-repeat ="comment in postComment" ng-show = "postID === viewComments">
-						  	<h5 class="blog-post-meta"> {{ comment.userName }} <button class="fa fa-times-circle" ng-click= "deleteComment(postID, comment._id);"ng-show ="comment.userName === isUser"></button></h5> 
+						  	<h5 class="blog-post-meta"> {{ comment.userName }} </button></h5> 
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 						  </div>
 
@@ -61,7 +61,7 @@
 			</div>		
 		</div>
 </div>
-
+<!-- <button class="fa fa-times-circle" ng-click= "deleteComment(postID, comment._id);"ng-show ="comment.userName === isUser"> -->
 <div ng-hide = "viewEditOptions"  ng-show = "showButton()">
 	<h1>Edit Post</h1>
 	<form name ="myForm">

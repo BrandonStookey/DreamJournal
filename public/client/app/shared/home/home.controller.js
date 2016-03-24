@@ -68,6 +68,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       // $location('/home');
       console.log('postsData: ', $scope.postsData);
       console.log('commentOnPost controller resp: ', resp);
+      console.log('commentOnPost Actuall ID', postID);
+
       // $scope.postsData = [];
       //I can either push comment into database array
       
@@ -105,10 +107,11 @@ $scope.deleteComment = function(postID, commentID){
       data: {postID: postID, commentID: commentID}
     })
     .then(function(resp){
+      console.log('deleteComment: ', resp.config.data.commentID);
       //refreshes and updates the page
       // $scope.postsData = [];      
       // $scope.init();
-      $scope.updateDeleteCommment($scope.postsData, postID, commentID);
+      $scope.updateDeleteCommment($scope.postsData, postID, resp.config.data.commentID);
     }, function(err){
       console.log('error', err);
     }); 
