@@ -40,6 +40,8 @@ app.post('/create/post', function(req, res) {
 	var post = req.body.post;    
   var dreamType = req.body.dreamType;	
 
+  console.log('createPost on routes: ', userName, userEmail, postTitle, post, dreamType)
+
   helpers.createPostDB(userName, userEmail, postTitle, post, dreamType,
   function(err, data) {
     if(err){

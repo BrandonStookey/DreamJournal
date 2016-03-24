@@ -15,7 +15,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     var userName = auth.profile.name;
     var userEmail = auth.profile.email;  
 
-    var getAllPosts = function(){
       $http({
         method: 'POST',
         url: '/create/new/user',
@@ -26,7 +25,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       }, function(err){
         console.log('error', err);
       });
-    }
+
     //======================Get All Blog Posts On Init======================
 
   	$http({
@@ -128,7 +127,7 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      // $scope.postsData = [];      
+      $scope.postsData = [];      
       $scope.init();
     }, function(err){
       console.log('error', err);
@@ -142,7 +141,7 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      // $scope.postsData = [];      
+      $scope.postsData = [];      
       $scope.init();
     }, function(err){
       console.log('error', err);
