@@ -147,14 +147,6 @@ $scope.deleteComment = function(postID, commentID){
     return $scope.viewComments;
   };
 
-//===================Shows delete button only if it is user's comment  
-
-  $scope.showButton = function(){
-    $scope.isUser = $scope.userName;
-    console.log('showButton ', $scope.isUser);
-    return $scope.isUser;
-  };
-
 //====================================Like Post
 
 $scope.likeCounter = 0;
