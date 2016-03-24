@@ -28,7 +28,7 @@ describe('profileController', function () {
     $httpBackend.expectPOST('/get/all/user/posts').respond(mockPosts);
     createController();
     $httpBackend.flush();
-    expect($scope.userPostsData).to.eql(mockPosts);
+    expect($scope.postsData).to.eql(mockPosts);
   }); 
 
   it('should have an init method on the $scope', function () {

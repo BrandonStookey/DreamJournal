@@ -94,8 +94,8 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
       console.log('commentOnPost controller resp: ', resp);
       // $scope.postsData = [];
       //I can either push comment into database array
-      
-      $scope.updateComment($scope.postsData, $scope.userName, comment, postID);
+      $scope.init();      
+      // $scope.updateComment($scope.postsData, $scope.userName, comment, postID);
 
       //or I can append directly to the page
 
@@ -124,7 +124,8 @@ $scope.deleteComment = function(postID, commentID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.updateDeleteCommment(commentID);
+      $scope.init();      
+      // $scope.updateDeleteCommment(commentID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -152,14 +153,14 @@ $scope.deleteComment = function(postID, commentID){
 $scope.likeCounter = 0;
 $scope.userLikePost = false;
 
-  $scope.updateLikes = function(bool){
-    if(bool){      
-      $scope.like.push({userName: userName, like: bool});
-    } else {
-      $scope.like.pop();
-    } 
-    $scope.postsData = postsData;
-  };
+  // $scope.updateLikes = function(bool){
+  //   if(bool){      
+  //     $scope.like.push({userName: userName, like: bool});
+  //   } else {
+  //     $scope.like.pop();
+  //   } 
+  //   $scope.postsData = postsData;
+  // };
 
 
 $scope.likePost = function(postID){
@@ -179,7 +180,8 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-    $scope.updateLikes(true);
+      $scope.init();      
+    // $scope.updateLikes(true);
     }, function(err){
       console.log('error', err);
     });     
@@ -191,8 +193,9 @@ $scope.likePost = function(postID){
       data: {postID: postID, userEmail: $scope.userEmail, like: $scope.userLikePost}
     })
     .then(function(resp){
+      $scope.init();      
       //refreshes and updates the page
-    $scope.updateLikes(false);
+    // $scope.updateLikes(false);
     }, function(err){
       console.log('error', err);
     });   

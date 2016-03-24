@@ -86,7 +86,8 @@ $scope.deleteComment = function(postID, commentID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.updateDeleteCommment($scope.postsData, postID, commentID);
+      $scope.init();      
+      // $scope.updateDeleteCommment($scope.postsData, postID, commentID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -153,7 +154,8 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-    $scope.updateLikes(postID, $scope.postsData, $scope.userName, true); 
+      $scope.init();
+    // $scope.updateLikes(postID, $scope.postsData, $scope.userName, true); 
     }, function(err){
       console.log('error', err);
     });     
@@ -167,7 +169,8 @@ $scope.likePost = function(postID){
     .then(function(resp){
       //refreshes and updates the page
       //refreshes and updates the page
-    $scope.updateLikes(postID, $scope.postsData, $scope.userName, false);
+      $scope.init();
+    // $scope.updateLikes(postID, $scope.postsData, $scope.userName, false);
     }, function(err){
       console.log('error', err);
     });   

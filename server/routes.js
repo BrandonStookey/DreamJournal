@@ -80,7 +80,7 @@ app.post('/get/all/user/posts', function(req, res) {
 
 //=====================================================================View Single Post===================================================================================
 
-app.post('/view/single/post', function(req, res) {
+app.post('/view/single/post', function(req, res) { //<-------------- change to get  request req.params.id
   var postID = req.body.postid;
   helpers.findSinglePost(postID,
   function(err, data) {  
@@ -93,9 +93,9 @@ app.post('/view/single/post', function(req, res) {
 
 //====================================================================Delete Single Post======================================================================================
 
-app.route('/delete/single/post') 
-  .post(function( req, res) {   
-    var postID = req.body.postID;
+app.route('/delete/single/post') // / /post/:id     <------pass postID here
+  .post(function( req, res) {   //<------------- .delete
+    var postID = req.body.postID; //<----------- req.params.id
 
     helpers.deleteSinglePost(postID,
     function(err, data) {
@@ -112,7 +112,7 @@ app.route('/delete/single/post')
     var postTitle = req.body.postTitle;     
     var post = req.body.post;    
     var dreamType = req.body.dreamType;     
-    var postID = req.body.postID;  
+    var postID = req.body.postID;         //<-------req.params.id
 
     helpers.updateSinglePost(userEmail, postID, postTitle, post, dreamType,
     function(err, data) {

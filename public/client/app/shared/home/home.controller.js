@@ -73,11 +73,11 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       // $scope.postsData = [];
       //I can either push comment into database array
       
-      $scope.updateComment($scope.postsData, $scope.userName, comment, postID);
+      // $scope.updateComment($scope.postsData, $scope.userName, comment, postID);
 
       //or I can append directly to the page
 
-      // $scope.init();
+      $scope.init();
     }, function(err){
       console.log('error', err);
     }); 
@@ -110,8 +110,8 @@ $scope.deleteComment = function(postID, commentID){
       console.log('deleteComment: ', resp.config.data.commentID);
       //refreshes and updates the page
       // $scope.postsData = [];      
-      // $scope.init();
-      $scope.updateDeleteCommment($scope.postsData, postID, resp.config.data.commentID);
+      $scope.init();
+      // $scope.updateDeleteCommment($scope.postsData, postID, resp.config.data.commentID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -170,6 +170,7 @@ $scope.likePost = function(postID){
       $scope.likeCounter++;      
       $scope.userLikePost = false;
     }
+
 //=========================if userLikePost is true then it will add a new like to the post in the database
   if($scope.userLikePost){
      $http({
@@ -179,7 +180,8 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-    $scope.updateLikes(postID, $scope.postsData, $scope.userName, true); 
+      $scope.init();
+    // $scope.updateLikes(postID, $scope.postsData, $scope.userName, true); 
     }, function(err){
       console.log('error', err);
     });     
@@ -192,7 +194,8 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-    $scope.updateLikes(postID, $scope.postsData, $scope.userName, false);
+      $scope.init();      
+    // $scope.updateLikes(postID, $scope.postsData, $scope.userName, false);
     }, function(err){
       console.log('error', err);
     });   

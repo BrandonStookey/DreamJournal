@@ -14,6 +14,11 @@ angular.module('dreamjournal', [
 ])
 .config(['$routeProvider', '$httpProvider', 'authProvider', 'jwtInterceptorProvider', function($routeProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
   $routeProvider
+    .when('/login', {
+      templateUrl: 'app/shared/login/login.view.html',
+      controller: 'loginController',
+      requiresLogin: true
+    })  
     .when('/graph', {
       templateUrl: 'app/shared/graph/graph.view.html',
       controller: 'graphController',
