@@ -49,6 +49,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 
   //======================Create Comment====================================
   $scope.updateComment = function(postsData, userName, comment, postID){
+
     for(var i = 0; i < postsData.length; i ++){
       if(postID === postsData[i]._id){
         postsData[i].postComment.push({userName: userName, comment: comment});
@@ -82,8 +83,23 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   };
   
 //==========================Delete Comment==================================
+  $scope.updateDeleteCommment = function(postsData, postID, commentID){
+
+      for(var i = 0; i < postsData.length; i ++){    
+        if(postID === postsData[i]._id){
+          for(var j = 0; j < postsData[i].postComment.length; j++){
+            if(postsData[i].postComment[j]._id === commentID){
+                postsData[i].postComment.splice(j,1);
+            }
+          }
+        } 
+      } 
+    $scope.postsData = postsData;
+  };
+
 
 $scope.deleteComment = function(postID, commentID){
+      console.log('controllers: ', commentID);
      $http({
       method: 'POST',
       url: '/delete/comment',
@@ -91,8 +107,9 @@ $scope.deleteComment = function(postID, commentID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.postsData = [];      
-      $scope.init();
+      // $scope.postsData = [];      
+      // $scope.init();
+      $scope.updateDeleteCommment($scope.postsData, postID, commentID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -128,6 +145,21 @@ $scope.deleteComment = function(postID, commentID){
 $scope.likeCounter = 0;
 $scope.userLikePost = false;
 
+
+  $scope.updateLikes = function(postID, postsData, userName, bool ){
+
+      for(var i = 0; i < postsData.length; i ++){
+        if(bool){      
+          if(postID === postsData[i]._id){
+            postsData[i].like.push({userName: userName, like: bool});
+          } 
+        } else {
+            postsData[i].like.pop();
+        } 
+      } 
+    $scope.postsData = postsData;
+  };
+
 $scope.likePost = function(postID){
     if($scope.likeCounter % 2 === 0){
       $scope.likeCounter++;
@@ -145,8 +177,7 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.postsData = [];      
-      $scope.init();
+    $scope.updateLikes(postID, $scope.postsData, $scope.userName, true); 
     }, function(err){
       console.log('error', err);
     });     
@@ -159,8 +190,7 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.postsData = [];      
-      $scope.init();
+    $scope.updateLikes(postID, $scope.postsData, $scope.userName, false);
     }, function(err){
       console.log('error', err);
     });   

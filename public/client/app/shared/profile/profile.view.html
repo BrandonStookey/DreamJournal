@@ -1,20 +1,36 @@
-<div class="container">
-<div class="blog-header">
-	<h1 class="blog-title">{{ userName }}</h1>
-</div>  
+<div class="container"> 
 
-<div class="row">
-  <div class="blog-post">
-			<div class ="mainDiv">
-			<div class ="blogDiv">
-				 	<div ng-repeat="post in userPostsData" >
-				  	<h3 class="blog-post-title"> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
-				  	<p class="blog-post-meta"> {{ post.postDate }}</p>
-				  	<p class="blog-post-meta"> {{ post.name }} </p>
-				    <p  ng-bind-html="post.post"></p>
-					</div> 
-			  </div>
-			</div>
-	</div>		
+	<div class="blog-header">
+		<h1 class="blog-title">Dream Journal</h1>
+	</div>  
 
+	<div class="row"> 
+	  <div class="blog-post"> 
+			<div class ="mainDiv"> 
+				<div class ="blogDiv"> 
+					 <div class="individualPostDiv" ng-repeat="post in postsData" > 
+
+					  	<h3 class="blog-post-title"> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
+
+
+						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
+						  	<p class="blog-post-meta"> {{ post.name }} </p>
+						    <p  ng-bind-html="post.post"></p>
+
+						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button> 
+
+						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showButton()"> {{ post.postComment.length }}</button><br>
+
+					  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
+						  	<h5 class="blog-post-meta"> {{ comment.userName }} <button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);"ng-show ="comment.userName === isUser"></button></h5> 
+						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
+
+						  </div>
+
+					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id); commentInput = null" novalidate required></textarea>
+						</div> 
+				  </div> 
+				</div> 
+			</div>		
+		</div>
 </div>

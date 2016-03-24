@@ -199,8 +199,8 @@ var createNewComment = function(postID, userName, userComment, callback){
 //=========================================================================Delete Single Comment=======================================================================
 
 var deleteComment = function(postID, commentID, callback){
-  console.log('helpers postID ', postID);
-  console.log('helpers commentID ', commentID);
+  console.log('helpers deleteComment postID ', postID);
+  console.log('helpers deleteComment commentID ', commentID);
   console.log('deleteComment on helpers!');
 
   db.User.update({'post._id': postID}, { $pull: { 'post.$.postComment': { _id: commentID } } },{multi:true}, function(err, posts){
