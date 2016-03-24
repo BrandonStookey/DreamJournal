@@ -78,12 +78,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 	}
 //======================Create Comment====================================
   $scope.updateComment = function(postsData, userName, comment, postID){
-    for(var i = 0; i < postsData.length; i ++){
-      if(postID === postsData[i]._id){
-        postsData[i].postComment.push({userName: userName, comment: comment});
-      }
-    }
-    $scope.postsData = postsData;
+    $scope.postComment.push({userName: userName, comment: comment});
   };
 
   $scope.commentOnPost = function(comment, postID){
@@ -112,6 +107,15 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
   
 //==========================Delete Comment==================================
 
+  $scope.updateDeleteCommment = function(commentID){
+
+    for(var j = 0; j < $scope.postComment.length; j++){
+      if($scope.postComment[j]._id === commentID){
+        $scope.postComment.splice(j,1);
+      }
+    }
+  };
+
 $scope.deleteComment = function(postID, commentID){
      $http({
       method: 'POST',
@@ -120,8 +124,7 @@ $scope.deleteComment = function(postID, commentID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.postsData = [];      
-      $scope.init();
+      $scope.updateDeleteCommment(commentID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -157,6 +160,16 @@ $scope.deleteComment = function(postID, commentID){
 $scope.likeCounter = 0;
 $scope.userLikePost = false;
 
+  $scope.updateLikes = function(bool){
+    if(bool){      
+      $scope.like.push({userName: userName, like: bool});
+    } else {
+      $scope.like.pop();
+    } 
+    $scope.postsData = postsData;
+  };
+
+
 $scope.likePost = function(postID){
     if($scope.likeCounter % 2 === 0){
       $scope.likeCounter++;
@@ -174,8 +187,7 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.postsData = [];      
-      $scope.init();
+    $scope.updateLikes(true);
     }, function(err){
       console.log('error', err);
     });     
@@ -188,8 +200,7 @@ $scope.likePost = function(postID){
     })
     .then(function(resp){
       //refreshes and updates the page
-      $scope.postsData = [];      
-      $scope.init();
+    $scope.updateLikes(false);
     }, function(err){
       console.log('error', err);
     });   

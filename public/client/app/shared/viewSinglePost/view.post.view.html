@@ -41,9 +41,11 @@
 						    <p  ng-bind-html="post.post"></p>
 
 						  	<button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost(postTitle)" ng-show = "showButton()"></button>
-								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showButton()"></button>			
-						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(postID)"> {{ like.length }}</button> 
+								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showButton()"></button>		
 
+
+						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(postID)"> {{ like.length }}</button> 
+						  	
 						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(postID); showButton()"> {{ postComment.length }}</button><br>
 
 					  	<div ng-repeat ="comment in postComment" ng-show = "postID === viewComments">
