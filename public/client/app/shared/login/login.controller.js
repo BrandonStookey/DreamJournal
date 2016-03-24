@@ -26,5 +26,32 @@ angular.module('dreamjournal.login', [])
 
   $scope.showButton = function(){
     return $scope.found;
-  }        
+  }    
+
+$scope.init= function(){
+
+//======================Get All Blog Posts On Init======================
+  $scope.postsData = [];
+  
+  $http({
+      method: 'GET',
+      url: '/get/all/posts'
+    })
+   .then(function(result) {
+      result.data.forEach(function(post) {
+        $scope.postsData.unshift(post);
+      }); 
+      console.log('Post GET successful');
+    }, function(err) {
+      console.error('Post GET error:', err);
+    });
+  };
+
+  $scope.init();      
 }]);
+
+
+
+
+
+
