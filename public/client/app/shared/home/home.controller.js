@@ -9,12 +9,14 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
-
+  $scope.alreadyRan = false;
   $scope.init= function(userName, userEmail){
    //======================Create New User on Init=========================
     var userName = auth.profile.name;
     var userEmail = auth.profile.email;  
 
+    if(!$scope.alreadyRan){
+      $scope.alreadyRan = true;
       $http({
         method: 'POST',
         url: '/create/new/user',
@@ -25,7 +27,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       }, function(err){
         console.log('error', err);
       });
-
+    };
     //======================Get All Blog Posts On Init======================
 
   	$http({
@@ -55,8 +57,20 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     .then(function(resp){
       //refreshes and updates the page
       // $location('/home');
+      console.log('postsData: ', $scope.postsData);
+      console.log('commentOnPost controller resp: ', resp);
+      // $scope.postsData = [];
+      //I can either push comment into database array
+      
+      for(var i = 0; i < $scope.postsData.length; i ++){
 
-      $scope.postsData = [];
+        if(postID === $scope.postsData[i]._id){
+          $scope.postsData[i].postComment.push[comment];
+        }
+      }
+
+      //or I can append directly to the page
+
       $scope.init();
     }, function(err){
       console.log('error', err);
