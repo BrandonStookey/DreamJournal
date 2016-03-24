@@ -27,7 +27,7 @@
 
 						  </div>
 
-					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id)" novalidate required></textarea>
+					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id); commentInput = null" novalidate required></textarea>
 						</div> 
 				  </div> 
 				</div> 

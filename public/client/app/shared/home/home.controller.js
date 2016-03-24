@@ -10,6 +10,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
   $scope.alreadyRan = false;
+
   $scope.init= function(userName, userEmail){
    //======================Create New User on Init=========================
     var userName = auth.profile.name;
@@ -47,6 +48,14 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.init();
 
   //======================Create Comment====================================
+  $scope.updateComment = function(postsData, userName, comment, postID){
+    for(var i = 0; i < postsData.length; i ++){
+      if(postID === postsData[i]._id){
+        postsData[i].postComment.push({userName: userName, comment: comment});
+      }
+    }
+    $scope.postsData = postsData;
+  };
 
   $scope.commentOnPost = function(comment, postID){
      $http({
@@ -62,16 +71,11 @@ angular.module('dreamjournal.home', ['ngSanitize'])
       // $scope.postsData = [];
       //I can either push comment into database array
       
-      for(var i = 0; i < $scope.postsData.length; i ++){
-
-        if(postID === $scope.postsData[i]._id){
-          $scope.postsData[i].postComment.push[comment];
-        }
-      }
+      $scope.updateComment($scope.postsData, $scope.userName, comment, postID);
 
       //or I can append directly to the page
 
-      $scope.init();
+      // $scope.init();
     }, function(err){
       console.log('error', err);
     }); 

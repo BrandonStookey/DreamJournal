@@ -7,16 +7,7 @@ var moment = require ('moment');
 
 var createNewUser = function(name, email, callback){
     console.log('createNewUser on helpers called!');
-
-    db.User.find({email: email}, function(err, found){
-      if(err){
-        console.log(err)
-      }
-      console.log('testing: ', found[0].email);
-      if(found[0].email == email){
-        return callback(found);
-      };
-    })
+    
     var user = new db.User({
       email: email,    
       name: name,
