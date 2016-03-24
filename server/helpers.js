@@ -8,6 +8,15 @@ var moment = require ('moment');
 var createNewUser = function(name, email, callback){
     console.log('createNewUser on helpers called!');
 
+    db.User.find({email: email}, function(err, found){
+      if(err){
+        console.log(err)
+      }
+      console.log('testing: ', found[0].email);
+      if(found[0].email == email){
+        return callback(found);
+      };
+    })
     var user = new db.User({
       email: email,    
       name: name,
@@ -139,7 +148,7 @@ var updateSinglePost = function(email, postID, postTitle, post, dreamType, callb
   console.log('helpers update SINGLE post request!'); 
   console.log('postID ', postID);
   // http://tech-blog.maddyzone.com/node/add-update-delete-object-array-schema-mongoosemongodb <-----Might be my answer 
-  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle, 'post.$.post': post, 'dream.$.dreamType': dreamType }  }, function(err, model) {
+  db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle, 'post.$.post': post, 'post.$.dreamType': dreamType }  }, function(err, model) {
       if(err){
           console.log(err);
           return callback(err);
