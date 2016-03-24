@@ -49,7 +49,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 
   //======================Create Comment====================================
   $scope.updateComment = function(postsData, userName, comment, postID){
-
     for(var i = 0; i < postsData.length; i ++){
       if(postID === postsData[i]._id){
         postsData[i].postComment.push({userName: userName, comment: comment});
