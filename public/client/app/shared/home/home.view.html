@@ -16,7 +16,8 @@
 						  	<p class="blog-post-meta"> {{ post.postDate }}</p>
 						  	<p class="blog-post-meta"> {{ post.name }} </p>
 						    <p  ng-bind-html="post.post"></p>
-						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id, post.postComment._id)">{{ userLikePost }} {{ post.like.length }}</button> 
+
+						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button> 
 
 						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showButton()"> {{ post.postComment.length }}</button><br>
 

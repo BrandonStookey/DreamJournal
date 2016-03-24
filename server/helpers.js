@@ -217,9 +217,9 @@ var deleteComment = function(postID, commentID, callback){
 
 //=============================================================================Like Comment===============================================================================
 
-var likeComment = function(postID, commentID, userName, likeComment, callback){
+var likeComment = function(postID, userEmail, userName, likeComment, callback){
 
-    db.User.update( { 'post._id': postID }, { $push: { 'post.$.like': {  userName: userName, like: likeComment } } }, function(err, success) {
+    db.User.update( { 'post._id': postID }, { $push: { 'post.$.like': {  userEmail: userEmail, userName: userName, like: likeComment } } }, function(err, success) {
         if (err) {
           console.log('comment on post error ', err);
           return callback(err);
@@ -232,6 +232,23 @@ var likeComment = function(postID, commentID, userName, likeComment, callback){
 
 };
 
+//==============================================================================Delete Like Comment======================================================================
+
+var deleteLikeComment = function(postID, userEmail, likeComment, callback){
+  console.log('deletelikeComment Helpers userEmail: ', userEmail);
+
+  db.User.update({'post._id': postID }, { $pull: { 'post.$.like': {userEmail: userEmail } } },{multi:true}, function(err, posts){
+      if(err){
+        console.log('remove like error: ', err);
+        return callback(err);
+      }
+
+      console.log('deleteLikeComment: ', posts);
+      callback(null, 200);
+  });
+
+
+}
 
 //============================================================================Export all helpers=========================================================================
 
@@ -246,6 +263,7 @@ module.exports = {
   findAllDreamsNightmares: findAllDreamsNightmares,
   createNewComment: createNewComment,
   deleteComment: deleteComment,
-  likeComment: likeComment
+  likeComment: likeComment,
+  deleteLikeComment: deleteLikeComment
 };
 

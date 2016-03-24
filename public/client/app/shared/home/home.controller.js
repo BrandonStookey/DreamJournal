@@ -55,6 +55,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     })
     .then(function(resp){
       //refreshes and updates the page
+      // $location('/home');
+
       $scope.postsData = [];
       $scope.init();
     }, function(err){
@@ -104,29 +106,48 @@ $scope.deleteComment = function(postID, commentID){
     return $scope.isUser;
   };
 
-//===========================Like Post
+//====================================Like Post
 
 $scope.likeCounter = 0;
 $scope.userLikePost = false;
 
-$scope.likePost = function(postID, commentID){
-    if($scope.counter % 2 === 0){
+$scope.likePost = function(postID){
+    if($scope.likeCounter % 2 === 0){
       $scope.likeCounter++;
       $scope.userLikePost = true;
+    } else {
+      $scope.likeCounter++;      
+      $scope.userLikePost = false;
     }
-
-   $http({
-    method: 'POST',
-    url: '/like/comment',
-    data: {postID: postID, commentID: commentID, name: $scope.userName, like: $scope.userLikePost}
-  })
-  .then(function(resp){
-    //refreshes and updates the page
-    $scope.postsData = [];      
-    $scope.init();
-  }, function(err){
-    console.log('error', err);
-  });     
+//=========================if userLikePost is true then it will add a new like to the post in the database
+  if($scope.userLikePost){
+     $http({
+      method: 'POST',
+      url: '/like/comment',
+      data: {postID: postID, userEmail: $scope.userEmail, name: $scope.userName, like: $scope.userLikePost}
+    })
+    .then(function(resp){
+      //refreshes and updates the page
+      // $scope.postsData = [];      
+      $scope.init();
+    }, function(err){
+      console.log('error', err);
+    });     
+  } else{
+//=========================if userLikePost is false then it will remove the 'like' from the database    
+     $http({
+      method: 'POST',
+      url: '/delete/like/comment',
+      data: {postID: postID, userEmail: $scope.userEmail, like: $scope.userLikePost}
+    })
+    .then(function(resp){
+      //refreshes and updates the page
+      // $scope.postsData = [];      
+      $scope.init();
+    }, function(err){
+      console.log('error', err);
+    });   
+  }
 };
 
 }])

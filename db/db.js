@@ -37,6 +37,7 @@ var userSchema = mongoose.Schema({
 
       like: { 
         type: [{
+          userEmail: String,
           userName: String,
           like: Boolean,
           date: { type: Date, default: Date.now }
