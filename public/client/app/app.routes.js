@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dreamjournal', [
-  'ngRoute',
+  'dreamjournal.services',
   'dreamjournal.login',  
   'dreamjournal.graph',
   'dreamjournal.profile',
@@ -10,7 +10,8 @@ angular.module('dreamjournal', [
   'dreamjournal.home',
   'auth0',
   'angular-storage',
-  'angular-jwt'          
+  'angular-jwt',          
+  'ngRoute'
 ])
 .config(['$routeProvider', '$httpProvider', 'authProvider', 'jwtInterceptorProvider', function($routeProvider, $httpProvider, authProvider, jwtInterceptorProvider) {
   $routeProvider

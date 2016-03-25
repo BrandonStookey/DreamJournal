@@ -2,25 +2,17 @@
 
 angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
-.controller('viewPostController', ['$scope', 'ViewSinglePostFromHomeAndFromProfile', '$http', '$location', 'auth', function ($scope, ViewSinglePostFromHomeAndFromProfile, $http, $location, auth) {
+.controller('viewPostController', ['$scope','djMainFactory', '$http', '$location', 'auth', function ($scope, djMainFactory, $http, $location, auth) {
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
 
-
 	$scope.init = function(){
-		$scope.singlePost = ViewSinglePostFromHomeAndFromProfile.singlePost;
 
-		$scope.postTitle = $scope.singlePost[0].data.postTitle;
-		$scope.post = $scope.singlePost[0].data.post;
-		$scope.dreamType = $scope.singlePost[0].data.dreamType;		
-		$scope.name = $scope.singlePost[0].data.name;
-		$scope.postID = $scope.singlePost[0].data._id;
-		$scope.postDate = $scope.singlePost[0].data.postDate;		
- 		$scope.postComment = $scope.singlePost[0].data.postComment;		
- 		$scope.like = $scope.singlePost[0].data.like;		 		
+    $scope.singlePost = djMainFactory.singlePost;
 
 //==========================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
-		$scope.showButton = function(){
+		
+    $scope.showButton = function(){
 			var userName = auth.profile.name; 
 			var isUserPost = false;
 
@@ -34,7 +26,8 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
 	$scope.init();
 //=====================================================================Delete A Single Post=============================================================
-	$scope.deletePost = function(postTitle){
+	
+  $scope.deletePost = function(postTitle){
 		console.log('deletePost is being called on controlers')
     $http({
       method: 'POST',
@@ -76,63 +69,36 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
       console.log('error', err);
     });
 	}
-//======================Create Comment====================================
-  $scope.updateComment = function(postsData, userName, comment, postID){
-    $scope.postComment.push({userName: userName, comment: comment});
-  };
+
+//======================Create Comment on Post================================
 
   $scope.commentOnPost = function(comment, postID){
-     $http({
-      method: 'POST',
-      url: '/create/new/comment',
-      data: {postID: postID, name: $scope.userName, comment: comment}
-    })
-    .then(function(resp){
-      //refreshes and updates the page
-      // $location('/home');
-      console.log('postsData: ', $scope.postsData);
-      console.log('commentOnPost controller resp: ', resp);
-      // $scope.postsData = [];
-      //I can either push comment into database array
-      $scope.init();      
-      // $scope.updateComment($scope.postsData, $scope.userName, comment, postID);
-
-      //or I can append directly to the page
-
-      // $scope.init();
-    }, function(err){
-      console.log('error', err);
-    }); 
+    djMainFactory.commentOnPost(comment, postID);
   };
-  
 //==========================Delete Comment==================================
 
-  $scope.updateDeleteCommment = function(commentID){
-
-    for(var j = 0; j < $scope.postComment.length; j++){
-      if($scope.postComment[j]._id === commentID){
-        $scope.postComment.splice(j,1);
-      }
-    }
-  };
-
 $scope.deleteComment = function(postID, commentID){
-     $http({
-      method: 'POST',
-      url: '/delete/comment',
-      data: {postID: postID, commentID: commentID}
-    })
-    .then(function(resp){
-      //refreshes and updates the page
-      $scope.init();      
-      // $scope.updateDeleteCommment(commentID);
-    }, function(err){
-      console.log('error', err);
-    }); 
+    djMainFactory.deleteComment(postID, commentID);
 };
 
+//====================================Like Post
+  $scope.likeCounter = 0;
+  $scope.userLikePost = false;
 
-//=========================Shows/Hide Comments===============================
+  $scope.likePost = function(postID){
+
+    if($scope.likeCounter % 2 === 0){
+      $scope.likeCounter++;
+      $scope.userLikePost = true;
+    } else {
+      $scope.likeCounter++;      
+      $scope.userLikePost = false;
+    }  
+      djMainFactory.likePost(postID, $scope.userLikePost);
+  }; 
+
+ //=========================Shows/Hide Comments===============================MUST FIX THIS!!!!!===============================================
+  
   $scope.viewComments;
   $scope.counter = 0;
   $scope.isUser;
@@ -148,59 +114,13 @@ $scope.deleteComment = function(postID, commentID){
     return $scope.viewComments;
   };
 
-//====================================Like Post
+//=========================Shows delete button only if it is user's comment  
 
-$scope.likeCounter = 0;
-$scope.userLikePost = false;
-
-  // $scope.updateLikes = function(bool){
-  //   if(bool){      
-  //     $scope.like.push({userName: userName, like: bool});
-  //   } else {
-  //     $scope.like.pop();
-  //   } 
-  //   $scope.postsData = postsData;
-  // };
-
-
-$scope.likePost = function(postID){
-    if($scope.likeCounter % 2 === 0){
-      $scope.likeCounter++;
-      $scope.userLikePost = true;
-    } else {
-      $scope.likeCounter++;      
-      $scope.userLikePost = false;
-    }
-//=========================if userLikePost is true then it will add a new like to the post in the database
-  if($scope.userLikePost){
-     $http({
-      method: 'POST',
-      url: '/like/comment',
-      data: {postID: postID, userEmail: $scope.userEmail, name: $scope.userName, like: $scope.userLikePost}
-    })
-    .then(function(resp){
-      //refreshes and updates the page
-      $scope.init();      
-    // $scope.updateLikes(true);
-    }, function(err){
-      console.log('error', err);
-    });     
-  } else{
-//=========================if userLikePost is false then it will remove the 'like' from the database    
-     $http({
-      method: 'POST',
-      url: '/delete/like/comment',
-      data: {postID: postID, userEmail: $scope.userEmail, like: $scope.userLikePost}
-    })
-    .then(function(resp){
-      $scope.init();      
-      //refreshes and updates the page
-    // $scope.updateLikes(false);
-    }, function(err){
-      console.log('error', err);
-    });   
-  }
-};
+  $scope.showDeleteCommentButton = function(){
+    $scope.isUser = $scope.userName;
+    console.log('showButton ', $scope.isUser);
+    return $scope.isUser;
+  };  
 
 }]);
 

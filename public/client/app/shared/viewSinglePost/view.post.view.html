@@ -1,26 +1,3 @@
-<!-- 
-<div class="container" ng-show = 'viewEditOptions'>
-<div class="blog-header">
-	<h1 class="blog-title">{{ postTitle }}</h1>
-</div>  
-
-
-
-<div class="row">
-  <div class="blog-post">
-			<div class ="mainDiv">
-		    <h4 class="blog-post-meta"> {{ name }} </h4> 
-		    <h6 class="blog-post-meta"> {{ postDate }}</h6>
-		    <p ng-bind-html="post"></p>
-		  </div> 
-			<button ng-click= "deletePost(postTitle)" ng-show = "showButton()"> Delete Post </button>
-			<button ng-click= "editPost()" ng-show = "showButton()"> Edit Post </button>			
-	  </div>
-</div>
-
-
-
-</div> -->
 <div class="container" ng-show = 'viewEditOptions'> 
 
 	<div class="blog-header">
@@ -31,26 +8,27 @@
 	  <div class="blog-post"> 
 			<div class ="mainDiv"> 
 				<div class ="blogDiv"> 
-					 <div class="individualPostDiv"> 
+					 <div class="individualPostDiv" ng-repeat="post in singlePost"> 
 
-					  	<h3 class="blog-post-title"> {{ postTitle }} </h3>
+					  	<h3 class="blog-post-title"> {{ post.data.postTitle }} </h3>
 
 
-						  	<p class="blog-post-meta"> {{ dreamType }} {{ postDate }} </p>
-						  	<p class="blog-post-meta"> {{ name }} </p>
-						    <p  ng-bind-html="post"></p>
+						  	<p class="blog-post-meta"> {{ post.data.dreamType }} {{ post.data.postDate }} </p>
+						  	<p class="blog-post-meta"> {{ post.data.name }} </p>
+						    <p  ng-bind-html="post.data.post"></p>
 
 						  	<button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost(postTitle)" ng-show = "showButton()"></button>
 						  	
 								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showButton()"></button>		
 
 
-						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(postID)"> {{ like.length }}</button> 
+						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(postID)"> {{ post.data.like.length }}</button> 
 
-						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(postID); showButton()"> {{ postComment.length }}</button><br>
+						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(postID); showButton()"> {{ post.data.postComment.length }}</button><br>
 
-					  	<div ng-repeat ="comment in postComment" ng-show = "postID === viewComments">
-						  	<h5 class="blog-post-meta"> {{ comment.userName }} <button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);"ng-show ="comment.userName === isUser"></button></h5> 
+					  	<div ng-repeat ="comment in post.data.postComment" ng-show = "postID === viewComments">
+						  	<h5 class="blog-post-meta"> {{ comment.userName }} 
+						  	<button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 						  </div>
 
@@ -61,7 +39,9 @@
 			</div>		
 		</div>
 </div>
+
 <!-- <button class="fa fa-times-circle" ng-click= "deleteComment(postID, comment._id);"ng-show ="comment.userName === isUser"> -->
+
 <div ng-hide = "viewEditOptions"  ng-show = "showButton()">
 	<h1>Edit Post</h1>
 	<form name ="myForm">
