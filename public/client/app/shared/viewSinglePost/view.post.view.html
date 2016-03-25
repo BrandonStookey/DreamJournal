@@ -24,11 +24,11 @@
 
 						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(postID)"> {{ post.data.like.length }}</button> 
 
-						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(postID); showButton()"> {{ post.data.postComment.length }}</button><br>
+						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(postID); showDeleteCommentButton()"> {{ post.data.postComment.length }}</button><br>
 
 					  	<div ng-repeat ="comment in post.data.postComment" ng-show = "postID === viewComments">
 						  	<h5 class="blog-post-meta"> {{ comment.userName }} 
-						  	<button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
+						  	<button class="fa fa-times-circle" ng-click= "deleteComment(post.data.post._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 						  </div>
 

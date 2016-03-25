@@ -75,9 +75,11 @@ angular.module('dreamjournal', [
       if (!jwtHelper.isTokenExpired(token)) {
         if (!auth.isAuthenticated) {
           auth.authenticate(store.get('profile'), token);
+          $rootScope.signedIn = true;          
         }
       } else {
         // Either show the login page or use the refresh token to get a new idToken
+        $rootScope.signedIn = false;        
         $location.path('/login');
       }
     }

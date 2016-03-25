@@ -2,7 +2,7 @@
 
 angular.module('dreamjournal.home', ['ngSanitize'])
 
-.controller('homeController', ['$scope', 'djMainFactory', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, djMainFactory,  $http, auth, ViewSinglePostFromHomeAndFromProfile) {
+.controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $rootScope, djMainFactory,  $http, auth, ViewSinglePostFromHomeAndFromProfile) {
   $scope.postsData = djMainFactory.postsData;
   djMainFactory.userData;
 
@@ -14,7 +14,9 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.init= function(userName, userEmail){
 //======================Create New User on Init=========================
 
+  if($rootScope.signedIn){
     djMainFactory.createUser();
+  };
 //======================Get All Blog Posts On Init======================
 
     djMainFactory.getPosts();
