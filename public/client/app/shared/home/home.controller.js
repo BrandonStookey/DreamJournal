@@ -2,34 +2,32 @@
 
 angular.module('dreamjournal.home', ['ngSanitize'])
 
-.controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', 'ViewSinglePostFromHomeAndFromProfile', function ($scope, $rootScope, djMainFactory,  $http, auth, ViewSinglePostFromHomeAndFromProfile) {
+.controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth',  function ($scope, $rootScope, djMainFactory,  $http, auth) {
   $scope.postsData = djMainFactory.postsData;
   djMainFactory.userData;
-
-  // angular.extend($scope, ViewSinglePostFromHomeAndFromProfile);
 
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
 
-  $scope.init= function(userName, userEmail){
-//======================Create New User on Init=========================
-
-  if($rootScope.signedIn){
+  $scope.init= function() {
+//======================Create New User on Init========================
+  // console.log($rootScope.signedIn);
+  if(!$rootScope.signedIn){
     djMainFactory.createUser();
   };
-//======================Get All Blog Posts On Init======================
+//======================Get All Blog Posts On Init=====================
 
     djMainFactory.getPosts();
   };
 
   $scope.init();
 
-//======================Create Comment on Post================================
+//======================Create Comment on Post==========================
 
   $scope.commentOnPost = function(comment, postID){
     djMainFactory.commentOnPost(comment, postID);
   };
-//==========================Delete Comment==================================
+//==========================Delete Comment==============================
 
 $scope.deleteComment = function(postID, commentID){
     djMainFactory.deleteComment(postID, commentID);

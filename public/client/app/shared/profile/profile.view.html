@@ -19,10 +19,10 @@
 
 						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button> 
 
-						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showButton()"> {{ post.postComment.length }}</button><br>
+						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
 
 					  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
-						  	<h5 class="blog-post-meta"> {{ comment.userName }} <button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);"ng-show ="comment.userName === isUser"></button></h5> 
+						  	<h5 class="blog-post-meta"> {{ comment.userName }} {{ comment.commentDate }}<button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);"ng-show ="comment.userName === isUser"></button></h5> 
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 
 						  </div>

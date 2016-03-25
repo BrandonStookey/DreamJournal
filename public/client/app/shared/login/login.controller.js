@@ -1,7 +1,7 @@
 angular.module('dreamjournal.login', [])
 
-  .controller('loginController', ['$scope', '$http', 'auth', 'store', '$location',
-  function ($scope, $http, auth, store, $location) {
+  .controller('loginController', ['$scope', '$rootScope', '$http', 'auth', 'store', '$location',
+  function ($scope,$rootScope, $http, auth, store, $location) {
   /////////User will login using Auth0///////////////
     $scope.found = true;
 
@@ -25,6 +25,9 @@ angular.module('dreamjournal.login', [])
     };
 
   $scope.showButton = function(){
+    if($rootScope.signedIn){
+      $scope.found = false;
+    }
     return $scope.found;
   }    
 
