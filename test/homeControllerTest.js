@@ -2,7 +2,7 @@
 var mockAuth = {profile: {} };
 
 describe('homeController', function () {
-  var $scope, auth, $rootScope, createController, $httpBackend;
+  var $scope, auth, $rootScope, createController, djMainFactory, $httpBackend;
 
   // using angular mocks, we can inject the injector
   // to retrieve our dependencies
@@ -12,13 +12,15 @@ describe('homeController', function () {
     // mock out our dependencies
     $rootScope = $injector.get('$rootScope');
     $httpBackend = $injector.get('$httpBackend');
+    djMainFactory = $injector.get( 'djMainFactory' );
     $scope = $rootScope.$new();
-
+    
     var $controller = $injector.get('$controller');
 
     createController = function () {
       return $controller('homeController', {
         $scope: $scope,
+        djMainFactory: djMainFactory
       });
     };
   }));

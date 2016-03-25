@@ -34,49 +34,50 @@ app.post('/create/new/user', function(req, res) {
 //================================================================Add New Post to Database===================================================================
 
 app.post('/create/post', function(req, res) {
-	var userName = req.body.name;
-	var userEmail = req.body.email;    	
-	var postTitle = req.body.postTitle;    	
-	var post = req.body.post;    
-  var dreamType = req.body.dreamType;	
+  var userName = req.body.name;
+  var userEmail = req.body.email;     
+  var postTitle = req.body.postTitle;     
+  var post = req.body.post;    
+  var dreamType = req.body.dreamType; 
 
-  console.log('createPost on routes: ', userName, userEmail, postTitle, post, dreamType)
+  // console.log('createPost on routes: ', userName, userEmail, postTitle, post, dreamType)
 
-  helpers.createPostDB(userName, userEmail, postTitle, post, dreamType,
+
+  helpers.createPostDB(userName, userEmail, postTitle, post, dreamType, 
   function(err, data) {
     if(err){
       res.status(400).send(err);
     }    
-    res.send(data);
+      res.send(data);
   });
 });
-
 //==================================================================Get all Posts Request===================================================================
 
-app.get('/get/all/posts', function(req, res) {  
-  helpers.findAllPosts( 
-  function(err, data) {
-    if(err){
-      res.status(400).send(err);
-    }        
-    res.send(data);
-  });
-});
-
-
-//======================================================================Get all User Posts========================================================================
-
-app.post('/get/all/user/posts', function(req, res) { 
-  var email = req.body.email;
-
-  helpers.findAllUserPosts(email, 
-  function(err, data) { 
-    if(err){
-      res.status(400).send(err);
-    }         
-    res.send(data);
-  });
-});
+app.route('/post/:email') // / /post/:id     <------pass postID here
+  .get(function( req, res) {   //<------------- .delete
+    
+    // var userEmail = req.params.email; //<----------- req.params.id
+    
+    var email = req.params.email;    
+    if(email !== 'undefined'){
+      console.log('End up in here no matter what');
+      helpers.findAllUserPosts(email, 
+      function(err, data) { 
+        if(err){
+          return res.status(400).send(err);
+        }         
+          return res.send(data);
+      });
+    } else {
+     helpers.findAllPosts( 
+      function(err, data) {
+        if(err){
+          res.status(400).send(err);
+        }        
+        res.send(data);
+      });
+   }
+  })
 
 //=====================================================================View Single Post===================================================================================
 

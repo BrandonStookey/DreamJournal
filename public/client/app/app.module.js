@@ -7,7 +7,8 @@ angular.module('dreamjournal.services', [])
 
   var userName = auth.profile.name;
   var userEmail = auth.profile.email;  
-	var postsData = [];
+	var allPostsData = [];
+  var userPostsData = [];
   var userData = [];
 
 //===================================================================Create New User===============================================================
@@ -25,16 +26,23 @@ angular.module('dreamjournal.services', [])
 	};
 
 //=====================================================================Get Blog Posts=============================================================
-	var getPosts = function(){
-	  	$http({
+	var getPosts = function(email){
+    $http({
   		method: 'GET',
-  		url: '/get/all/posts'
+  		url: '/post/' + email,
   	})
    .then(function(result) {
-	    result.data.forEach(function(post) {
-	    	postsData.unshift(post);
-	    });	
-	    console.log('Post GET successful');
+      if(email){
+        result.data.forEach(function(post) {
+          userPostsData.unshift(post);
+        }); 
+      userPostsData = [];
+      } else{
+        result.data.forEach(function(post) {
+          allPostsData.unshift(post);
+        });
+        allPostsData = [];    
+      }
   	}, function(err) {
       console.error('Post GET error:', err);
   	});
@@ -123,7 +131,8 @@ angular.module('dreamjournal.services', [])
   } 
 
 	return {
-		postsData: postsData,
+		allPostsData: allPostsData,
+    userPostsData: userPostsData,
 		userData: userData,
 		userEmail: userEmail,
 		userName: userName,

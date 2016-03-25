@@ -3,7 +3,7 @@
 angular.module('dreamjournal.profile', ['ngSanitize'])
 
 .controller('profileController', ['$scope', 'auth', '$http', 'djMainFactory', function ($scope, auth, $http, djMainFactory ) {
-$scope.postsData = djMainFactory.postsData;
+$scope.postsData = djMainFactory.userPostsData;
   djMainFactory.userData;
 
   $scope.userName = auth.profile.name;
@@ -12,7 +12,7 @@ $scope.postsData = djMainFactory.postsData;
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
 
-    djMainFactory.getPosts();
+    djMainFactory.getPosts(auth.profile.email);
   };
 
   $scope.init();

@@ -3,20 +3,19 @@
 angular.module('dreamjournal.home', ['ngSanitize'])
 
 .controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth',  function ($scope, $rootScope, djMainFactory,  $http, auth) {
-  $scope.postsData = djMainFactory.postsData;
-  djMainFactory.userData;
+  // djMainFactory.postsData = [];
+  $scope.postsData = djMainFactory.allPostsData;
 
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
 
   $scope.init= function() {
 //======================Create New User on Init========================
-  // console.log($rootScope.signedIn);
+
   if(!$rootScope.signedIn){
     djMainFactory.createUser();
   };
 //======================Get All Blog Posts On Init=====================
-
     djMainFactory.getPosts();
   };
 
