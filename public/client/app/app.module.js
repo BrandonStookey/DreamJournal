@@ -16,7 +16,7 @@ angular.module('dreamjournal.services', ['textAngular'])
   var createUser = function(){    
   	$http({
         method: 'POST',
-        url: '/user/',
+        url: '/user',
         data: {name: userName, email: userEmail}
       })
       .then(function(resp){

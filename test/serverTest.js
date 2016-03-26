@@ -15,7 +15,7 @@ describe(' ', function () {
 
 //================================================================Test Add New User To Database=====================================================================
 
-describe('http://localhost:4568/create/new/user', function () {
+describe('http://localhost:4568/user', function () {
     describe('POST', function () {
  
       var newUser = {
@@ -25,7 +25,7 @@ describe('http://localhost:4568/create/new/user', function () {
       it('responds with a 200 (ok) when a user is created', function (done) {
 
         request(app)
-          .post('/create/new/user')
+          .post('/user')
           .send(newUser)
           .expect(201, done);
       });
@@ -33,13 +33,13 @@ describe('http://localhost:4568/create/new/user', function () {
   });
 
 //==================================================================Test Get all Posts Request===================================================================
-  describe('http://localhost:4568/get/all/posts', function () {
+  describe('http://localhost:4568/post', function () {
     
     describe('GET', function () {
     
       it('Retrieve all posts, responds with a 200 (OK)', function (done) {
         request(app)
-          .get('/get/all/posts')
+          .get('/post')
           .expect(200, done);
       });
     });
@@ -48,13 +48,13 @@ describe('http://localhost:4568/create/new/user', function () {
 
 //======================================================================Test Get all User Posts========================================================================
 
-describe('http://localhost:4568/get/all/user/posts', function () {
+describe('http://localhost:4568/user/:email', function () {
  
     describe('POST', function () {
   
       it('Retrieves all posts from a single user, responds with a 200 (OK)', function (done) {
         request(app)
-          .post('/get/all/user/posts')
+          .get('/user/:email')
           .send('hatter@hatter.com')
           .expect(200, done);
       });

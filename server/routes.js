@@ -18,7 +18,7 @@ app.use(['/api/public/client/app/shared/home/home.view.html', '/api/public/clien
 
 //================================================================Add New User To Database=====================================================================
 //    /user
-app.post('/user/', function(req, res) {
+app.post('/user', function(req, res) {
   var userName = req.body.name;
   var userEmail = req.body.email;     
  
@@ -32,7 +32,7 @@ app.post('/user/', function(req, res) {
 });
 
 //=================================================================Gets All Posts For Single User=====================================================================
-app.get('/user/:email/', function(req, res) {
+app.get('/user/:email', function(req, res) {
 
   var userEmail = req.params.email;     
  
