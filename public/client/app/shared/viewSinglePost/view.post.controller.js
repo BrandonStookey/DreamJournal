@@ -7,9 +7,10 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
   $scope.userEmail = auth.profile.email;  
 
 	$scope.init = function(){
+  //======================================Gets single post from either home or profile  
     $scope.singlePost = djMainFactory.singlePost;
 
-//==========================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
+//=======================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
    
     $scope.showDeleteEditPostButton = function(){
       var isUserPost = false;
@@ -22,56 +23,37 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
 	$scope.init();
 
-//===================================================================Stores PostTitle and PostBody to be edited by user===================================================
+//============================================================Stores PostTitle and PostBody to be edited by user===================================================
   $scope.postForEditPostBody = $scope.singlePost[0].data.post;
   $scope.postForEditPostTitle = $scope.singlePost[0].data.postTitle;
 //=====================================================================Delete A Single Post===============================================================================
 	
   $scope.deletePost = function(){
-    $http({
-      method: 'PUT',
-      url: '/post/delete',
-      data: {postID: $scope.singlePost[0].data._id}
-    })
-    .then(function(resp){    
-      $location.path('/profile');
-    }, function(err){
-      console.log('error', err);
-    });
-	}
+    djMainFactory.deletePost($scope.singlePost[0].data._id);
+	};
 
 //=======================================================================Edit a Single Post=====================================================================
-	
+	//===============================View Edit Options
   $scope.viewEditOptions = true;
 
 	$scope.editPost = function(){
 		$scope.viewEditOptions = false;		
 		return $scope.viewEditOptions;
-	}
+	};
 
 	$scope.updatePost = function(postTitle, post, dreamNightmare){	
 		$scope.viewEditOptions = true
-
-    $http({
-      method: 'PUT',
-      url: '/post',
-      data: {email: $scope.userEmail, postID: $scope.singlePost[0].data._id, postTitle: postTitle, post: post, dreamType: dreamNightmare}
-    })
-    .then(function(resp){    
-      $location.path('/profile');
-    }, function(err){
-      console.log('error', err);
-    });
-	}
+    djMainFactory.updatePost(postTitle, post, dreamNightmare);
+	};
 
 //===========================================================================Create Comment on Post==================================================================================
   $scope.commentOnPost = function(comment, postID){
     djMainFactory.commentOnPost(comment, postID);
   };
 //================================================================================Delete Comment=====================================================================================
-$scope.deleteComment = function(postID, commentID){
-    djMainFactory.deleteComment(postID, commentID);
-};
+  $scope.deleteComment = function(postID, commentID){
+      djMainFactory.deleteComment(postID, commentID);
+  };
 //=================================================================================Like Post==========================================================================================
   $scope.likeCounter = 0;
   $scope.userLikePost = false;
