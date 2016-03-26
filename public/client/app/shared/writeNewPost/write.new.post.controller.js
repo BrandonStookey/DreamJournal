@@ -2,18 +2,19 @@
 
 angular.module('dreamjournal.newPost', ['textAngular'])
 
-.controller('newPostController', ['$scope', '$http', 'auth', function ($scope, $http, auth) {
+.controller('newPostController', ['$scope', '$http', 'auth', '$location', function ($scope, $http, auth, $location) {
+  
   $scope.createPost = function(postTitle, post, dreamNightmare){
 	  var userName = auth.profile.name;
     var userEmail = auth.profile.email;
     console.log('writeNewPost dreamNightmare: ', dreamNightmare);
-
-    return $http({
+   $http({
       method: 'POST',
-      url: '/create/post',
+      url: '/post/',
       data: {postTitle: postTitle, post: post, name: userName, email: userEmail, dreamType: dreamNightmare}
     })
     .then(function(resp){
+      $location.path('/profile');      
       console.log(resp);
     }, function(error){
       console.log(error);

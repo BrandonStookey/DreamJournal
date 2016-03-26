@@ -16,7 +16,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     djMainFactory.createUser();
   };
 //======================Get All Blog Posts On Init=====================
-    djMainFactory.getPosts();
+    djMainFactory.getAllPosts();
   };
 
   $scope.init();
@@ -48,8 +48,8 @@ $scope.deleteComment = function(postID, commentID){
       djMainFactory.likePost(postID, $scope.userLikePost);
   };  
 
-  $scope.viewSinglePost = function(postID){  
-      djMainFactory.viewSinglePost(postID);
+  $scope.getPosts = function(postID){  
+      djMainFactory.getPosts('undefined', postID);
   };
 
 //=========================Shows/Hide Comments===============================

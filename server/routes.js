@@ -18,7 +18,7 @@ app.use(['/api/public/client/app/shared/home/home.view.html', '/api/public/clien
 
 //================================================================Add New User To Database=====================================================================
 //    /user
-app.post('/create/new/user', function(req, res) {
+app.post('/user/', function(req, res) {
   var userName = req.body.name;
   var userEmail = req.body.email;     
  
@@ -31,66 +31,58 @@ app.post('/create/new/user', function(req, res) {
   });
 });
 
-//================================================================Add New Post to Database===================================================================
 
-app.post('/create/post', function(req, res) {
-  var userName = req.body.name;
-  var userEmail = req.body.email;     
-  var postTitle = req.body.postTitle;     
-  var post = req.body.post;    
-  var dreamType = req.body.dreamType; 
+app.get('/user/:email/', function(req, res) {
 
-  // console.log('createPost on routes: ', userName, userEmail, postTitle, post, dreamType)
-
-
-  helpers.createPostDB(userName, userEmail, postTitle, post, dreamType, 
-  function(err, data) {
+  var userEmail = req.params.email;     
+ 
+  helpers.findAllUserPosts(userEmail, 
+  function(err, data) { 
     if(err){
-      res.status(400).send(err);
-    }    
-      res.send(data);
+      return res.status(400).send(err);
+    }         
+      return res.send(data);
   });
 });
-//==================================================================Get all Posts Request===================================================================
 
-app.route('/post/:email') // / /post/:id     <------pass postID here
-  .get(function( req, res) {   //<------------- .delete
-    
-    // var userEmail = req.params.email; //<----------- req.params.id
-    
-    var email = req.params.email;    
-    if(email !== 'undefined'){
-      console.log('End up in here no matter what');
-      helpers.findAllUserPosts(email, 
-      function(err, data) { 
-        if(err){
-          return res.status(400).send(err);
-        }         
-          return res.send(data);
-      });
-    } else {
-     helpers.findAllPosts( 
-      function(err, data) {
-        if(err){
-          res.status(400).send(err);
-        }        
+
+
+
+
+//===============================================================================POST/GET/PUT/DELETE for Posts=================================================================
+//===============================Creates new Post
+app.route('/post/')
+  .post(function(req, res) {
+    var userName = req.body.name;
+    var userEmail = req.body.email;     
+    var postTitle = req.body.postTitle;     
+    var post = req.body.post;    
+    var dreamType = req.body.dreamType; 
+
+    helpers.createPostDB(userName, userEmail, postTitle, post, dreamType, 
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }    
         res.send(data);
-      });
-   }
-  })
+    });
+})
+//================================Get all Posts Request
+.get(function(req, res){
+   helpers.findAllPosts( 
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }        
+      res.send(data);
+    });
+})
 
-//=====================================================================View Single Post===================================================================================
 
-app.post('/view/single/post', function(req, res) { //<-------------- change to get  request req.params.id
-  var postID = req.body.postid;
-  helpers.findSinglePost(postID,
-  function(err, data) {  
-    if(err){
-      res.status(400).send(err);
-    }      
-    res.send(data);
-  });
-});
+
+
+
+
 
 //====================================================================Delete Single Post======================================================================================
 
@@ -128,6 +120,8 @@ app.route('/delete/single/post') // / /post/:id     <------pass postID here
 
 //================================================================Get All Dreams and Nightmares for Graph========================================================================
 
+
+//graph get request
 app.post('/get/all/dreamType/posts', function(req, res) { 
   console.log('routes for graph being called!');  
   var email = req.body.email;

@@ -9,13 +9,14 @@ angular.module('dreamjournal.services', [])
   var userEmail = auth.profile.email;  
 	var allPostsData = [];
   var userPostsData = [];
+  var singlePost = [];
   var userData = [];
 
 //===================================================================Create New User===============================================================
   var createUser = function(){    
   	$http({
         method: 'POST',
-        url: '/create/new/user',
+        url: '/user/',
         data: {name: userName, email: userEmail}
       })
       .then(function(resp){
@@ -25,27 +26,41 @@ angular.module('dreamjournal.services', [])
       });
 	};
 
-//=====================================================================Get Blog Posts=============================================================
-	var getPosts = function(email){
+//=======================================================================Get all User Posts===========================================================
+  var getAllUserPosts = function(email){
     $http({
-  		method: 'GET',
-  		url: '/post/' + email,
-  	})
+      method: 'GET',
+      url: '/user/' + email,
+    })
    .then(function(result) {
-      if(email){
-        result.data.forEach(function(post) {
-          userPostsData.unshift(post);
-        }); 
+      // console.log('result ', result);
+      // $scope.userPostsData = result;
+      result.data.forEach(function(post) {
+        userPostsData.unshift(post);
+      }); 
       userPostsData = [];
-      } else{
-        result.data.forEach(function(post) {
-          allPostsData.unshift(post);
-        });
-        allPostsData = [];    
-      }
-  	}, function(err) {
+    }, function(err) {
       console.error('Post GET error:', err);
-  	});
+    });
+  }
+
+
+
+//=====================================================================Get All Blog Posts=============================================================
+	
+  var getAllPosts = function(){
+    $http({
+    	method: 'GET',
+    	url: '/post/',
+    })
+    .then(function(result) {
+      result.data.forEach(function(post) {
+        allPostsData.unshift(post);
+      });
+      allPostsData = [];    
+    }, function(err) {
+        console.error('Post GET error:', err);
+    });
   }; 
   //==================================================================Create Comment============================================================================
 
@@ -110,39 +125,21 @@ angular.module('dreamjournal.services', [])
 	  }
 	};
 
-//==================================================================Allow user to view a single post========================================================================
 
-  var singlePost = [];
-
-  var viewSinglePost = function(postID){
-    $http({
-      method: 'POST',
-      url: '/view/single/post',
-      data: {postid: postID}
-    })
-    .then(function(resp){
-      console.log('viewSinglePost resp ', resp);      
-      singlePost[0] = resp;
-      $location.path('/viewPost');
-      console.log('homeController: ', singlePost);
-    }, function(err){
-      console.log('error', err);
-    });
-  } 
 
 	return {
 		allPostsData: allPostsData,
     userPostsData: userPostsData,
+    singlePost: singlePost,
 		userData: userData,
 		userEmail: userEmail,
 		userName: userName,
 		createUser: createUser,
-		getPosts: getPosts,
+    getAllUserPosts: getAllUserPosts,
+		getAllPosts: getAllPosts,
 		commentOnPost: commentOnPost,
 		deleteComment: deleteComment,
 		likePost: likePost,
-		viewSinglePost: viewSinglePost,
-		singlePost: singlePost
 	}
 
 }])
