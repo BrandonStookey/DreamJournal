@@ -54,7 +54,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 
     $http({
       method: 'PUT',
-      url: '/delete/single/post',
+      url: '/post/',
       data: {email: $scope.userEmail, postID: $scope.singlePost[0].data._id, postTitle: postTitle, post: post, dreamType: dreamNightmare}
     })
     .then(function(resp){    

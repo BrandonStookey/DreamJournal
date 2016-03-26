@@ -62,6 +62,26 @@ angular.module('dreamjournal.services', [])
         console.error('Post GET error:', err);
     });
   }; 
+
+//======================================================================View Single Post==========================================================================
+
+  var viewSinglePost = function(postID){
+    $http({
+      method: 'GET',
+      url: '/post/' + postID,
+    })
+   .then(function(result) {
+        singlePost[0] = result;
+        $location.path('/viewPost');
+        singlePost = [];
+        userPostsData = [];
+        allPostsData = [];   
+    }, function(err) {
+      console.error('Post GET error:', err);
+    });
+
+  };
+
   //==================================================================Create Comment============================================================================
 
   var commentOnPost = function(comment, postID){
@@ -137,6 +157,7 @@ angular.module('dreamjournal.services', [])
 		createUser: createUser,
     getAllUserPosts: getAllUserPosts,
 		getAllPosts: getAllPosts,
+    viewSinglePost: viewSinglePost,
 		commentOnPost: commentOnPost,
 		deleteComment: deleteComment,
 		likePost: likePost,

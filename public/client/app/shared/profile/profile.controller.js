@@ -44,8 +44,8 @@ $scope.deleteComment = function(postID, commentID){
       djMainFactory.likePost(postID, $scope.userLikePost);
   };  
 
-  $scope.getPosts = function(postID){  
-      djMainFactory.getPosts('undefined', postID);
+  $scope.viewSinglePost = function(postID){  
+      djMainFactory.viewSinglePost(postID);
   };
 
 //=========================Shows/Hide Comments===============================

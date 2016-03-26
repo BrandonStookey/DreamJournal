@@ -68,35 +68,14 @@ app.route('/post/')
     });
 })
 //================================Get all Posts Request
-.get(function(req, res){
-   helpers.findAllPosts( 
-    function(err, data) {
-      if(err){
-        res.status(400).send(err);
-      }        
-      res.send(data);
-    });
-})
-
-
-
-
-
-
-
-//====================================================================Delete Single Post======================================================================================
-
-app.route('/delete/single/post') // / /post/:id     <------pass postID here
-  .post(function( req, res) {   //<------------- .delete
-    var postID = req.body.postID; //<----------- req.params.id
-
-    helpers.deleteSinglePost(postID,
-    function(err, data) {
-      if(err){
-        res.status(400).send(err);
-      }      
-      res.send(data);
-    });
+  .get(function(req, res){
+     helpers.findAllPosts( 
+      function(err, data) {
+        if(err){
+          res.status(400).send(err);
+        }        
+        res.send(data);
+      });
   })
  //=====================================================Update Single Post 
   .put(function( req, res) { 
@@ -108,6 +87,38 @@ app.route('/delete/single/post') // / /post/:id     <------pass postID here
     var postID = req.body.postID;         //<-------req.params.id
 
     helpers.updateSinglePost(userEmail, postID, postTitle, post, dreamType,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })
+
+
+//=======================================View Single Post
+app.get('/post/:postID/', function(req, res) {
+
+  var postID = req.params.postID;     
+ 
+  helpers.findSinglePost(postID,
+    function(err, data) {  
+      if(err){
+       return res.status(400).send(err);
+      }      
+       return res.send(data);
+    }); 
+});
+
+
+
+//====================================================================Delete Single Post======================================================================================
+
+app.route('/delete/single/post') // / /post/:id     <------pass postID here
+  .post(function( req, res) {   //<------------- .delete
+    var postID = req.body.postID; //<----------- req.params.id
+
+    helpers.deleteSinglePost(postID,
     function(err, data) {
       if(err){
         res.status(400).send(err);
