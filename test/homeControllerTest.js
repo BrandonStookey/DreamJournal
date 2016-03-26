@@ -27,8 +27,8 @@ describe('homeController', function () {
 
   it('should call all posts when controller is loaded', function () {
     var mockPosts = [{},{},{}];
-    $httpBackend.expectPOST('/create/new/user').respond();   
-    $httpBackend.expectGET('/get/all/posts').respond(mockPosts);
+    $httpBackend.expectPOST('/user').respond();   
+    $httpBackend.expectGET('/post').respond(mockPosts);
     createController();
     $httpBackend.flush();
     expect($scope.postsData).to.eql(mockPosts);
@@ -36,8 +36,8 @@ describe('homeController', function () {
 
   it('should create a new user when controller is loaded', function () {
     var mockUser = {name: 'John', email: 'john@john.com'};
-    $httpBackend.expectPOST('/create/new/user').respond(mockUser);
-    $httpBackend.expectGET('/get/all/posts').respond([]);    
+    $httpBackend.expectPOST('/user').respond(mockUser);
+    $httpBackend.expectGET('/post').respond([]);    
     createController();
     $httpBackend.flush();
     expect($scope.userData[0].data).to.eql(mockUser);

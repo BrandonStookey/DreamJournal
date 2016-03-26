@@ -63,26 +63,43 @@ angular.module('dreamjournal.services', ['textAngular'])
 
   var getAllPosts = function(postTitle, post, dreamNightmare){
     $http({
-    	method: 'GET',
-    	url: '/post',
+      method: 'GET',
+      url: '/post',
     })
     .then(function(result) {
-      result.data.forEach(function(post) {
-        allPostsData.unshift(post);
-      });
-      allPostsData = [];    
+      console.log('lets seet this', result.data);
+      if(allPostsData.length < 1){
+        allPostsData.unshift(result.data[0]);
+      };
+      console.log('allPostsData before loop: ', allPostsData[0]._id);
+      for(var i = 0; i < result.data.length; i++){
+            console.log('result.data[i]._id: ', result.data[i]._id);
+          for(var j = 0; j < result.data.length; j++){
+            console.log('j ', j);
+            if(allPostsData[j] === undefined){
+              allPostsData.unshift(result.data[i]);
+              break;
+            }
+            if(result.data[i]._id == allPostsData[j]._id) {
+              console.log('allPostsData inside loop: ', allPostsData[j]._id);
+              allPostsData[j] = result.data[i];
+              break;
+            } 
+          } 
+        }
     }, function(err) {
+      allPostsData = []; 
         console.error('Post GET error:', err);
     });
   }; 
 
 //============================================Edit/Update Post
 
-  var updatePost = function(postTitle, post, dreamNightmare){
+  var updatePost = function(postTitle, post, dreamNightmare, postID){
     $http({
       method: 'PUT',
       url: '/post',
-      data: {email: $scope.userEmail, postID: $scope.singlePost[0].data._id, postTitle: postTitle, post: post, dreamType: dreamNightmare}
+      data: {email: userEmail, postID: postID, postTitle: postTitle, post: post, dreamType: dreamNightmare}
     })
     .then(function(resp){    
       $location.path('/profile');
@@ -135,7 +152,7 @@ angular.module('dreamjournal.services', ['textAngular'])
       data: {postID: postID, name: userName, comment: comment}
     })
     .then(function(resp){
-
+      getAllPosts();
     }, function(err){
       console.log('error', err);
     }); 
@@ -184,12 +201,6 @@ angular.module('dreamjournal.services', ['textAngular'])
 	    });   
 	  }
 	};
-
-
-
-
-
-
 
 	return {
 		allPostsData: allPostsData,

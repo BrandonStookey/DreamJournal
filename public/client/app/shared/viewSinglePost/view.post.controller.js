@@ -42,8 +42,9 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
 	};
 
 	$scope.updatePost = function(postTitle, post, dreamNightmare){	
+    console.log('working? updatePost: ', $scope.updatePost);
 		$scope.viewEditOptions = true
-    djMainFactory.updatePost(postTitle, post, dreamNightmare);
+    djMainFactory.updatePost(postTitle, post, dreamNightmare, $scope.singlePost[0].data._id);
 	};
 
 //===========================================================================Create Comment on Post==================================================================================

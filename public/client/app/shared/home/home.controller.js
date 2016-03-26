@@ -2,8 +2,8 @@
 
 angular.module('dreamjournal.home', ['ngSanitize'])
 
-.controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth',  function ($scope, $rootScope, djMainFactory,  $http, auth) {
-  // djMainFactory.postsData = [];
+.controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', '$interval', function ($scope, $rootScope, djMainFactory,  $http, auth, $interval) {
+
   $scope.postsData = djMainFactory.allPostsData;
 
   $scope.userName = auth.profile.name;
@@ -75,6 +75,25 @@ $scope.deleteComment = function(postID, commentID){
     console.log('showButton ', $scope.isUser);
     return $scope.isUser;
   };
+
+  $scope.refreshPage = function(){
+    $interval(function(){
+    // console.log('Hello am I working?');
+    // console.log($scope.postsData = djMainFactory.allPostsData);
+    $scope.init();
+    $scope.postsData = djMainFactory.allPostsData;
+      // djMainFactory.getAllPosts();
+    },1000);
+  };
+  // $scope.refreshPage();
+
+  // add wathicng for change
+  // $scope.$watch('$scope.postsData', function(newValues, oldValues) {
+  //   console.log('newValues', newValues);
+  //   console.log('oldValues', oldValues);
+  //   // $scope.postsData = newValues;
+  // },true);
+
 }]);
 
 
