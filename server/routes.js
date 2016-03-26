@@ -31,7 +31,7 @@ app.post('/user/', function(req, res) {
   });
 });
 
-
+//=================================================================Gets All Posts For Single User=====================================================================
 app.get('/user/:email/', function(req, res) {
 
   var userEmail = req.params.email;     
@@ -45,13 +45,9 @@ app.get('/user/:email/', function(req, res) {
   });
 });
 
-
-
-
-
-//===============================================================================POST/GET/PUT/DELETE for Posts=================================================================
+//===============================================================================POST/GET/PUT for Posts=================================================================
 //===============================Creates new Post
-app.route('/post/')
+app.route('/post')
   .post(function(req, res) {
     var userName = req.body.name;
     var userEmail = req.body.email;     
@@ -77,14 +73,14 @@ app.route('/post/')
         res.send(data);
       });
   })
- //=====================================================Update Single Post 
+ //=================================Update Single Post 
   .put(function( req, res) { 
 
     var userEmail = req.body.email;     
     var postTitle = req.body.postTitle;     
     var post = req.body.post;    
     var dreamType = req.body.dreamType;     
-    var postID = req.body.postID;         //<-------req.params.id
+    var postID = req.body.postID;       
 
     helpers.updateSinglePost(userEmail, postID, postTitle, post, dreamType,
     function(err, data) {
@@ -94,10 +90,24 @@ app.route('/post/')
       res.send(data);
     });
   })
+//====================================================================Delete Single Post======================================================================================
+//Angular does not support sending a request body to a delete request
+  //http://stackoverflow.com/questions/22186671/angular-resource-delete-wont-send-body-to-express-js-server
+app.route('/post/delete') 
+  .put(function( req, res) {  
+    var postID = req.body.postID; 
 
+    helpers.deleteSinglePost(postID,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })
 
 //=======================================View Single Post
-app.get('/post/:postID/', function(req, res) {
+app.get('/post/:postID', function(req, res) {
 
   var postID = req.params.postID;     
  
@@ -111,32 +121,11 @@ app.get('/post/:postID/', function(req, res) {
 });
 
 
-
-//====================================================================Delete Single Post======================================================================================
-
-app.route('/delete/single/post') // / /post/:id     <------pass postID here
-  .post(function( req, res) {   //<------------- .delete
-    var postID = req.body.postID; //<----------- req.params.id
-
-    helpers.deleteSinglePost(postID,
-    function(err, data) {
-      if(err){
-        res.status(400).send(err);
-      }      
-      res.send(data);
-    });
-  })
-
-
-
 //================================================================Get All Dreams and Nightmares for Graph========================================================================
 
-
-//graph get request
-app.post('/get/all/dreamType/posts', function(req, res) { 
-  console.log('routes for graph being called!');  
-  var email = req.body.email;
-  var dreamType = req.body.dreamType;   
+app.get('/graph/:email/:dreamType', function(req, res) { 
+  var email = req.params.email;
+  var dreamType = req.params.dreamType;   
 
   helpers.findAllDreamsNightmares(email, dreamType,
   function(err, data) {  
@@ -149,75 +138,69 @@ app.post('/get/all/dreamType/posts', function(req, res) {
 
 //=======================================================================Create a new comment================================================================================================
 
-app.post('/create/new/comment', function(req, res) { 
+app.route('/comment')
+  .post(function(req, res) { 
+    var postID = req.body.postID;
+    var userName = req.body.name;
+    var userComment = req.body.comment;
 
+    helpers.createNewComment(postID, userName, userComment, 
+    function(err, data) { 
+      if(err){
+        res.status(400).send(err);
+      }         
+      res.status(200).send(data);
+    });
+})
+//==========================Delete Comment
+  .put(function(req, res) { 
 
-  var postID = req.body.postID;
-  var userName = req.body.name;
-  var userComment = req.body.comment;
+    var postID = req.body.postID;
+    var commentID = req.body.commentID;
 
-  helpers.createNewComment(postID, userName, userComment, 
-  function(err, data) { 
-    if(err){
-      res.status(400).send(err);
-    }         
-    res.status(200).send(data);
+    console.log('commentID on routes', commentID);
+    helpers.deleteComment(postID, commentID, 
+    function(err, data) { 
+      if(err){
+        res.status(400).send(err);
+      }         
+      res.status(200).send(data);
+    });
   });
-});
 
-//========================================================================Delete Comment==========================================================================================================
+//=====================================================================Like Post=====================================================================================================================
 
-app.post('/delete/comment', function(req, res) { 
+app.route('/like')
+  .post(function(req, res) { 
+    var postID = req.body.postID;
+    var userEmail = req.body.userEmail;  
+    var userName = req.body.name;  
+    var likeComment = req.body.like;
 
-  var postID = req.body.postID;
-  var commentID = req.body.commentID;
+    helpers.likeComment(postID, userEmail, userName, likeComment,
+    function(err, data) { 
+      if(err){
+        res.status(400).send(err);
+      }         
+      res.status(200).send(data);
+    });
+  })
+//========================Delete Like Post
+  .put(function(req, res) { 
+    console.log('delete like Comment on routes');
 
-  console.log('commentID on routes', commentID);
-  helpers.deleteComment(postID, commentID, 
-  function(err, data) { 
-    if(err){
-      res.status(400).send(err);
-    }         
-    res.status(200).send(data);
+    var postID = req.body.postID;
+    var userEmail = req.body.userEmail; 
+    var likeComment = req.body.like;
+
+
+    helpers.deleteLikeComment(postID, userEmail, likeComment,
+    function(err, data) { 
+      if(err){
+        res.status(400).send(err);
+      }         
+      res.status(200).send(data);
+    });
   });
-});
-
-//=====================================================================Like Comment=====================================================================================================================
-
-app.post('/like/comment', function(req, res) { 
-  var postID = req.body.postID;
-  var userEmail = req.body.userEmail;  
-  var userName = req.body.name;  
-  var likeComment = req.body.like;
-
-  helpers.likeComment(postID, userEmail, userName, likeComment,
-  function(err, data) { 
-    if(err){
-      res.status(400).send(err);
-    }         
-    res.status(200).send(data);
-  });
-});
-
-
-//=====================================================================Delete Like Comment=====================================================================================================================
-
-
-app.post('/delete/like/comment', function(req, res) { 
-  console.log('delete like Comment on routes');
-
-  var postID = req.body.postID;
-  var userEmail = req.body.userEmail; 
-  var likeComment = req.body.like;
-
-
-  helpers.deleteLikeComment(postID, userEmail, likeComment,
-  function(err, data) { 
-    if(err){
-      res.status(400).send(err);
-    }         
-    res.status(200).send(data);
-  });
-});
 
 

@@ -51,7 +51,7 @@ angular.module('dreamjournal.services', [])
   var getAllPosts = function(){
     $http({
     	method: 'GET',
-    	url: '/post/',
+    	url: '/post',
     })
     .then(function(result) {
       result.data.forEach(function(post) {
@@ -87,12 +87,11 @@ angular.module('dreamjournal.services', [])
   var commentOnPost = function(comment, postID){
      $http({
       method: 'POST',
-      url: '/create/new/comment',
+      url: '/comment',
       data: {postID: postID, name: userName, comment: comment}
     })
     .then(function(resp){
-      //=====================A temp solution that does not really work
-      getPosts();
+
     }, function(err){
       console.log('error', err);
     }); 
@@ -101,13 +100,12 @@ angular.module('dreamjournal.services', [])
 	var deleteComment = function(postID, commentID){
       console.log('controllers: ', commentID);
      $http({
-      method: 'POST',
-      url: '/delete/comment',
+      method: 'PUT',
+      url: '/comment',
       data: {postID: postID, commentID: commentID}
     })
     .then(function(resp){    
-      //=====================A temp solution that does not really work
-      getPosts();
+
     }, function(err){
       console.log('error', err);
     }); 
@@ -120,25 +118,23 @@ angular.module('dreamjournal.services', [])
 	  if(userLikePost){
 	     $http({
 	      method: 'POST',
-	      url: '/like/comment',
+	      url: '/like',
 	      data: {postID: postID, userEmail: userEmail, name: userName, like: userLikePost}
 	    })
 	    .then(function(resp){
-      //=====================A temp solution that does not really work
-      getPosts();
+
 	    }, function(err){
 	      console.log('error', err);
 	    });     
 	  } else{
 	//=========================if userLikePost is false then it will remove the 'like' from the database    
 	     $http({
-	      method: 'POST',
-	      url: '/delete/like/comment',
+	      method: 'PUT',
+	      url: '/like',
 	      data: {postID: postID, userEmail: userEmail, like: userLikePost}
 	    })
 	    .then(function(resp){
-      //=====================A temp solution that does not really work
-      getPosts();     
+   
 	    }, function(err){
 	      console.log('error', err);
 	    });   

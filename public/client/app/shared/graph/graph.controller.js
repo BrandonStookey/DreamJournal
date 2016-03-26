@@ -10,12 +10,13 @@ angular.module('dreamjournal.graph', [])
 	$scope.init = function(){
     var userName = auth.profile.name;
     var userEmail = auth.profile.email;
+    var dream = 'Dream';
+    var nightmare = 'Nightmare';
 //=====================================================Gets all post with a dreamType of 'Dream'========================================================
    
     $http({
-      method: 'POST',
-      url: '/get/all/dreamType/posts',
-      data: {email: userEmail, dreamType: 'Dream'}
+      method: 'GET',
+      url: '/graph/' + userEmail + '/' + dream,
     })
     .then(function(result){
     	console.log('Dream result: ', result );    	
@@ -29,9 +30,8 @@ angular.module('dreamjournal.graph', [])
 //======================================================Gets all post with a dreamType of 'Nightmare'=======================================================
 
     $http({
-      method: 'POST',
-      url: '/get/all/dreamType/posts',
-      data: {email: userEmail, dreamType: 'Nightmare'}
+      method: 'GET',
+      url: '/graph/' + userEmail + '/' + nightmare,
     })
     .then(function(result){
     	console.log('Nightmare result: ', result );

@@ -10,7 +10,7 @@ angular.module('dreamjournal.newPost', ['textAngular'])
     console.log('writeNewPost dreamNightmare: ', dreamNightmare);
    $http({
       method: 'POST',
-      url: '/post/',
+      url: '/post',
       data: {postTitle: postTitle, post: post, name: userName, email: userEmail, dreamType: dreamNightmare}
     })
     .then(function(resp){
