@@ -20,6 +20,7 @@ $scope.postsData = djMainFactory.userPostsData;
 //======================Create Comment on Post==========================
 
   $scope.commentOnPost = function(comment, postID){
+
     djMainFactory.commentOnPost(comment, postID);
   };
 //==========================Delete Comment==============================

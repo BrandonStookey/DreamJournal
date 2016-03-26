@@ -76,24 +76,6 @@ $scope.deleteComment = function(postID, commentID){
     return $scope.isUser;
   };
 
-  $scope.refreshPage = function(){
-    $interval(function(){
-    // console.log('Hello am I working?');
-    // console.log($scope.postsData = djMainFactory.allPostsData);
-    $scope.init();
-    $scope.postsData = djMainFactory.allPostsData;
-      // djMainFactory.getAllPosts();
-    },1000);
-  };
-  // $scope.refreshPage();
-
-  // add wathicng for change
-  // $scope.$watch('$scope.postsData', function(newValues, oldValues) {
-  //   console.log('newValues', newValues);
-  //   console.log('oldValues', oldValues);
-  //   // $scope.postsData = newValues;
-  // },true);
-
 }]);
 
 

@@ -33,12 +33,25 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/user/' + email,
     })
    .then(function(result) {
-      // console.log('result ', result);
-      // $scope.userPostsData = result;
-      result.data.forEach(function(post) {
-        userPostsData.unshift(post);
-      }); 
-      userPostsData = [];
+      if(userPostsData.length < 1){
+        userPostsData.unshift(result.data[0]);
+      };
+      // console.log('userPostsData before loop: ', userPostsData[0]._id);
+      for(var i = 0; i < result.data.length; i++){
+            console.log('result.data[i]._id: ', result.data[i]._id);
+          for(var j = 0; j < result.data.length; j++){
+            console.log('j ', j);
+            if(userPostsData[j] === undefined){
+              userPostsData.unshift(result.data[i]);
+              break;
+            }
+            if(result.data[i]._id == userPostsData[j]._id) {
+              console.log('userPostsData inside loop: ', userPostsData[j]._id);
+              userPostsData[j] = result.data[i];
+              break;
+            } 
+          } 
+        }
     }, function(err) {
       console.error('Post GET error:', err);
     });
@@ -81,14 +94,13 @@ angular.module('dreamjournal.services', ['textAngular'])
               break;
             }
             if(result.data[i]._id == allPostsData[j]._id) {
-              console.log('allPostsData inside loop: ', allPostsData[j]._id);
+              console.log('allPostsData inside if: ', allPostsData[j]._id);
               allPostsData[j] = result.data[i];
               break;
             } 
           } 
         }
     }, function(err) {
-      allPostsData = []; 
         console.error('Post GET error:', err);
     });
   }; 
@@ -134,9 +146,6 @@ angular.module('dreamjournal.services', ['textAngular'])
    .then(function(result) {
         singlePost[0] = result;
         $location.path('/viewPost');
-        singlePost = [];
-        userPostsData = [];
-        allPostsData = [];   
     }, function(err) {
       console.error('Post GET error:', err);
     });
@@ -153,6 +162,8 @@ angular.module('dreamjournal.services', ['textAngular'])
     })
     .then(function(resp){
       getAllPosts();
+      getAllUserPosts(auth.profile.email);
+      viewSinglePost(postID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -166,7 +177,9 @@ angular.module('dreamjournal.services', ['textAngular'])
       data: {postID: postID, commentID: commentID}
     })
     .then(function(resp){    
-
+      getAllPosts();
+      getAllUserPosts(auth.profile.email);
+      viewSinglePost(postID);
     }, function(err){
       console.log('error', err);
     }); 
@@ -183,7 +196,9 @@ angular.module('dreamjournal.services', ['textAngular'])
 	      data: {postID: postID, userEmail: userEmail, name: userName, like: userLikePost}
 	    })
 	    .then(function(resp){
-
+      getAllPosts();
+      getAllUserPosts(auth.profile.email);
+      viewSinglePost(postID);
 	    }, function(err){
 	      console.log('error', err);
 	    });     
@@ -195,7 +210,9 @@ angular.module('dreamjournal.services', ['textAngular'])
 	      data: {postID: postID, userEmail: userEmail, like: userLikePost}
 	    })
 	    .then(function(resp){
-   
+      getAllPosts();   
+      getAllUserPosts(auth.profile.email);
+      viewSinglePost(postID);
 	    }, function(err){
 	      console.log('error', err);
 	    });   
