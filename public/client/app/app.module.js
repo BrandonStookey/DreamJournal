@@ -5,54 +5,56 @@ angular.module('dreamjournal.services', ['textAngular'])
 	//refer to routes on legacy, they have this at the bottom. Really could fix my bug
 
 
-  var userName = undefined || auth.profile.name;
-  var userEmail = undefined || auth.profile.email;  
+  var userName = auth.profile.name;
+  var userEmail = auth.profile.email; 
+  var setUserEmail = [];
 	var allPostsData = [];
   var userPostsData = [];
   var singlePost = [];
-  var userData = [];
   var getUserLikeData = [];
 
-//===================================================================Create New User===============================================================
-  var createUser = function(){    
-  	$http({
-        method: 'POST',
-        url: '/user',
-        data: {name: userName, email: userEmail}
-      })
-      .then(function(resp){
-        userData.unshift(resp);
-      }, function(err){
-        console.log('error', err);
-      });
-	};
+
 
 //=======================================================================Get all User Posts===========================================================
+
+  var getUserEmail = function(email){
+    setUserEmail[0] = email;
+    return setUserEmail;
+  }; 
+
   var getAllUserPosts = function(email){
-    $http({
+    console.log('getAllUserPOsts EMAIL!: ', email);
+    return $http({
       method: 'GET',
       url: '/user/' + email,
     })
    .then(function(result) {
-      if(userPostsData.length < 1 && result.data[0] !== undefined){
-        userPostsData.unshift(result.data[0]);
-      };
-      // console.log('userPostsData before loop: ', userPostsData[0]._id);
-      for(var i = 0; i < result.data.length; i++){
-            console.log('result.data[i]._id: ', result.data[i]._id);
-          for(var j = 0; j < result.data.length; j++){
-            console.log('j ', j);
-            if(userPostsData[j] === undefined){
-              userPostsData.unshift(result.data[i]);
-              break;
-            }
-            if(result.data[i]._id == userPostsData[j]._id) {
-              console.log('userPostsData inside loop: ', userPostsData[j]._id);
-              userPostsData[j] = result.data[i];
-              break;
-            } 
-          } 
-        }
+      console.log('on factory result.data: ', result.data);
+      return result.data;
+
+      // console.log('result.data: ', result.data);
+      // userPostsData = [result.data];
+      // console.log('userPostsData: ', userPostsData);
+    // console.log('getAllUserPOsts: ', email);
+    //   if(userPostsData.length < 1 && result.data[0] !== undefined){
+    //     userPostsData.unshift(result.data[0]);
+    //   };
+    //   // console.log('userPostsData before loop: ', userPostsData[0]._id);
+    //   for(var i = 0; i < result.data.length; i++){
+    //       for(var j = 0; j < result.data.length; j++){
+    //         if(userPostsData[j] === undefined){
+    //           userPostsData.unshift(result.data[i]);
+    //           break;
+    //         }
+    //         if(result.data[i]._id == userPostsData[j]._id) {
+    //           userPostsData[j] = result.data[i];
+    //           break;
+    //         } 
+    //       } 
+    //     }
+    //     if(email !== userEmail){
+    //       $location.path('/otherusers');
+    //     }
     }, function(err) {
       console.error('Post GET error:', err);
     });
@@ -161,10 +163,10 @@ angular.module('dreamjournal.services', ['textAngular'])
     .then(function(resp){
       console.log('comment resp', resp);
       getAllPosts();
-      getAllUserPosts(auth.profile.email);
-      if(singlePost[0].data._id === postID){
-        viewSinglePost(postID);
-      }
+      // getAllUserPosts(auth.profile.email);
+      // if(singlePost[0].data._id === postID){
+      //   viewSinglePost(postID);
+      // }
     }, function(err){
       console.log('error', err);
     }); 
@@ -246,10 +248,10 @@ angular.module('dreamjournal.services', ['textAngular'])
 		allPostsData: allPostsData,
     userPostsData: userPostsData,
     singlePost: singlePost,
-		userData: userData,
 		userEmail: userEmail,
 		userName: userName,
-		createUser: createUser,
+    setUserEmail: setUserEmail,
+    getUserEmail:getUserEmail,
     getAllUserPosts: getAllUserPosts,
     createPost: createPost,
 		getAllPosts: getAllPosts,

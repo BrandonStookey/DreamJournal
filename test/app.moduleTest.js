@@ -34,14 +34,6 @@ describe('Dreamjounral djMainfactory', function () {
     expect(djMainFactory.userPostsData).to.eql([{_id: 3},{_id: 2},{_id: 1}]);
   });
 
-  it('should create a new user when createUser function is invoked', function () {
-    var mockUser = {name: 'John', email: 'john@john.com'};
-    $httpBackend.expectPOST('/user').respond(mockUser);
-    djMainFactory.createUser();    
-    $httpBackend.flush();
-    expect(djMainFactory.userData[0].data).to.eql(mockUser);
-  });  
-
 });
 
 

@@ -6,7 +6,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 
   $scope.postsData = djMainFactory.allPostsData;
   $scope.isUserSignedIn = $rootScope.signedIn;
-  console.log('isUserSingedIn: ', $scope.isUserSignedIn);
+  console.log('$scope.postsData = djMainFactory.allPostsData: ', $scope.postsData = djMainFactory.allPostsData);
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
@@ -14,6 +14,13 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   };
 
   $scope.init();
+
+//==========================Get All User Posts==========================
+
+  $scope.getAllUserPosts = function(email){
+    console.log('on home controller: ', email);
+    djMainFactory.getAllUserPosts(email);
+  };
 
 //======================Create Comment on Post==========================
 

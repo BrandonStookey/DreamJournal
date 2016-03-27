@@ -29,15 +29,17 @@ beforeEach(function (done) {
           post:[{
             postTitle: 'Not the Real Alice',
             post: 'I am the real Alice',
+            email: 'alice@alice.com',
             name: 'Alice'
           }]
-        },
+        },               
         {
           name: 'White Rabbit',
           email: 'whiterabbit@whiterabbit.com',
           post:[{
             postTitle: 'Running late',
             post: 'I am always running late!',
+            email: 'whiterabbit@whiterabbit.com',
             name: 'White Rabbit'
           }]
         },
@@ -47,6 +49,7 @@ beforeEach(function (done) {
           post:[{
             postTitle: 'Headless',
             post: 'Off with their heads!',
+            email: 'hearts@hearts.com',
             name: 'Queen of Hearts'
           }]
         },
@@ -56,6 +59,7 @@ beforeEach(function (done) {
           post:[{
             postTitle: 'Inspirational Quote',
             post: '“Alice asked the Cheshire Cat, who was sitting in a tree, “What road do I take?” The cat asked, “Where do you want to go?” “I don’t know,” Alice answered. “Then,” said the cat, “it really doesn’t matter, does it?”',
+            email: 'chesshire@chesshire.com',
             name: 'Chesshire Cat'
           }]
         },
@@ -65,6 +69,7 @@ beforeEach(function (done) {
           post:[{
             postTitle: 'I am a little mad',
             post: 'Have I gone made? I\'m afraid so, You\'re Entirely Bonkers. But I\'ll tell you a secrete. All the best People are.',
+            email: 'hatter@hatter.com',
             name: 'The Mad Hatter'
           }]
         }

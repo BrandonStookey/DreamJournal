@@ -47,14 +47,14 @@ angular.module('dreamjournal.graphservices', [])
   console.log('on graph factory dreamcount: ', dreamCount);
   console.log('on graph factory ngihtmarecount: ', nightmareCount);
   return {
-    dreamCount: dreamCount, 
-    nightmareCount: nightmareCount,
-    getDreams: getDreams,
-    getNightmares: getNightmares,
     userName: userName, 
     userEmail: userEmail,
     dream: dream,
-    nightmare: nightmare
+    nightmare: nightmare,
+    dreamCount: dreamCount, 
+    nightmareCount: nightmareCount,
+    getDreams: getDreams,
+    getNightmares: getNightmares
   } 
  
 }]);
@@ -76,3 +76,6 @@ angular.module('dreamjournal.graphservices', [])
 
 //   };
 //   $scope.init();  
+
+
+

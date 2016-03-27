@@ -31,7 +31,7 @@ var createPostDB = function (name, email, postTitle, post, dreamType, callback) 
     var date = moment().format('llll');
     console.log('createPostDB Date', date);
     console.log('createPost on helpers: ', name, email, postTitle, post, dreamType);
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, postDate: date, dreamType: dreamType } } }, function(err, success) {
+    db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: date, dreamType: dreamType } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
           return callback(err);
@@ -82,7 +82,7 @@ var findAllUserPosts = function(email, callback){
         if(post.post[i] === undefined){
           break;
         }
-        postMap.push(post.post[i]);
+        postMap.unshift(post.post[i]);
       }
     });
     callback(null, postMap);  

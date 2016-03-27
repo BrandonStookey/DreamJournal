@@ -3,9 +3,11 @@
 angular.module('dreamjournal', [
   'dreamjournal.services',
   'dreamjournal.graphservices',
+  'dreamjournal.loginservices',
   'dreamjournal.login',  
   'dreamjournal.graph',
   'dreamjournal.profile',
+  'dreamjournal.otherusers',
   'dreamjournal.viewPost',
   'dreamjournal.newPost',
   'dreamjournal.home',
@@ -31,6 +33,11 @@ angular.module('dreamjournal', [
       controller: 'profileController',
       requiresLogin: true      
     })
+    .when('/otherusers', {
+      templateUrl: 'app/shared/otherUsers/otherUsers.view.html',
+      controller: 'otherUsersController',
+      requiresLogin: true
+    })      
     .when('/viewPost', {
       templateUrl: 'app/shared/viewSinglePost/view.post.view.html',
       controller: 'viewPostController',
@@ -43,10 +50,11 @@ angular.module('dreamjournal', [
     })
     .when('/home', {
       templateUrl: 'app/shared/home/home.view.html',
-      controller: 'homeController',            
+      controller: 'homeController',    
+      requiresLogin: true           
     })        
     .when('/', {
-      templateUrl: 'app/shared/home/home.view.html',
+      templateUrl: 'app/shared/login/login.view.html',
       controller: 'loginController'    
     })
 
@@ -70,6 +78,7 @@ angular.module('dreamjournal', [
 .run(function($rootScope, auth, store, jwtHelper, $location) {
   // This events gets triggered on refresh or URL change
   $rootScope.$on('$locationChangeStart', function() {
+
     var token = store.get('token');
     if (token) {
       if (!jwtHelper.isTokenExpired(token)) {
@@ -80,7 +89,7 @@ angular.module('dreamjournal', [
       } else {
         // Either show the login page or use the refresh token to get a new idToken
         $rootScope.signedIn = false;        
-        $location.path('/login');
+        // $location.path('/login');
       }
     }
   });

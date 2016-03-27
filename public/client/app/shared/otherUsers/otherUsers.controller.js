@@ -1,54 +1,35 @@
 'use strict';
 
-angular.module('dreamjournal.profile', ['ngSanitize'])
+angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
-.controller('profileController', ['$scope', 'auth', '$http', 'djMainFactory', function ($scope, auth, $http, djMainFactory ) {
+.controller('otherUsersController', ['$scope', 'auth', '$http', 'djMainFactory', function ($scope, auth, $http, djMainFactory) {
+  
+  $scope.postsData = djMainFactory.userPostsData;
 
-  // $scope.postsData = djMainFactory.userPostsData;
+  console.log('$scope.postsData = djMainFactory.userPostsData: ', $scope.postsData = djMainFactory.userPostsData);
+  djMainFactory.userData;
 
-  // console.log('$scope.postsData = djMainFactory.userPostsData: ', $scope.postsData = djMainFactory.userPostsData);
   $scope.userName = auth.profile.name;
-  $scope.userEmail = auth.profile.email; 
-  $scope.postsData; 
-  $scope.result;
+  $scope.userEmail = auth.profile.email;  
 
+  $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
-  $scope.init = function(){
 
-    djMainFactory.getAllUserPosts(auth.profile.email)
-    .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
-      $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
-    });
-
-  }
+    djMainFactory.getAllUserPosts(djMainFactory.setUserEmail);
+  };
 
   $scope.init();
 
 //======================Create Comment on Post==========================
 
   $scope.commentOnPost = function(comment, postID){
-    djMainFactory.commentOnPost(comment, postID);
 
-    djMainFactory.getAllUserPosts(auth.profile.email)
-    .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
-      $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
-    });    
+    djMainFactory.commentOnPost(comment, postID);
   };
 //==========================Delete Comment==============================
 
 $scope.deleteComment = function(postID, commentID){
     djMainFactory.deleteComment(postID, commentID);
-
-    djMainFactory.getAllUserPosts(auth.profile.email)
-    .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
-      $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
-    });      
 };
 
 //====================================Like Post
@@ -65,13 +46,6 @@ $scope.deleteComment = function(postID, commentID){
       $scope.userLikePost = false;
     }  
       djMainFactory.likePost(postID, $scope.userLikePost);
-
-     djMainFactory.getAllUserPosts(auth.profile.email)
-    .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
-      $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
-    });       
   };  
 
   $scope.viewSinglePost = function(postID){  
@@ -101,6 +75,14 @@ $scope.deleteComment = function(postID, commentID){
     console.log('showButton ', $scope.isUser);
     return $scope.isUser;
   };
+
+  $scope.$watch(
+    function(){ return djMainFactory.userPostsData },
+
+    function(newVal) {
+      $scope.postsData = newVal;
+    }
+  )  
 
 }]);
 
