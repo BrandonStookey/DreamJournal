@@ -9,11 +9,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   console.log('isUserSingedIn: ', $scope.isUserSignedIn);
 
   $scope.init= function() {
-//======================Create New User on Init========================
-
-  if(!$rootScope.signedIn){
-    djMainFactory.createUser();
-  };
 //======================Get All Blog Posts On Init=====================
     djMainFactory.getAllPosts();
   };

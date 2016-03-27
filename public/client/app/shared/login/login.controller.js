@@ -12,6 +12,7 @@ angular.module('dreamjournal.login', [])
         $scope.found = false;
         store.set('profile', profile);
         store.set('token', token);
+        createUser(auth.profile.email, auth.profile.name);
         $location.path('/home');
       }, function () {
         // Error callback
@@ -26,7 +27,18 @@ angular.module('dreamjournal.login', [])
       store.remove('token');
     };
 
-
+  var createUser = function(email, name){    
+    $http({
+        method: 'POST',
+        url: '/user',
+        data: {email: email, name: name}
+      })
+      .then(function(resp){
+        console.log(resp);
+      }, function(err){
+        console.log('error', err);
+      });
+  };
 
 $scope.init= function(){
   $scope.showButton = function(){
