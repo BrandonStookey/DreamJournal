@@ -26,6 +26,14 @@ describe('Dreamjounral djMainfactory', function () {
     expect(djMainFactory.allPostsData).to.eql([{_id: 3},{_id: 2},{_id: 1}]);
   });
 
+  it('should call all user posts when getAllUserPosts function is invoked', function () {
+    var mockPosts = [{_id: 1},{_id: 2},{_id: 3}];  
+    $httpBackend.expectGET('/user/' + 'bob@bobmail.com').respond(mockPosts);
+    djMainFactory.getAllUserPosts('bob@bobmail.com');
+    $httpBackend.flush();
+    expect(djMainFactory.userPostsData).to.eql([{_id: 3},{_id: 2},{_id: 1}]);
+  });
+
   it('should create a new user when createUser function is invoked', function () {
     var mockUser = {name: 'John', email: 'john@john.com'};
     $httpBackend.expectPOST('/user').respond(mockUser);
@@ -33,7 +41,6 @@ describe('Dreamjounral djMainfactory', function () {
     $httpBackend.flush();
     expect(djMainFactory.userData[0].data).to.eql(mockUser);
   });  
-
 
 });
 

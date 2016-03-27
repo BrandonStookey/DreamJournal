@@ -159,6 +159,7 @@ angular.module('dreamjournal.services', ['textAngular'])
       data: {postID: postID, name: userName, comment: comment}
     })
     .then(function(resp){
+      console.log('comment resp', resp);
       getAllPosts();
       getAllUserPosts(auth.profile.email);
       if(singlePost[0].data._id === postID){
