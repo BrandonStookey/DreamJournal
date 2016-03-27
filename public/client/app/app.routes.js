@@ -2,6 +2,7 @@
 
 angular.module('dreamjournal', [
   'dreamjournal.services',
+  'dreamjournal.graphservices',
   'dreamjournal.login',  
   'dreamjournal.graph',
   'dreamjournal.profile',

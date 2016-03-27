@@ -2,12 +2,12 @@
 
 angular.module('dreamjournal.graph', [])
 
-.controller('graphController', ['$scope', '$http', 'auth',  function ($scope, $http, auth) {
+.controller('graphController', ['$scope', '$http', 'auth', 'GraphFactory',  function ($scope, $http, auth, GraphFactory) {
 
-	$scope.dreamCount = 0;
-	$scope.nightmareCount = 0;
+  $scope.dreamCount = 0;
+  $scope.nightmareCount = 0;
 
-	$scope.init = function(){
+  $scope.init = function(){
     var userName = auth.profile.name;
     var userEmail = auth.profile.email;
     var dream = 'Dream';
@@ -19,10 +19,10 @@ angular.module('dreamjournal.graph', [])
       url: '/graph/' + userEmail + '/' + dream,
     })
     .then(function(result){
-    	console.log('Dream result: ', result );    	
-	    result.data.forEach(function(post) {
-	    	$scope.dreamCount++;
-	    });	
+      console.log('Dream result: ', result );     
+      result.data.forEach(function(post) {
+        $scope.dreamCount++;
+      }); 
     }, function(err){
       console.log('error', err);
     });
@@ -34,17 +34,16 @@ angular.module('dreamjournal.graph', [])
       url: '/graph/' + userEmail + '/' + nightmare,
     })
     .then(function(result){
-    	console.log('Nightmare result: ', result );
-	    result.data.forEach(function(post) {
-	    	$scope.nightmareCount++;
-	    });	
+      console.log('Nightmare result: ', result );
+      result.data.forEach(function(post) {
+        $scope.nightmareCount++;
+      }); 
     }, function(err){
       console.log('error', err);
-    });	      
-	};
+    });       
+  };
 
-	$scope.init();
-   
+  $scope.init();
 }])
   .directive('fillGraph', function() {
 //=====Here we are referencing both dreamCount and nightmareCount, so our directive has access to it from the graphController
