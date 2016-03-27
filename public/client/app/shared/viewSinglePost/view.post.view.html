@@ -34,7 +34,7 @@
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 						  </div>
 
-					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post.data._id); commentInput = null" novalidate required></textarea>
+					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post.data._id); commentInput = null" ng-show = "post.data._id === viewComments" novalidate required></textarea>
 						</div> 
 				  </div> 
 				</div> 

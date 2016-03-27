@@ -5,8 +5,8 @@ angular.module('dreamjournal.services', ['textAngular'])
 	//refer to routes on legacy, they have this at the bottom. Really could fix my bug
 
 
-  var userName = auth.profile.name;
-  var userEmail = auth.profile.email;  
+  var userName = undefined || auth.profile.name;
+  var userEmail = undefined || auth.profile.email;  
 	var allPostsData = [];
   var userPostsData = [];
   var singlePost = [];

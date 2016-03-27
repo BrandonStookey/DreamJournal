@@ -5,9 +5,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 .controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', '$interval', function ($scope, $rootScope, djMainFactory,  $http, auth, $interval) {
 
   $scope.postsData = djMainFactory.allPostsData;
-
-  $scope.userName = auth.profile.name;
-  $scope.userEmail = auth.profile.email;  
+  $scope.isUserSignedIn = $rootScope.signedIn;
+  console.log('isUserSingedIn: ', $scope.isUserSignedIn);
 
   $scope.init= function() {
 //======================Create New User on Init========================

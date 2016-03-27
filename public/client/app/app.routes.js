@@ -43,11 +43,10 @@ angular.module('dreamjournal', [
     })
     .when('/home', {
       templateUrl: 'app/shared/home/home.view.html',
-      controller: 'homeController',   
-      requiresLogin: true              
+      controller: 'homeController',            
     })        
     .when('/', {
-      templateUrl: 'app/shared/login/login.view.html',
+      templateUrl: 'app/shared/home/home.view.html',
       controller: 'loginController'    
     })
 
