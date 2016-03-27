@@ -11,6 +11,7 @@ angular.module('dreamjournal.services', ['textAngular'])
   var userPostsData = [];
   var singlePost = [];
   var userData = [];
+  var getUserLikeData = [];
 
 //===================================================================Create New User===============================================================
   var createUser = function(){    
@@ -33,7 +34,7 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/user/' + email,
     })
    .then(function(result) {
-      if(userPostsData.length < 1){
+      if(userPostsData.length < 1 && result.data[0] !== undefined){
         userPostsData.unshift(result.data[0]);
       };
       // console.log('userPostsData before loop: ', userPostsData[0]._id);
@@ -80,21 +81,16 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/post',
     })
     .then(function(result) {
-      console.log('lets seet this', result.data);
-      if(allPostsData.length < 1){
+      if(allPostsData.length < 1 && result.data[0] !== undefined){
         allPostsData.unshift(result.data[0]);
       };
-      console.log('allPostsData before loop: ', allPostsData[0]._id);
       for(var i = 0; i < result.data.length; i++){
-            console.log('result.data[i]._id: ', result.data[i]._id);
           for(var j = 0; j < result.data.length; j++){
-            console.log('j ', j);
             if(allPostsData[j] === undefined){
               allPostsData.unshift(result.data[i]);
               break;
             }
             if(result.data[i]._id == allPostsData[j]._id) {
-              console.log('allPostsData inside if: ', allPostsData[j]._id);
               allPostsData[j] = result.data[i];
               break;
             } 
@@ -110,8 +106,8 @@ angular.module('dreamjournal.services', ['textAngular'])
   var updatePost = function(postTitle, post, dreamNightmare, postID){
     $http({
       method: 'PUT',
-      url: '/post',
-      data: {email: userEmail, postID: postID, postTitle: postTitle, post: post, dreamType: dreamNightmare}
+      url: '/post/' + postID,
+      data: {email: userEmail, postTitle: postTitle, post: post, dreamType: dreamNightmare}
     })
     .then(function(resp){    
       $location.path('/profile');
@@ -125,11 +121,13 @@ angular.module('dreamjournal.services', ['textAngular'])
 
   var deletePost = function(postID){
     $http({
-      method: 'PUT',
-      url: '/post/delete',
+      method: 'DELETE',
+      url: '/post/' + postID,
       data: {postID: postID}
     })
-    .then(function(resp){    
+    .then(function(resp){  
+      // getAllPosts();
+      getAllUserPosts(auth.profile.email);  
       $location.path('/profile');
     }, function(err){
       console.log('error', err);
@@ -163,7 +161,9 @@ angular.module('dreamjournal.services', ['textAngular'])
     .then(function(resp){
       getAllPosts();
       getAllUserPosts(auth.profile.email);
-      viewSinglePost(postID);
+      if(singlePost[0].data._id === postID){
+        viewSinglePost(postID);
+      }
     }, function(err){
       console.log('error', err);
     }); 
@@ -179,7 +179,9 @@ angular.module('dreamjournal.services', ['textAngular'])
     .then(function(resp){    
       getAllPosts();
       getAllUserPosts(auth.profile.email);
-      viewSinglePost(postID);
+      if(singlePost[0].data._id === postID){
+        viewSinglePost(postID);
+      }
     }, function(err){
       console.log('error', err);
     }); 
@@ -198,13 +200,15 @@ angular.module('dreamjournal.services', ['textAngular'])
 	    .then(function(resp){
       getAllPosts();
       getAllUserPosts(auth.profile.email);
-      viewSinglePost(postID);
+      if(singlePost[0].data._id === postID){
+        viewSinglePost(postID);
+      }
 	    }, function(err){
 	      console.log('error', err);
 	    });     
 	  } else{
 	//=========================if userLikePost is false then it will remove the 'like' from the database    
-	     $http({
+	   $http({
 	      method: 'PUT',
 	      url: '/like',
 	      data: {postID: postID, userEmail: userEmail, like: userLikePost}
@@ -212,12 +216,30 @@ angular.module('dreamjournal.services', ['textAngular'])
 	    .then(function(resp){
       getAllPosts();   
       getAllUserPosts(auth.profile.email);
-      viewSinglePost(postID);
+      if(singlePost[0].data._id === postID){
+        viewSinglePost(postID);
+      }
+
 	    }, function(err){
 	      console.log('error', err);
 	    });   
 	  }
 	};
+
+  // var getUserLike = function(postID){
+  //   $http({
+  //     method: 'GET',
+  //     url: '/like/' + postID + '/' + userEmail,
+  //   })
+  //   .then(function(resp){
+  //   getUserLikeData[0] = resp.data;  
+  //   getAllPosts();   
+  //   getAllUserPosts(auth.profile.email);
+  //   // viewSinglePost(postID);
+  //   }, function(err){
+  //     console.log('error', err);
+  //   }); 
+  // };
 
 	return {
 		allPostsData: allPostsData,
@@ -235,7 +257,9 @@ angular.module('dreamjournal.services', ['textAngular'])
 		deleteComment: deleteComment,
 		likePost: likePost,
     updatePost: updatePost,
-    deletePost: deletePost
+    deletePost: deletePost,
+    // getUserLike: getUserLike,
+    // getUserLikeData: getUserLikeData
 	}
 
 }])

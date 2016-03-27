@@ -35,6 +35,13 @@ $scope.deleteComment = function(postID, commentID){
 //====================================Like Post
   $scope.likeCounter = 0;
   $scope.userLikePost = false;
+  $scope.userLikeData = djMainFactory.getUserLikeData;
+
+  $scope.getUserLike = function(postID){
+    console.log('getUserLike on home controller: ');
+    djMainFactory.getUserLike(postID); 
+  }
+
 
   $scope.likePost = function(postID){
 

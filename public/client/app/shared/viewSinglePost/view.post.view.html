@@ -17,7 +17,7 @@
 						  	<p class="blog-post-meta"> {{ post.data.name }} </p>
 						    <p  ng-bind-html="post.data.post"></p>
 
-						  	<button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button>
+						  	<a href ="#/profile"><button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button></a>
 						  	
 								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showDeleteEditPostButton()"></button>		
 

@@ -71,16 +71,12 @@ var findAllPosts = function(callback){
 //==========================================================================Find All User Posts=======================================================================
 
 var findAllUserPosts = function(email, callback){
-  console.log('MADE IT TO FINDALLUSERPOST ON HELPERS');
   db.User.find({ email: email }, function(err, posts){
-
     if(err){
       console.log('findAllUserPosts Error ', err);
       return callback(err);
     }
-
     var postMap = [];
-
     posts.forEach(function(post) {
       for(var i = 0; i < post.post.length; i++){
         if(post.post[i] === undefined){
@@ -89,7 +85,6 @@ var findAllUserPosts = function(email, callback){
         postMap.push(post.post[i]);
       }
     });
-
     callback(null, postMap);  
   });
 };
@@ -244,13 +239,33 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
         console.log('remove like error: ', err);
         return callback(err);
       }
-
-      console.log('deleteLikeComment: ', posts);
       callback(null, 200);
   });
-
-
 }
+
+
+//====================================================================Get User Like==========================================================================================
+
+//   var getUserLike = function(postID, userEmail, callback){
+//     console.log('working on helpers getUserLIke');
+
+//      db.User.find( {'post._id': postID}, function(err, post){
+//       if(err){
+//         console.log('remove like error: ', err);
+//         return callback(err);
+//       } 
+      
+//       console.log('helpers getUserLike: ', post.post);
+
+//       // for(var i = 0; i < post.post.like.length; i++){
+//       //   if(post.like.userEmail === userEmail){
+//       //     return callback(null, post);
+//       //   }
+//       // }
+
+//       callback(null, post);
+//   });
+// };
 
 //============================================================================Export all helpers=========================================================================
 
@@ -266,6 +281,7 @@ module.exports = {
   createNewComment: createNewComment,
   deleteComment: deleteComment,
   likeComment: likeComment,
-  deleteLikeComment: deleteLikeComment
+  deleteLikeComment: deleteLikeComment,
+  // getUserLike: getUserLike
 };
 

@@ -73,41 +73,14 @@ app.route('/post')
         res.send(data);
       });
   })
- //=================================Update Single Post 
-  .put(function( req, res) { 
 
-    var userEmail = req.body.email;     
-    var postTitle = req.body.postTitle;     
-    var post = req.body.post;    
-    var dreamType = req.body.dreamType;     
-    var postID = req.body.postID;       
-
-    helpers.updateSinglePost(userEmail, postID, postTitle, post, dreamType,
-    function(err, data) {
-      if(err){
-        res.status(400).send(err);
-      }      
-      res.send(data);
-    });
-  })
 //====================================================================Delete Single Post======================================================================================
 //Angular does not support sending a request body to a delete request
   //http://stackoverflow.com/questions/22186671/angular-resource-delete-wont-send-body-to-express-js-server
-app.route('/post/delete') 
-  .put(function( req, res) {  
-    var postID = req.body.postID; 
-
-    helpers.deleteSinglePost(postID,
-    function(err, data) {
-      if(err){
-        res.status(400).send(err);
-      }      
-      res.send(data);
-    });
-  })
 
 //=======================================View Single Post
-app.get('/post/:postID', function(req, res) {
+app.route('/post/:postID')
+  .get(function(req, res) {
 
   var postID = req.params.postID;     
  
@@ -118,7 +91,37 @@ app.get('/post/:postID', function(req, res) {
       }      
        return res.send(data);
     }); 
-});
+}) 
+  //===================================Delete Single Post
+  .delete(function( req, res) {  
+    var postID = req.params.postID; 
+
+    helpers.deleteSinglePost(postID,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })
+ //=================================Update Single Post 
+  .put(function( req, res) { 
+
+    var userEmail = req.body.email;     
+    var postTitle = req.body.postTitle;     
+    var post = req.body.post;    
+    var dreamType = req.body.dreamType;     
+    var postID = req.params.postID;       
+
+    helpers.updateSinglePost(userEmail, postID, postTitle, post, dreamType,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })  
+
 
 
 //================================================================Get All Dreams and Nightmares for Graph========================================================================
@@ -201,6 +204,21 @@ app.route('/like')
       }         
       res.status(200).send(data);
     });
-  });
+  })
+
+  // app.get('/like/:postID/:userEmail', function(req, res){
+  //   console.log('working on ROUTES getUserLIke');
+  //   var postID = req.params.postID;
+  //   var userEmail = req.params.userEmail;
+
+  //   helpers.getUserLike(postID, userEmail,
+  //   function(err, data) { 
+  //     if(err){
+  //       res.status(400).send(err);
+  //     }         
+  //     res.status(200).send(data);
+  //   });
+
+  // })
 
 
