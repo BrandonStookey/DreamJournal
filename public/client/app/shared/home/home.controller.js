@@ -13,9 +13,10 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
     // djMainFactory.getAllPosts();
-    djMainFactory.getAllPosts()
+    djMainFactory.getAllFriendsPosts()
     .then(function(data){
       $scope.postsData  = data;
+      console.log($scope.postsData);
     }); 
   };
 
@@ -32,11 +33,10 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.commentOnPost = function(comment, postID){
     djMainFactory.commentOnPost(comment, postID);
 
-    djMainFactory.getAllPosts()
+    djMainFactory.getAllFriendsPosts()
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
+      console.log($scope.postsData);
     });     
   };
 //==========================Delete Comment==============================
@@ -44,12 +44,11 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 $scope.deleteComment = function(postID, commentID){
     djMainFactory.deleteComment(postID, commentID);
 
-    djMainFactory.getAllPosts()
+    djMainFactory.getAllFriendsPosts()
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
-    });     
+      console.log($scope.postsData);
+    });    
 };
 
 //====================================Like Post
@@ -74,12 +73,11 @@ $scope.deleteComment = function(postID, commentID){
     }  
       djMainFactory.likePost(postID, $scope.userLikePost);
 
-    djMainFactory.getAllPosts()
+    djMainFactory.getAllFriendsPosts()
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
-    });       
+      console.log($scope.postsData);
+    });        
   };  
 
   $scope.getSinglePostID = function(postID){  

@@ -67,6 +67,18 @@ angular.module('dreamjournal.services', ['textAngular'])
   }
 
 
+  var getAllPosts = function(postTitle, post, dreamNightmare){
+    return $http({
+      method: 'GET',
+      url: '/post',
+    })
+    .then(function(result) {
+      return result.data;
+    }, function(err) {
+        console.error('Post GET error:', err);
+    });
+  };
+
 
 //=====================================================================Get All Blog Posts=============================================================
 	var createPost = function(postTitle, post, dreamNightmare){
@@ -82,10 +94,10 @@ angular.module('dreamjournal.services', ['textAngular'])
     });
   };
 
-  var getAllPosts = function(postTitle, post, dreamNightmare){
+  var getAllFriendsPosts = function(){
     return $http({
       method: 'GET',
-      url: '/post',
+      url: '/friends/' + userEmail,
     })
     .then(function(result) {
       return result.data;
@@ -223,8 +235,9 @@ angular.module('dreamjournal.services', ['textAngular'])
     setSinglePostID: setSinglePostID,
     getSinglePostID: getSinglePostID,
     getAllUserPosts: getAllUserPosts,
+    getAllPosts: getAllPosts,
     createPost: createPost,
-		getAllPosts: getAllPosts,
+    getAllFriendsPosts: getAllFriendsPosts,
     viewSinglePost: viewSinglePost,
 		commentOnPost: commentOnPost,
 		deleteComment: deleteComment,

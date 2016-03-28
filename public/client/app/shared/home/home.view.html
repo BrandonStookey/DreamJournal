@@ -6,8 +6,8 @@
 	<div class="row"> 
 	  <div class="blog-post"> 
 			<div class ="mainDiv"> 
-				<div class ="blogDiv"> 
-					 <div class="individualPostDiv" ng-repeat="post in postsData" > 
+				<div class ="blogDiv" ng-repeat="startPost in postsData"> 
+					 <div class="individualPostDiv" ng-repeat="post in startPost" > 
 
 					  	<h3 class="blog-post-title"> <a href = "#/viewPost"  ng-click = "getSinglePostID(post._id)">{{ post.postTitle }} </h3></a>
 

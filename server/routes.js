@@ -76,6 +76,18 @@ app.delete('/user/:userEmail/:otherUserEmail', function( req, res) {
     });
   })  
 
+app.get('/friends/:email', function(req, res) {
+
+  var userEmail = req.params.email;      
+  helpers.findAllFriendsPosts(userEmail, 
+  function(err, data) { 
+    if(err){
+      return res.status(400).send(err);
+    }         
+      return res.send(data);
+  });
+})
+
 //===============================================================================POST/GET/PUT for Posts=================================================================
 //===============================Creates new Post
 app.route('/post')

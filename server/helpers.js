@@ -276,6 +276,45 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
               });
   }; 
 
+//=====================================================================Find all Friends Posts==================================================================================
+
+var findAllFriendsPosts = function(userEmail, callback){
+  var friends;
+  
+  db.User.find({email: userEmail}, function(err, posts){
+    if(err){
+      console.log('findAllPosts Error ', err);
+      return callback(err);
+    }
+    
+    friends = posts[0].friendList;
+  });
+
+  db.User.find({}, function(err, posts){
+    if(err){
+      console.log('findAllPosts Error ', err);
+      return callback(err);
+    }
+    var postMap = [];
+    for(var i = 0; i < posts.length; i++){
+      for(var j = 0; j < friends.length; j++){
+        if(friends[j].userEmail === undefined){
+          break;
+        }
+        if(posts[i].email === friends[j].userEmail){
+          console.log('one helpers looking at each post: ', posts[i]);
+          postMap.unshift(posts[i].post);
+        }
+      }
+    }
+    console.log('postMap on helpers: ', postMap);
+
+    postMap.sort(function(p1, p2) {return p1.date - p2.date });
+    postMap.reverse();
+    callback(null, postMap);  
+  });
+};
+
 //====================================================================Get User Like==========================================================================================
 
 //   var getUserLike = function(postID, userEmail, callback){
@@ -315,7 +354,8 @@ module.exports = {
   likeComment: likeComment,
   deleteLikeComment: deleteLikeComment,
   followUser: followUser,
-  deleteUserFromFriendsList: deleteUserFromFriendsList
+  deleteUserFromFriendsList: deleteUserFromFriendsList,
+  findAllFriendsPosts: findAllFriendsPosts
   // getUserLike: getUserLike
 };
 
