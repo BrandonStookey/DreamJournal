@@ -4,9 +4,9 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 
 .controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', '$interval', function ($scope, $rootScope, djMainFactory,  $http, auth, $interval) {
 
-  // $scope.postsData = djMainFactory.allPostsData;
+  $scope.userName = auth.profile.name;
+  $scope.userEmail = auth.profile.email;
   $scope.postsData;
-
   $scope.isUserSignedIn = $rootScope.signedIn;
 
 
@@ -26,19 +26,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.getUserEmail = function(email){
     djMainFactory.getUserEmail(email);
   };
-
-
-  // $scope.getAllUserPosts = function(email){
-  //   console.log('on home controller: ', email);
-  //   $scope.postsData = [];
-  //   djMainFactory.getAllUserPosts(email)
-  //   .then(function(data){
-  //     console.log('DATA On Controller!!!: ', data);
-  //     $scope.postsData  = data;
-  //     console.log('$scope.result: ', $scope.result);
-  //   });
-
-  // };
 
 //======================Create Comment on Post==========================
 

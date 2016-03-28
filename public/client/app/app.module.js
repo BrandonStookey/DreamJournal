@@ -31,30 +31,6 @@ angular.module('dreamjournal.services', ['textAngular'])
    .then(function(result) {
       console.log('on factory result.data: ', result.data);
       return result.data;
-
-      // console.log('result.data: ', result.data);
-      // userPostsData = [result.data];
-      // console.log('userPostsData: ', userPostsData);
-    // console.log('getAllUserPOsts: ', email);
-    //   if(userPostsData.length < 1 && result.data[0] !== undefined){
-    //     userPostsData.unshift(result.data[0]);
-    //   };
-    //   // console.log('userPostsData before loop: ', userPostsData[0]._id);
-    //   for(var i = 0; i < result.data.length; i++){
-    //       for(var j = 0; j < result.data.length; j++){
-    //         if(userPostsData[j] === undefined){
-    //           userPostsData.unshift(result.data[i]);
-    //           break;
-    //         }
-    //         if(result.data[i]._id == userPostsData[j]._id) {
-    //           userPostsData[j] = result.data[i];
-    //           break;
-    //         } 
-    //       } 
-    //     }
-    //     if(email !== userEmail){
-    //       $location.path('/otherusers');
-    //     }
     }, function(err) {
       console.error('Post GET error:', err);
     });
@@ -71,7 +47,6 @@ angular.module('dreamjournal.services', ['textAngular'])
     })
     .then(function(resp){
       $location.path('/profile');      
-      console.log(resp);
     }, function(error){
       console.log(error);
     });
@@ -84,21 +59,6 @@ angular.module('dreamjournal.services', ['textAngular'])
     })
     .then(function(result) {
       return result.data;
-      // if(allPostsData.length < 1 && result.data[0] !== undefined){
-      //   allPostsData.unshift(result.data[0]);
-      // };
-      // for(var i = 0; i < result.data.length; i++){
-      //     for(var j = 0; j < result.data.length; j++){
-      //       if(allPostsData[j] === undefined){
-      //         allPostsData.unshift(result.data[i]);
-      //         break;
-      //       }
-      //       if(result.data[i]._id == allPostsData[j]._id) {
-      //         allPostsData[j] = result.data[i];
-      //         break;
-      //       } 
-      //     } 
-      //   }
     }, function(err) {
         console.error('Post GET error:', err);
     });
@@ -129,7 +89,6 @@ angular.module('dreamjournal.services', ['textAngular'])
       data: {postID: postID}
     })
     .then(function(resp){  
-      // getAllPosts();
       getAllUserPosts(auth.profile.email);  
       $location.path('/profile');
     }, function(err){
@@ -162,12 +121,6 @@ angular.module('dreamjournal.services', ['textAngular'])
       data: {postID: postID, name: userName, comment: comment}
     })
     .then(function(resp){
-      console.log('comment resp', resp);
-      getAllPosts();
-      // getAllUserPosts(auth.profile.email);
-      // if(singlePost[0].data._id === postID){
-      //   viewSinglePost(postID);
-      // }
     }, function(err){
       console.log('error', err);
     }); 
@@ -181,11 +134,6 @@ angular.module('dreamjournal.services', ['textAngular'])
       data: {postID: postID, commentID: commentID}
     })
     .then(function(resp){    
-      getAllPosts();
-      getAllUserPosts(auth.profile.email);
-      if(singlePost[0].data._id === postID){
-        viewSinglePost(postID);
-      }
     }, function(err){
       console.log('error', err);
     }); 
@@ -202,11 +150,6 @@ angular.module('dreamjournal.services', ['textAngular'])
 	      data: {postID: postID, userEmail: userEmail, name: userName, like: userLikePost}
 	    })
 	    .then(function(resp){
-      getAllPosts();
-      getAllUserPosts(auth.profile.email);
-      if(singlePost[0].data._id === postID){
-        viewSinglePost(postID);
-      }
 	    }, function(err){
 	      console.log('error', err);
 	    });     
@@ -218,12 +161,6 @@ angular.module('dreamjournal.services', ['textAngular'])
 	      data: {postID: postID, userEmail: userEmail, like: userLikePost}
 	    })
 	    .then(function(resp){
-      getAllPosts();   
-      getAllUserPosts(auth.profile.email);
-      if(singlePost[0].data._id === postID){
-        viewSinglePost(postID);
-      }
-
 	    }, function(err){
 	      console.log('error', err);
 	    });   
