@@ -82,8 +82,8 @@ $scope.deleteComment = function(postID, commentID){
     });       
   };  
 
-  $scope.viewSinglePost = function(postID){  
-      djMainFactory.viewSinglePost(postID);
+  $scope.getSinglePostID = function(postID){  
+      djMainFactory.getSinglePostID(postID);
   };
 
 //=========================Shows/Hide Comments===============================

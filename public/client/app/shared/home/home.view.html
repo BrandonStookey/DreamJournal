@@ -10,20 +10,14 @@
 				<div class ="blogDiv"> 
 					 <div class="individualPostDiv" ng-repeat="post in postsData" > 
 
-					  	<h3 class="blog-post-title"> <a href = "#"  ng-click = "viewSinglePost(post._id)">{{ post.postTitle }} </h3></a>
+					  	<h3 class="blog-post-title"> <a href = "#/viewPost"  ng-click = "getSinglePostID(post._id)">{{ post.postTitle }} </h3></a>
 
 
 						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
 
 
-
 						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
 						    <p  ng-bind-html="post.post"></p>
-
-
-
-
-
 							  <div ng-show='isUserSignedIn'>
 
 						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button> 

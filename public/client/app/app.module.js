@@ -8,7 +8,8 @@ angular.module('dreamjournal.services', ['textAngular'])
   var userName = auth.profile.name;
   var userEmail = auth.profile.email; 
   var setUserEmail = [];
-	var allPostsData = [];
+  var setSinglePostID = [];
+  var allPostsData = [];
   var userPostsData = [];
   var singlePost = [];
   var getUserLikeData = [];
@@ -21,6 +22,12 @@ angular.module('dreamjournal.services', ['textAngular'])
     setUserEmail[0] = email;
     return setUserEmail;
   }; 
+
+
+  var getSinglePostID = function(postID){
+    setSinglePostID[0] = postID;
+    return setSinglePostID;
+  }
 
   var getAllUserPosts = function(email){
     console.log('getAllUserPOsts EMAIL!: ', email);
@@ -99,13 +106,12 @@ angular.module('dreamjournal.services', ['textAngular'])
 //==============================================View Single Post
 
   var viewSinglePost = function(postID){
-    $http({
+    return $http({
       method: 'GET',
       url: '/post/' + postID,
     })
    .then(function(result) {
-        singlePost[0] = result;
-        $location.path('/viewPost');
+        return result.data;
     }, function(err) {
       console.error('Post GET error:', err);
     });
@@ -190,6 +196,8 @@ angular.module('dreamjournal.services', ['textAngular'])
 		userName: userName,
     setUserEmail: setUserEmail,
     getUserEmail:getUserEmail,
+    setSinglePostID: setSinglePostID,
+    getSinglePostID: getSinglePostID,
     getAllUserPosts: getAllUserPosts,
     createPost: createPost,
 		getAllPosts: getAllPosts,

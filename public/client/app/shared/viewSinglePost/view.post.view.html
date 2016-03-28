@@ -10,31 +10,31 @@
 				<div class ="blogDiv"> 
 					 <div class="individualPostDiv" ng-repeat="post in singlePost"> 
 
-					  	<h3 class="blog-post-title"> {{ post.data.postTitle }} </h3>
+					  	<h3 class="blog-post-title"> {{ post.postTitle }} </h3>
 
 
-						  	<p class="blog-post-meta"> {{ post.data.dreamType }} {{ post.data.postDate }} </p>
-						  	<p class="blog-post-meta"> {{ post.data.name }} </p>
-						    <p  ng-bind-html="post.data.post"></p>
+						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
+						  	<p class="blog-post-meta"> {{ post.name }} </p>
+						    <p  ng-bind-html="post.post"></p>
 
 						  	<a href ="#/profile"><button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button></a>
 						  	
 								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showDeleteEditPostButton()"></button>		
 
 
-						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post.data._id)"> {{ post.data.like.length }}</button> 
+						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)"> {{ post.like.length }}</button> 
 
-						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post.data._id); showDeleteCommentButton()"> {{ post.data.postComment.length }}</button><br>
+						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
 
-					  	<div ng-repeat ="comment in post.data.postComment" ng-show = "post.data._id === viewComments">
+					  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
 						  	<h5 class="blog-post-meta"> {{ comment.userName }} {{ comment.commentDate}}
 						  	
-						  	<button class="fa fa-times-circle" ng-click= "deleteComment(post.data._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
+						  	<button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
 
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 						  </div>
 
-					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post.data._id); commentInput = null" ng-show = "post.data._id === viewComments" novalidate required></textarea>
+					    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id); commentInput = null" ng-show = "post._id === viewComments" novalidate required></textarea>
 						</div> 
 				  </div> 
 				</div> 
