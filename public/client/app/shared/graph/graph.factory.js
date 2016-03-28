@@ -10,39 +10,30 @@ angular.module('dreamjournal.graphservices', [])
 
 
   var getDreams = function(){  
-    $http({
+    return $http({
       method: 'GET',
       url: '/graph/' + userEmail + '/' + dream,
     })
     .then(function(result){
-      console.log('Dream result: ', result );     
-      result.data.forEach(function(post) {
-        console.log('dream post: ', post);
-        dreamCount++;
-      }); 
+      return result.data;
     }, function(err){
       console.log('error', err);
     });
   };
 
-  getDreams();
 
   var getNightmares = function(){
-    $http({
+    return $http({
       method: 'GET',
       url: '/graph/' + userEmail + '/' + nightmare,
     })
     .then(function(result){
-      console.log('Nightmare result: ', result );
-      result.data.forEach(function(post) {
-        nightmareCount++;
-      }); 
+      return result.data;
     }, function(err){
       console.log('error', err);
     });       
   };
 
-  getNightmares();
 
   console.log('on graph factory dreamcount: ', dreamCount);
   console.log('on graph factory ngihtmarecount: ', nightmareCount);

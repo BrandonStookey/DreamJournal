@@ -4,43 +4,16 @@ angular.module('dreamjournal.graph', [])
 
 .controller('graphController', ['$scope', '$http', 'auth', 'GraphFactory',  function ($scope, $http, auth, GraphFactory) {
 
-  $scope.dreamCount = 0;
-  $scope.nightmareCount = 0;
+  $scope.dreamCount;
+  $scope.nightmareCount;
 
   $scope.init = function(){
-    var userName = auth.profile.name;
-    var userEmail = auth.profile.email;
-    var dream = 'Dream';
-    var nightmare = 'Nightmare';
-//=====================================================Gets all post with a dreamType of 'Dream'========================================================
-   
-    $http({
-      method: 'GET',
-      url: '/graph/' + userEmail + '/' + dream,
+    GraphFactory.getDreams().then(function(data){
+      $scope.dreamCount = data;
     })
-    .then(function(result){
-      console.log('Dream result: ', result );     
-      result.data.forEach(function(post) {
-        $scope.dreamCount++;
-      }); 
-    }, function(err){
-      console.log('error', err);
-    });
-
-//======================================================Gets all post with a dreamType of 'Nightmare'=======================================================
-
-    $http({
-      method: 'GET',
-      url: '/graph/' + userEmail + '/' + nightmare,
+    GraphFactory.getNightmares().then(function(data){
+      $scope.nightmareCount = data;
     })
-    .then(function(result){
-      console.log('Nightmare result: ', result );
-      result.data.forEach(function(post) {
-        $scope.nightmareCount++;
-      }); 
-    }, function(err){
-      console.log('error', err);
-    });       
   };
 
   $scope.init();
@@ -66,12 +39,12 @@ angular.module('dreamjournal.graph', [])
             
             d3.selectAll("svg").remove();
 
-            var totalCount = newValues[0] + newValues[1];
+            var totalCount = newValues[0].length + newValues[1].length;
 
-            var dreamNum = newValues[0];
+            var dreamNum = newValues[0].length;
             var dreamPercent = Math.round((dreamNum / totalCount) * 100);
 
-            var nightmareNum = newValues[1];
+            var nightmareNum = newValues[1].length;
             var nightmarePercent = Math.round((nightmareNum / totalCount) * 100);
 
             loadLiquidFillGauge("dreamersGauge",  dreamPercent , dream);  
