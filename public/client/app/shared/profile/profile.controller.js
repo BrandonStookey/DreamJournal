@@ -17,9 +17,7 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
 
     djMainFactory.getAllUserPosts(auth.profile.email)
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
     });
 
   }
@@ -74,8 +72,8 @@ $scope.deleteComment = function(postID, commentID){
     });       
   };  
 
-  $scope.viewSinglePost = function(postID){  
-      djMainFactory.viewSinglePost(postID);
+  $scope.getSinglePostID = function(postID){  
+      djMainFactory.getSinglePostID(postID);
   };
 
 //=========================Shows/Hide Comments===============================

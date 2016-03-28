@@ -86,6 +86,8 @@ var findAllUserPosts = function(email, callback){
         postMap.unshift(post.post[i]);
       }
     });
+    postMap.sort(function(p1, p2) {return p1.date - p2.date });
+    postMap.reverse();    
     callback(null, postMap);  
   });
 };

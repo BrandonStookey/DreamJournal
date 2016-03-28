@@ -3,19 +3,14 @@ angular.module('dreamjournal.services', ['textAngular'])
 .factory('djMainFactory', ['$http', 'auth', '$location', function($http, auth, $location ){
 // ($rootScope.signedIn) <-----------------------Could help me check if user is signed in, and only do a createuser call once
 	//refer to routes on legacy, they have this at the bottom. Really could fix my bug
-
-
   var userName = auth.profile.name;
   var userEmail = auth.profile.email; 
   var setUserEmail = [];
   var setSinglePostID = [];
-  var allPostsData = [];
+  var allPostsData;
   var userPostsData = [];
   var singlePost = [];
   var getUserLikeData = [];
-
-
-
 //=======================================================================Get all User Posts===========================================================
 
   var getUserEmail = function(email){
@@ -36,7 +31,6 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/user/' + email,
     })
    .then(function(result) {
-      console.log('on factory result.data: ', result.data);
       return result.data;
     }, function(err) {
       console.error('Post GET error:', err);
