@@ -13,7 +13,7 @@ var userSchema = mongoose.Schema({
     type: String,
   },
   image: {
-    type: Buffer,
+    type: String,
   },
   date: { type: Date, default: Date.now },   
 

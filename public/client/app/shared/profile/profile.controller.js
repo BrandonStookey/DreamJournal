@@ -9,6 +9,8 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
   // console.log('$scope.postsData = djMainFactory.userPostsData: ', $scope.postsData = djMainFactory.userPostsData);
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email; 
+  $scope.userImage = auth.profile.picture;
+  console.log('image on profile: ', $scope.userImage);
   $scope.postsData; 
   $scope.result;
 

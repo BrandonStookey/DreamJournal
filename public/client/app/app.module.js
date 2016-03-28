@@ -11,6 +11,7 @@ angular.module('dreamjournal.services', ['textAngular'])
   var userPostsData = [];
   var singlePost = [];
   var getUserLikeData = [];
+  var friendList;
 //=======================================================================Get all User Posts===========================================================
 
 
@@ -100,6 +101,8 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/friends/' + userEmail,
     })
     .then(function(result) {
+      friendList = result.data;
+      console.log('on appmodule.js: ', friendList);
       return result.data;
     }, function(err) {
         console.error('Post GET error:', err);
@@ -244,6 +247,7 @@ angular.module('dreamjournal.services', ['textAngular'])
 		likePost: likePost,
     updatePost: updatePost,
     deletePost: deletePost,
+    friendList:friendList
     // getUserLike: getUserLike,
     // getUserLikeData: getUserLikeData
 	}

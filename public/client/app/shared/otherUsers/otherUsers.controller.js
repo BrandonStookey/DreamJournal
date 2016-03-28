@@ -5,18 +5,24 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 .controller('otherUsersController', ['$scope', 'auth', '$http', 'djMainFactory', function ($scope, auth, $http, djMainFactory) {
   
   $scope.postsData; 
-
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;  
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
+
     djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
     .then(function(data){
       console.log('DATA On otherUSer Controller!!!: ', data);
       $scope.postsData  = data;
       console.log('$scope.result on otherUsersController: ', $scope.result);
     });
+
+    $scope.friendList = djMainFactory.friendList;
+
+    console.log('friendList: ', djMainFactory.friendList);
+
+
   };
 
   $scope.init();

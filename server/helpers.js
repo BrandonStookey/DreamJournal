@@ -7,10 +7,13 @@ var moment = require ('moment');
 
 var createNewUser = function(name, email, callback){
     console.log('createNewUser on helpers called!');
-    
     var user = new db.User({
       email: email,    
       name: name,
+      friendList:{ 
+        type: [{
+          userEmail: email
+      }]},
     })
     .save(function(err, data) {
   ////Later check to see what your second parameter is sending back
@@ -287,20 +290,29 @@ var findAllFriendsPosts = function(userEmail, callback){
       return callback(err);
     }
     
+    console.log('posts length: ', posts.length);
+    console.log('posts ', posts[0].friendList);
+
     friends = posts[0].friendList;
-  });
+
+    console.log('friends', friends);
+  })
 
   db.User.find({}, function(err, posts){
     if(err){
       console.log('findAllPosts Error ', err);
       return callback(err);
     }
+    // console.log('posts: ', posts);
     var postMap = [];
+
     for(var i = 0; i < posts.length; i++){
       for(var j = 0; j < friends.length; j++){
-        if(friends[j].userEmail === undefined){
+        if(friends[j].userEmail === undefined && j === friends.length){
           break;
         }
+        console.log('posts[i].email: ', posts[i].email);
+        console.log('friends[j].userEmail: ', friends[j].userEmail);
         if(posts[i].email === friends[j].userEmail){
           console.log('one helpers looking at each post: ', posts[i]);
           postMap.unshift(posts[i].post);

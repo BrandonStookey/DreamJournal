@@ -21,7 +21,7 @@ app.use(['/api/public/client/app/shared/home/home.view.html', '/api/public/clien
 app.route('/user')
   .post(function(req, res) {
   var userName = req.body.name;
-  var userEmail = req.body.email;     
+  var userEmail = req.body.email;    
  
   helpers.createNewUser(userName, userEmail,
   function(err, data) {  

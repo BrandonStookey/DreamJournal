@@ -8,7 +8,7 @@ angular.module('dreamjournal.loginservices', [])
   	$http({
         method: 'POST',
         url: '/user',
-        data: { email: email, name: name,}
+        data: { email: email, name: name}
       })
       .then(function(resp){
         userData.unshift(resp);
