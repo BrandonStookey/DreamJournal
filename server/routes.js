@@ -49,8 +49,7 @@ app.route('/user')
 //=================================================================Gets All Posts For Single User=====================================================================
 app.get('/user/:email', function(req, res) {
 
-  var userEmail = req.params.email;     
- 
+  var userEmail = req.params.email;      
   helpers.findAllUserPosts(userEmail, 
   function(err, data) { 
     if(err){
@@ -58,7 +57,24 @@ app.get('/user/:email', function(req, res) {
     }         
       return res.send(data);
   });
-});
+})
+
+app.delete('/user/:userEmail/:otherUserEmail', function( req, res) {  
+    console.log('Delete user from frineds list being called!');
+
+    var userEmail = req.params.userEmail;     
+    var otherUserEmail = req.params.otherUserEmail;
+
+    console.log('on routes delete friendsList: ', userEmail);
+
+    helpers.deleteUserFromFriendsList(userEmail, otherUserEmail,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });
+  })  
 
 //===============================================================================POST/GET/PUT for Posts=================================================================
 //===============================Creates new Post

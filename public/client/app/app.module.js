@@ -13,19 +13,32 @@ angular.module('dreamjournal.services', ['textAngular'])
   var getUserLikeData = [];
 //=======================================================================Get all User Posts===========================================================
 
-  var followButton = function(otherUserEmail){
-    console.log('on appmodule.js otherUserEmail: ', otherUserEmail);
-   $http({
-      method: 'PUT',
-      url: '/user',
-      data: {email: userEmail, otherUserEmail: otherUserEmail}
-    })
-    .then(function(resp){
-        
-    }, function(error){
-      console.log(error);
-    });    
-  }
+
+  var followButton = function(otherUserEmail, followUser){
+    if(followUser){
+      console.log('on appmodule.js otherUserEmail: ', otherUserEmail);
+     $http({
+        method: 'PUT',
+        url: '/user',
+        data: {email: userEmail, otherUserEmail: otherUserEmail}
+      })
+      .then(function(resp){
+
+      }, function(error){
+        console.log(error);
+      });    
+    } else{   
+      console.log('delete user from friends lits being called on app.module!');
+     $http({
+        method: 'DELETE',
+        url: '/user/' + userEmail + '/' + otherUserEmail,
+      })
+      .then(function(resp){
+      }, function(err){
+        console.log('error', err);
+      });   
+    }
+  };  
 
 
 

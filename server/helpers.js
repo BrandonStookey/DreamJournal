@@ -247,9 +247,6 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
 //====================================================================Follow User========================================================================
 
   var followUser = function(userEmail, otherUserEmail, callback){
-    console.log('followUser on helpers!');
-    console.log('helpers userEmail: ', userEmail);
-    console.log('helpers otehr userEmail:' , otherUserEmail);
       
     db.User.findOneAndUpdate( {email: userEmail}, { $push: { friendList:  { userEmail: otherUserEmail } } }, function(err, success) {
         if (err) {
@@ -262,6 +259,22 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
     }); 
 
   };
+
+
+
+  var deleteUserFromFriendsList = function(userEmail, otherUserEmail, callback){
+    console.log('deleteUser from friends list on helpers!');
+    console.log('deleteuser from freinds list helpers userEmail: ', userEmail);
+    console.log('deleteuser from friends list helpers otehr userEmail:' , otherUserEmail);
+
+    db.User.update({email: userEmail}, { $pull: { friendList: { userEmail: otherUserEmail } } },{multi:true}, function(err, posts){
+                  if(err){
+                    console.log('delete single USER from friends list error: ', err);
+                    return callback(err);
+                  }
+                  callback(null, 200);
+              });
+  }; 
 
 //====================================================================Get User Like==========================================================================================
 
@@ -301,7 +314,8 @@ module.exports = {
   deleteComment: deleteComment,
   likeComment: likeComment,
   deleteLikeComment: deleteLikeComment,
-  followUser: followUser
+  followUser: followUser,
+  deleteUserFromFriendsList: deleteUserFromFriendsList
   // getUserLike: getUserLike
 };
 

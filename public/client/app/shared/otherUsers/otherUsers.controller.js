@@ -22,12 +22,25 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
   $scope.init();
 //=============================Follow Button===========================
 
-$scope.followButton = function(email){
+
+
+  $scope.followCounter = 0;
+  $scope.followUser = false;
+
+  $scope.followButton = function(email){
+
+    if($scope.followCounter % 2 === 0){
+      $scope.followCounter++;
+      $scope.followUser = true;
+    } else {
+      $scope.followCounter++;      
+      $scope.followUser = false;
+    }  
+    
     console.log('Follow button being called: ', email);
-    djMainFactory.followButton(email);
+    djMainFactory.followButton(email, $scope.followUser);
 
-};
-
+  };  
 
 
 
