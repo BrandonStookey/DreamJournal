@@ -1,0 +1,23 @@
+<div class="container"> 
+
+
+	<div class="blog-header">
+		<h1 class="blog-title">Search</h1>
+	</div>  
+	<input type="text" ng-model="searchBox">
+	<div class="row"> 
+	  <div class="blog-post"> 
+			<div class ="mainDiv"> 
+				<div class ="blogDiv"> 
+					 <div class="individualPostDiv" ng-repeat="post in postsData | filter: searchBox" > 
+
+
+						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
+
+						</div> 
+				  </div> 
+				</div> 
+			</div>		
+		</div>
+</div>
+

@@ -7,6 +7,7 @@ angular.module('dreamjournal', [
   'dreamjournal.login',  
   'dreamjournal.graph',
   'dreamjournal.profile',
+  'dreamjournal.search',
   'dreamjournal.otherusers',
   'dreamjournal.viewPost',
   'dreamjournal.newPost',
@@ -33,6 +34,11 @@ angular.module('dreamjournal', [
       controller: 'profileController',
       requiresLogin: true      
     })
+    .when('/search', {
+      templateUrl: 'app/shared/search/search.view.html',
+      controller: 'searchController',
+      requiresLogin: true      
+    })    
     .when('/otherusers', {
       templateUrl: 'app/shared/otherUsers/otherUsers.view.html',
       controller: 'otherUsersController',
