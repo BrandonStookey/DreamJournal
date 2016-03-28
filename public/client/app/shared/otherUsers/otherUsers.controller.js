@@ -26,11 +26,25 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
   $scope.commentOnPost = function(comment, postID){
 
     djMainFactory.commentOnPost(comment, postID);
+
+    djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
+    .then(function(data){
+      console.log('DATA On otherUSer Controller!!!: ', data);
+      $scope.postsData  = data;
+      console.log('$scope.result on otherUsersController: ', $scope.result);
+    });    
   };
 //==========================Delete Comment==============================
 
 $scope.deleteComment = function(postID, commentID){
     djMainFactory.deleteComment(postID, commentID);
+
+    djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
+    .then(function(data){
+      console.log('DATA On otherUSer Controller!!!: ', data);
+      $scope.postsData  = data;
+      console.log('$scope.result on otherUsersController: ', $scope.result);
+    });    
 };
 
 //====================================Like Post
@@ -47,6 +61,13 @@ $scope.deleteComment = function(postID, commentID){
       $scope.userLikePost = false;
     }  
       djMainFactory.likePost(postID, $scope.userLikePost);
+
+    djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
+    .then(function(data){
+      console.log('DATA On otherUSer Controller!!!: ', data);
+      $scope.postsData  = data;
+      console.log('$scope.result on otherUsersController: ', $scope.result);
+    });      
   };  
 
   $scope.viewSinglePost = function(postID){  
