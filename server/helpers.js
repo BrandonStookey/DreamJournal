@@ -29,8 +29,6 @@ var createNewUser = function(name, email, callback){
 
 var createPostDB = function (name, email, postTitle, post, dreamType, callback) {
     var date = moment().format('llll');
-    console.log('createPostDB Date', date);
-    console.log('createPost on helpers: ', name, email, postTitle, post, dreamType);
     db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: date, dreamType: dreamType } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
@@ -244,8 +242,26 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
       }
       callback(null, 200);
   });
-}
+};
 
+//====================================================================Follow User========================================================================
+
+  var followUser = function(userEmail, otherUserEmail, callback){
+    console.log('followUser on helpers!');
+    console.log('helpers userEmail: ', userEmail);
+    console.log('helpers otehr userEmail:' , otherUserEmail);
+      
+    db.User.findOneAndUpdate( {email: userEmail}, { $push: { friendList:  { userEmail: otherUserEmail } } }, function(err, success) {
+        if (err) {
+          console.log('followUser error ', err);
+          return callback(err);
+        } else {
+          console.log('Added a new friend! ', success);
+          callback(null, 200);
+        }   
+    }); 
+
+  };
 
 //====================================================================Get User Like==========================================================================================
 
@@ -285,6 +301,7 @@ module.exports = {
   deleteComment: deleteComment,
   likeComment: likeComment,
   deleteLikeComment: deleteLikeComment,
+  followUser: followUser
   // getUserLike: getUserLike
 };
 

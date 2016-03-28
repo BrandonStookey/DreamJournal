@@ -20,6 +20,18 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
   };
 
   $scope.init();
+//=============================Follow Button===========================
+
+$scope.followButton = function(email){
+    console.log('Follow button being called: ', email);
+    djMainFactory.followButton(email);
+
+};
+
+
+
+
+
 
 //======================Create Comment on Post==========================
 

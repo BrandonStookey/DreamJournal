@@ -18,7 +18,8 @@ app.use(['/api/public/client/app/shared/home/home.view.html', '/api/public/clien
 
 //================================================================Add New User To Database=====================================================================
 //    /user
-app.post('/user', function(req, res) {
+app.route('/user')
+  .post(function(req, res) {
   var userName = req.body.name;
   var userEmail = req.body.email;     
  
@@ -29,7 +30,21 @@ app.post('/user', function(req, res) {
     }
     res.status(201).send(data);
   });
-});
+})
+  .put(function(req, res){
+    console.log('routes being called for otherUsers put request!');
+    var userEmail = req.body.email;     
+    var otherUserEmail = req.body.otherUserEmail;     
+   
+
+    helpers.followUser(userEmail, otherUserEmail,
+    function(err, data) {
+      if(err){
+        res.status(400).send(err);
+      }      
+      res.send(data);
+    });   
+  })
 
 //=================================================================Gets All Posts For Single User=====================================================================
 app.get('/user/:email', function(req, res) {

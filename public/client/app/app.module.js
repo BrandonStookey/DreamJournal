@@ -13,6 +13,22 @@ angular.module('dreamjournal.services', ['textAngular'])
   var getUserLikeData = [];
 //=======================================================================Get all User Posts===========================================================
 
+  var followButton = function(otherUserEmail){
+    console.log('on appmodule.js otherUserEmail: ', otherUserEmail);
+   $http({
+      method: 'PUT',
+      url: '/user',
+      data: {email: userEmail, otherUserEmail: otherUserEmail}
+    })
+    .then(function(resp){
+        
+    }, function(error){
+      console.log(error);
+    });    
+  }
+
+
+
   var getUserEmail = function(email){
     setUserEmail[0] = email;
     return setUserEmail;
@@ -189,6 +205,7 @@ angular.module('dreamjournal.services', ['textAngular'])
 		userEmail: userEmail,
 		userName: userName,
     setUserEmail: setUserEmail,
+    followButton: followButton,
     getUserEmail:getUserEmail,
     setSinglePostID: setSinglePostID,
     getSinglePostID: getSinglePostID,
