@@ -14,8 +14,15 @@
 
 
 						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
-						  	<a href = "#/otherusers" ng-click="getAllUserPosts(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
+
+
+
+						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
 						    <p  ng-bind-html="post.post"></p>
+
+
+
+
 
 							  <div ng-show='isUserSignedIn'>
 
