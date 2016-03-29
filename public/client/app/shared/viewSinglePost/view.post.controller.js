@@ -11,6 +11,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
   $scope.singlePostID;
 	$scope.init = function(){
   //======================================Gets single post from either home or profile  
+  
     djMainFactory.viewSinglePost(djMainFactory.setSinglePostID)
     .then(function(data){
       $scope.singlePost[0] = (data);

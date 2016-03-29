@@ -71,7 +71,7 @@ angular.module('dreamjournal', [
     domain: 'dreamjournal.auth0.com',
     clientID: '1lZ3sYfpkqI5yJkeFXYscvLsR7dnG7q2',
     callbackURL: location.href,    
-    loginUrl: '/home'
+    loginUrl: '/login'
       // We're annotating this function so that the `store` is injected correctly when this file is minified
   });
   jwtInterceptorProvider.tokenGetter = ['store', function(store) {
@@ -95,7 +95,7 @@ angular.module('dreamjournal', [
       } else {
         // Either show the login page or use the refresh token to get a new idToken
         $rootScope.signedIn = false;        
-        // $location.path('/login');
+        $location.path('/home');
       }
     }
   });

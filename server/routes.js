@@ -20,10 +20,15 @@ app.use(['/api/public/client/app/shared/home/home.view.html', '/api/public/clien
 //    /user
 app.route('/user')
   .post(function(req, res) {
+
   var userName = req.body.name;
   var userEmail = req.body.email;    
+  var image = req.body.image;
  
-  helpers.createNewUser(userName, userEmail,
+  console.log('routes create user image: ', image);
+
+
+  helpers.createNewUser(userName, userEmail, image,
   function(err, data) {  
     if(err){
       res.status(400).send(err);
@@ -114,8 +119,9 @@ app.route('/post')
     var postTitle = req.body.postTitle;     
     var post = req.body.post;    
     var dreamType = req.body.dreamType; 
+    var image = req.body.image;
 
-    helpers.createPostDB(userName, userEmail, postTitle, post, dreamType, 
+    helpers.createPostDB(userName, userEmail, postTitle, post, dreamType, image,
     function(err, data) {
       if(err){
         res.status(400).send(err);

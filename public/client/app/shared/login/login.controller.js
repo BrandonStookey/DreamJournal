@@ -12,7 +12,7 @@ angular.module('dreamjournal.login', [])
       $scope.found = false;
       store.set('profile', profile);
       store.set('token', token);
-      LoginFactory.createUser(auth.profile.email, auth.profile.name);
+      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.picture);
       $location.path('/home');
     }, function () {
       // Error callback

@@ -4,11 +4,11 @@ angular.module('dreamjournal.loginservices', [])
 	var allPostsData = [];
   var userData = [];
 //===================================================================Create New User===============================================================
-  var createUser = function(email, name){    
+  var createUser = function(email, name, image){    
   	$http({
         method: 'POST',
         url: '/user',
-        data: { email: email, name: name}
+        data: { email: email, name: name, image: image}
       })
       .then(function(resp){
         userData.unshift(resp);

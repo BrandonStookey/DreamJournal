@@ -14,7 +14,7 @@
 
 
 						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
-						  	<p class="blog-post-meta"> {{ post.name }} </p>
+						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
 						    <p  ng-bind-html="post.post"></p>
 
 						  	<a href ="#/profile"><button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button></a>

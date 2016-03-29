@@ -19,10 +19,11 @@ describe('http://localhost:4568/user', function () {
     describe('POST', function () {
  
       var newUser = {
-        name: 'Josh',
-        email: 'josh@josh.io'
+        name: 'Caterpillar',
+        email: 'caterpillar@caterpillar.com',
+        image: 'https://s-media-cache-ak0.pinimg.com/736x/c2/1b/8d/c21b8dc05932594c10adca97cf08da52.jpg'
       };    
-      it('responds with a 200 (ok) when a user is created', function (done) {
+      it('responds with a 201 (ok) when a user is created', function (done) {
 
         request(app)
           .post('/user')

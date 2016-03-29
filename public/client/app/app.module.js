@@ -95,11 +95,11 @@ angular.module('dreamjournal.services', ['textAngular'])
   };
 
 //=====================================================================Get All Blog Posts=============================================================
-	var createPost = function(postTitle, post, dreamNightmare){
+	var createPost = function(postTitle, post, dreamNightmare, image){
    $http({
       method: 'POST',
       url: '/post',
-      data: {postTitle: postTitle, post: post, name: userName, email: userEmail, dreamType: dreamNightmare}
+      data: {postTitle: postTitle, post: post, name: userName, email: userEmail, dreamType: dreamNightmare, image: image}
     })
     .then(function(resp){
       $location.path('/profile');      

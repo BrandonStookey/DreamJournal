@@ -30,6 +30,7 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
       console.log('DATA On otherUSer Controller!!!: ', data);
       $scope.postsData  = data;
       console.log('$scope.result on otherUsersController: ', $scope.result);
+      console.log('otherusers images?!?!: ', $scope.postsData);
     });
 
 

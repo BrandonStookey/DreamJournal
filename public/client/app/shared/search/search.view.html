@@ -12,7 +12,7 @@
 					 <div class="individualPostDiv" ng-repeat="post in postsData | filter: searchBox" > 
 
 
-						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
+						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"><img ng-src= '{{ post.image }}' alt="Smiley face" height="70" width="70">{{ post.name }} </p></a>
 
 						</div> 
 				  </div> 

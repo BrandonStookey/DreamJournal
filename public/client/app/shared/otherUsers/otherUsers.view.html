@@ -3,7 +3,8 @@
 	<div class="blog-header">
 		<h1 class="blog-title">{{ postsData[0].name }}</h1>
 	</div>  
-	
+	<img ng-src= '{{ postsData[0].image }}' alt="Smiley face" height="75" width="75">
+
 	<a href = '#/home'><button ng-click = 'followButton(postsData[0].email, true)' ng-show = "alreadyFollowing"> Follow </button></a>
 
 	<a href = '#/home'><button ng-click = 'followButton(postsData[0].email, false)' ng-hide = "alreadyFollowing"> UnFollow </button></a>

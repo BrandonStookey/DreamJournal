@@ -22,6 +22,7 @@ var userSchema = mongoose.Schema({
       postTitle: String,
       postDate: String,
       post: String,
+      image: String,
       name: String,
       email: String,
       dreamType: String,

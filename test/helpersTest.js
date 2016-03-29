@@ -26,7 +26,9 @@ beforeEach(function (done) {
         {
           name: 'Alice',
           email: 'alice@alice.com',
+          image:'https://gentwenty.com/wp-content/uploads/2014/02/Alice-in-Wonderland.jpg',
           post:[{
+            image:'https://gentwenty.com/wp-content/uploads/2014/02/Alice-in-Wonderland.jpg',
             postTitle: 'Not the Real Alice',
             post: 'I am the real Alice',
             email: 'alice@alice.com',
@@ -36,7 +38,9 @@ beforeEach(function (done) {
         {
           name: 'White Rabbit',
           email: 'whiterabbit@whiterabbit.com',
+          image: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=185171',
           post:[{
+            image: 'http://www.polyvore.com/cgi/img-thing?.out=jpg&size=l&tid=185171',
             postTitle: 'Running late',
             post: 'I am always running late!',
             email: 'whiterabbit@whiterabbit.com',
@@ -46,7 +50,9 @@ beforeEach(function (done) {
         {
           name: 'Queen of Hearts',
           email: 'hearts@hearts.com',
+          image: 'http://vignette3.wikia.nocookie.net/disney/images/f/f5/OffWithHerHead-SW.png/revision/latest?cb=20160221131038',
           post:[{
+            image: 'http://vignette3.wikia.nocookie.net/disney/images/f/f5/OffWithHerHead-SW.png/revision/latest?cb=20160221131038',
             postTitle: 'Headless',
             post: 'Off with their heads!',
             email: 'hearts@hearts.com',
@@ -56,7 +62,9 @@ beforeEach(function (done) {
         {
           name: 'Chesshire Cat',
           email: 'chesshire@chesshire.com',
+          image: 'https://katzenworld.files.wordpress.com/2016/02/cheshire-cat-5.jpg',
           post:[{
+            image: 'https://katzenworld.files.wordpress.com/2016/02/cheshire-cat-5.jpg',
             postTitle: 'Inspirational Quote',
             post: '“Alice asked the Cheshire Cat, who was sitting in a tree, “What road do I take?” The cat asked, “Where do you want to go?” “I don’t know,” Alice answered. “Then,” said the cat, “it really doesn’t matter, does it?”',
             email: 'chesshire@chesshire.com',
@@ -66,7 +74,9 @@ beforeEach(function (done) {
         {
           name: 'The Mad Hatter',
           email: 'hatter@hatter.com',
+          image: 'http://anitasnotebook.com/wp-content/uploads/2013/11/Mad-Hatter-True-Story-Disney.jpg',
           post:[{
+            image: 'http://anitasnotebook.com/wp-content/uploads/2013/11/Mad-Hatter-True-Story-Disney.jpg',
             postTitle: 'I am a little mad',
             post: 'Have I gone made? I\'m afraid so, You\'re Entirely Bonkers. But I\'ll tell you a secrete. All the best People are.',
             email: 'hatter@hatter.com',
@@ -83,12 +93,12 @@ beforeEach(function (done) {
 //==============================================================Add New User to Database================================================================
 
   it('should create a new user', function (done) {
-      helpers.createNewUser ('Jason', 'jason@jason.com',function(err, result){
+      helpers.createNewUser ('Caterpillar', 'caterpillar@caterpillar.com', 'https://s-media-cache-ak0.pinimg.com/736x/c2/1b/8d/c21b8dc05932594c10adca97cf08da52.jpg', function(err, result){
           if(err){
             console.log(err);
           }
           console.log('result')
-          expect(result.name).to.equal('Jason');
+          expect(result.name).to.equal('Caterpillar');
           done(); 
       });
   });

@@ -5,14 +5,18 @@ var moment = require ('moment');
 
 //==============================================================Add New User to Database================================================================
 
-var createNewUser = function(name, email, callback){
+var createNewUser = function(name, email, image, callback){
     console.log('createNewUser on helpers called!');
+    console.log('helpers create user image: ', image);
+
+    console.log('callback: ', callback);
     var user = new db.User({
       email: email,    
       name: name,
+      image: image,
       friendList:{ 
         type: [{
-          userEmail: email
+          userEmail: email,
       }]},
     })
     .save(function(err, data) {
@@ -23,16 +27,17 @@ var createNewUser = function(name, email, callback){
         // return callback(err);
       } else {
         console.log('Added New User!');
-        callback(null, data);
+        console.log('callback on createNewUser: ', callback);
+        return callback(null, data);
       }
     });  
 };
 
 //===============================================================Add New Post To DataBase===========================================================================
 
-var createPostDB = function (name, email, postTitle, post, dreamType, callback) {
+var createPostDB = function (name, email, postTitle, post, dreamType, image, callback) {
     var date = moment().format('llll');
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: date, dreamType: dreamType } } }, function(err, success) {
+    db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: date, dreamType: dreamType, image: image } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
           return callback(err);
