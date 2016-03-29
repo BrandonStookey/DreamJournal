@@ -6,10 +6,24 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
   
   $scope.postsData; 
   $scope.userName = auth.profile.name;
-  $scope.userEmail = auth.profile.email;  
+  $scope.userEmail = auth.profile.email; 
+  $scope.isUserFollowing; 
+  $scope.alreadyFollowing = true;
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
+
+    djMainFactory.isUserFollowing().then(function(data){
+      $scope.isUserFollowing = data;
+  
+      for(var i = 0; i < $scope.isUserFollowing.length; i++){
+        if($scope.isUserFollowing[i].userEmail == djMainFactory.setUserEmail){
+          $scope.alreadyFollowing = false;
+          break;
+        }
+      };
+    });
+
 
     djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
     .then(function(data){
@@ -18,9 +32,7 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
       console.log('$scope.result on otherUsersController: ', $scope.result);
     });
 
-    $scope.friendList = djMainFactory.friendList;
 
-    console.log('friendList: ', djMainFactory.friendList);
 
 
   };
@@ -28,24 +40,9 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
   $scope.init();
 //=============================Follow Button===========================
 
-
-
-  $scope.followCounter = 0;
-  $scope.followUser = false;
-
-  $scope.followButton = function(email){
-
-    if($scope.followCounter % 2 === 0){
-      $scope.followCounter++;
-      $scope.followUser = true;
-    } else {
-      $scope.followCounter++;      
-      $scope.followUser = false;
-    }  
-    
+  $scope.followButton = function(email, follow){
     console.log('Follow button being called: ', email);
-    djMainFactory.followButton(email, $scope.followUser);
-
+    djMainFactory.followButton(email, follow);
   };  
 
 

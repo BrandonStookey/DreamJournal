@@ -13,12 +13,26 @@ angular.module('dreamjournal.services', ['textAngular'])
   var getUserLikeData = [];
   var friendList;
 //=======================================================================Get all User Posts===========================================================
+  
+  var isUserFollowing = function(){
+    console.log('appmodule isUserFollowing!: ');
+    return $http({
+      method: 'GET',
+      url: '/followers/' + userEmail + '/' + setUserEmail,
+    })
+   .then(function(result) {
 
+      return result.data;
+    }, function(err) {
+      console.error('Post GET error:', err);
+    });
+
+  }
 
   var followButton = function(otherUserEmail, followUser){
     if(followUser){
       console.log('on appmodule.js otherUserEmail: ', otherUserEmail);
-     $http({
+      $http({
         method: 'PUT',
         url: '/user',
         data: {email: userEmail, otherUserEmail: otherUserEmail}
@@ -42,7 +56,6 @@ angular.module('dreamjournal.services', ['textAngular'])
   };  
 
 
-
   var getUserEmail = function(email){
     setUserEmail[0] = email;
     return setUserEmail;
@@ -61,6 +74,7 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/user/' + email,
     })
    .then(function(result) {
+
       return result.data;
     }, function(err) {
       console.error('Post GET error:', err);
@@ -79,7 +93,6 @@ angular.module('dreamjournal.services', ['textAngular'])
         console.error('Post GET error:', err);
     });
   };
-
 
 //=====================================================================Get All Blog Posts=============================================================
 	var createPost = function(postTitle, post, dreamNightmare){
@@ -101,7 +114,6 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/friends/' + userEmail,
     })
     .then(function(result) {
-      friendList = result.data;
       console.log('on appmodule.js: ', friendList);
       return result.data;
     }, function(err) {
@@ -247,7 +259,8 @@ angular.module('dreamjournal.services', ['textAngular'])
 		likePost: likePost,
     updatePost: updatePost,
     deletePost: deletePost,
-    friendList:friendList
+    friendList:friendList,
+    isUserFollowing:isUserFollowing
     // getUserLike: getUserLike,
     // getUserLikeData: getUserLikeData
 	}

@@ -289,13 +289,7 @@ var findAllFriendsPosts = function(userEmail, callback){
       console.log('findAllPosts Error ', err);
       return callback(err);
     }
-    
-    console.log('posts length: ', posts.length);
-    console.log('posts ', posts[0].friendList);
-
     friends = posts[0].friendList;
-
-    console.log('friends', friends);
   })
 
   db.User.find({}, function(err, posts){
@@ -312,16 +306,6 @@ var findAllFriendsPosts = function(userEmail, callback){
         if(friends[j].userEmail === undefined && j === friends.length + 1){
           break;
         }
-        // var foundUser = false;
-        // if(posts[i].email === userEmail){
-        //   if(!foundUser){
-        //     foundUser = true;
-        //     postMap.unshift(posts[i].post[0]);
-        //   }
-        //   break;
-        // }
-        // console.log('posts[i].pos: ', posts[i].post);
-        // console.log('friends[j].userEmail: ', friends[j].userEmail);
         if(posts[i].email === friends[j].userEmail || posts[i].email === userEmail){
           console.log('one helpers looking at each post: ', posts[i].post);
             posts[i].post.forEach(function(post){
@@ -332,9 +316,6 @@ var findAllFriendsPosts = function(userEmail, callback){
       }
     }
 
-    // console.log('flattening out an array: ', postMap.toString().split(','));
-    // console.log('postMap on helpers: ', postMap);
-    // postMap = postMap.toString().split(' ');
     postMap.sort(function(p1, p2) {return p1.date - p2.date });
     postMap.reverse();
     callback(null, postMap);  
@@ -342,6 +323,33 @@ var findAllFriendsPosts = function(userEmail, callback){
 };
 
 //====================================================================Get User Like==========================================================================================
+
+
+
+
+  var isUserFollowing = function(userEmail, otherUserEmail, callback){
+    console.log('on isuserfollowing helpers!')
+    db.User.find({}, function(err, posts){
+    if(err){
+      console.log('isUserFollowing Error ', err);
+      return callback(err);
+    }
+      var postMap = [];
+      for(var i = 0; i < posts.length; i++){
+        for(var j = 0; j < posts.length; j++){
+          if(posts[i].email === userEmail){
+            posts[i].friendList.forEach(function(post){
+              postMap.unshift(post);
+            });
+          }
+        }
+      }
+      callback(null, postMap);
+    });
+
+
+
+  }
 
 //   var getUserLike = function(postID, userEmail, callback){
 //     console.log('working on helpers getUserLIke');
@@ -381,7 +389,8 @@ module.exports = {
   deleteLikeComment: deleteLikeComment,
   followUser: followUser,
   deleteUserFromFriendsList: deleteUserFromFriendsList,
-  findAllFriendsPosts: findAllFriendsPosts
+  findAllFriendsPosts: findAllFriendsPosts,
+  isUserFollowing: isUserFollowing
   // getUserLike: getUserLike
 };
 

@@ -4,8 +4,9 @@
 		<h1 class="blog-title">{{ postsData[0].name }}</h1>
 	</div>  
 	
-	<button ng-click = 'followButton(postsData[0].email)'> Follow </button>
+	<a href = '#/home'><button ng-click = 'followButton(postsData[0].email, true)' ng-show = "alreadyFollowing"> Follow </button></a>
 
+	<a href = '#/home'><button ng-click = 'followButton(postsData[0].email, false)' ng-hide = "alreadyFollowing"> UnFollow </button></a>
 
 
 	<div class="row"> 

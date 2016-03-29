@@ -59,6 +59,23 @@ app.get('/user/:email', function(req, res) {
   });
 })
 
+app.get('/followers/:email/:otherUserEmail', function(req, res) {
+  console.log('on followers route!');
+  var userEmail = req.params.email;     
+  var otherUserEmail = req.params.otherUserEmail;  
+
+  helpers.isUserFollowing(userEmail, otherUserEmail,
+  function(err, data) { 
+    if(err){
+      return res.status(400).send(err);
+    }         
+      return res.send(data);
+  });
+})
+
+
+
+
 app.delete('/user/:userEmail/:otherUserEmail', function( req, res) {  
     console.log('Delete user from frineds list being called!');
 
