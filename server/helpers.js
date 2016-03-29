@@ -308,19 +308,33 @@ var findAllFriendsPosts = function(userEmail, callback){
 
     for(var i = 0; i < posts.length; i++){
       for(var j = 0; j < friends.length; j++){
-        if(friends[j].userEmail === undefined && j === friends.length){
+
+        if(friends[j].userEmail === undefined && j === friends.length + 1){
           break;
         }
-        console.log('posts[i].email: ', posts[i].email);
-        console.log('friends[j].userEmail: ', friends[j].userEmail);
-        if(posts[i].email === friends[j].userEmail){
-          console.log('one helpers looking at each post: ', posts[i]);
-          postMap.unshift(posts[i].post);
+        // var foundUser = false;
+        // if(posts[i].email === userEmail){
+        //   if(!foundUser){
+        //     foundUser = true;
+        //     postMap.unshift(posts[i].post[0]);
+        //   }
+        //   break;
+        // }
+        // console.log('posts[i].pos: ', posts[i].post);
+        // console.log('friends[j].userEmail: ', friends[j].userEmail);
+        if(posts[i].email === friends[j].userEmail || posts[i].email === userEmail){
+          console.log('one helpers looking at each post: ', posts[i].post);
+            posts[i].post.forEach(function(post){
+              postMap.unshift(post);
+            });
+          break;
         }
       }
     }
-    console.log('postMap on helpers: ', postMap);
 
+    // console.log('flattening out an array: ', postMap.toString().split(','));
+    // console.log('postMap on helpers: ', postMap);
+    // postMap = postMap.toString().split(' ');
     postMap.sort(function(p1, p2) {return p1.date - p2.date });
     postMap.reverse();
     callback(null, postMap);  
