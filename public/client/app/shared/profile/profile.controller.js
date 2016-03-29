@@ -13,18 +13,52 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
   console.log('image on profile: ', $scope.userImage);
   $scope.postsData; 
   $scope.result;
+  $scope.alreadyFoundFriend = {};
+  $scope.friendData;
+  $scope.friendList = [];  
 
 //======================Get All Blog Posts On Init=====================
   $scope.init = function(){
+    var userEmail = auth.profile.email; 
 
-    djMainFactory.getAllUserPosts(auth.profile.email)
+    djMainFactory.getAllUserPosts(userEmail)
     .then(function(data){
       $scope.postsData  = data;
     });
 
+
+
+    djMainFactory.getAllFriendsPosts(userEmail)
+    .then(function(data){
+      $scope.friendData = data;
+      console.log($scope.postsData);
+
+      if($scope.friendData === undefined){
+        return;
+      }
+      
+      for(var i = 0; i < $scope.friendData.length; i++){
+        var key = $scope.friendData[i].email;
+
+        if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
+          $scope.alreadyFoundFriend[key] = key;
+          $scope.friendList.push($scope.friendData[i]);
+        }
+      }
+
+    }); 
+
+
+
+
   }
 
   $scope.init();
+
+
+  $scope.getUserEmail = function(email){
+    djMainFactory.getUserEmail(email);
+  };
 
 //======================Create Comment on Post==========================
 

@@ -51,6 +51,11 @@ var userSchema = mongoose.Schema({
     type: [{
       userEmail: String
     }]},
+    
+  followerList:{ 
+    type: [{
+      userEmail: String
+    }]},
 });
 
 

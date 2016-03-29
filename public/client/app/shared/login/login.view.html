@@ -5,21 +5,25 @@
 	</div>  
 
 	<div class="row"> 
-	  <div class="blog-post"> 
-			<div class ="mainDiv"> 
-				<div class ="blogDiv"> 
-					 <div class="individualPostDiv" ng-repeat="post in allPostsData" > 
+		<div class="col-md-8 blog-main">
+	  	<div class="blog-post"> 
+				<div class ="mainDiv"> 
+					<div class ="blogDiv"> 
+						 <div class="individualPostDiv" ng-repeat="post in allPostsData" > 
 
-					  	<h3 class="blog-post-title"> {{ post.postTitle }} </h3>
+					  		<h3 class="blog-post-title"> {{ post.postTitle }} </h3>
 
 
 						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
 						  	<p class="blog-post-meta"> {{ post.name }} </p>
-						    <p  ng-bind-html="post.post"></p>
-
-
-				  </div> 
+						    
+						    <div class = "blogBoxSize">
+						   	 	<p  ng-bind-html="post.post"></p>
+						    </div>
+						    <hr>
+					</div>
 				</div> 
-			</div>		
-		</div>
+			</div> 
+		</div>		
+	</div>
 </div>

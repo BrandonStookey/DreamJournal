@@ -1,21 +1,22 @@
 <div class="container" ng-show = 'viewEditOptions'> 
 
-	<div class="blog-header">
-		<h1 class="blog-title">{{ singlePost[0].name }}</h1>
-	</div>  
+<div class="blog-header">
+  <h1 class="blog-title">Dream Journal</h1>
+  <p class="lead blog-description">{{ singlePost[0].name }}</p>        
+</div>
+      <div class="row">
+        <div class="col-md-8 blog-main">
+					<div class="individualPostDiv"  ng-repeat="post in singlePost"> 
 
-	<div class="row"> 
-	  <div class="blog-post"> 
-			<div class ="mainDiv"> 
-				<div class ="blogDiv"> 
-					 <div class="individualPostDiv" ng-repeat="post in singlePost"> 
-
-					  	<h3 class="blog-post-title"> {{ post.postTitle }} </h3>
+					  	<h3 class="blog-post-title"><img ng-src= '{{ post.image }}' alt="Smiley face" height="35" width="35" style = "border-radius: 50%"> {{ post.postTitle }} </h3>
 
 
 						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
 						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
+
+
 						    <p  ng-bind-html="post.post"></p>
+
 
 						  	<a href ="#/profile"><button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button></a>
 						  	

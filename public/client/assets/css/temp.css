@@ -36,7 +36,7 @@ h6, .h6 {
  */
 
 .blog-masthead {
-  background-color: #428bca;
+  background-color: #1DAFE8;
   -webkit-box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
           box-shadow: inset 0 -2px 5px rgba(0,0,0,.1);
 }
@@ -105,23 +105,25 @@ h6, .h6 {
 
  .blogBoxSize{
   max-height: 100px ;
+  margin-bottom: 5px;
+  padding-bottom: 5px;  
   position: relative;
   overflow: hidden;
+  text-overflow: ellipsis;
+  content: "";
   /*word-wrap: break-word;*/
   margin: 20px;
 
  };
 
- .blogBoxSize .read-more { 
-  position: absolute; 
-  bottom: 0; 
-  left: 0;
-  width: 100%; 
-  text-align: center; 
-  margin: 0; padding: 30px 0; 
-  
-  /* "transparent" only works here because == rgba(0,0,0,0) */
-  background-image: linear-gradient(to bottom, white 80%, white);
+ .blogBoxSize:before {
+    content:'';
+    width:100%;
+    height:100%;    
+    position:absolute;
+    left:0;
+    top:0;
+    background:linear-gradient(transparent 500x, white);
 }
 
 /* Sidebar modules for boxing content */
@@ -193,5 +195,13 @@ h6, .h6 {
 .searchBoxResult{
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    /* Set the hr color */
+    color: #999; /* old IE */
+    background-color: #333; /* Modern Browsers */
 }
 

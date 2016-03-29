@@ -3,8 +3,10 @@
 angular.module('dreamjournal.search', ['ngSanitize'])
 
 .controller('searchController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', '$interval', function ($scope, $rootScope, djMainFactory,  $http, auth, $interval) {
-  $scope.postsData;
 
+  $scope.userAlreadyFound = {};
+  $scope.postsData;
+  $scope.userList = [];
 
 
   $scope.init= function() {
@@ -13,6 +15,21 @@ angular.module('dreamjournal.search', ['ngSanitize'])
     djMainFactory.getAllPosts()
     .then(function(data){
       $scope.postsData  = data;
+
+      for(var i = 0; i < $scope.postsData.length; i++){
+        var key = $scope.postsData[i].email;
+        console.log(auth.profile.email);
+        console.log($scope.postsData[i].email)
+        if(!$scope.userAlreadyFound[key]){
+          if(key != auth.profile.email){
+            $scope.userAlreadyFound[key] = key;
+            $scope.userList.push($scope.postsData[i]);
+          }
+        }
+      }
+
+
+
     }); 
   };
 

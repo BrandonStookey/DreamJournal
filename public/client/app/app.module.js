@@ -74,7 +74,6 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/user/' + email,
     })
    .then(function(result) {
-
       return result.data;
     }, function(err) {
       console.error('Post GET error:', err);
@@ -108,10 +107,10 @@ angular.module('dreamjournal.services', ['textAngular'])
     });
   };
 
-  var getAllFriendsPosts = function(){
+  var getAllFriendsPosts = function(email){
     return $http({
       method: 'GET',
-      url: '/friends/' + userEmail,
+      url: '/friends/' + email,
     })
     .then(function(result) {
       console.log('on appmodule.js: ', friendList);

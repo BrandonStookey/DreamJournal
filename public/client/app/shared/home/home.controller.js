@@ -4,23 +4,27 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 
 .controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', '$interval', function ($scope, $rootScope, djMainFactory,  $http, auth, $interval) {
 
+  $scope.isUserSignedIn = $rootScope.signedIn;
   $scope.userName = auth.profile.name;
-  $scope.userEmail = auth.profile.email;
   $scope.postsData;
   $scope.alreadyFoundFriend = {};
   $scope.friendData;
   $scope.friendList = [];
-  $scope.isUserSignedIn = $rootScope.signedIn;
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
     // djMainFactory.getAllPosts();
-    djMainFactory.getAllFriendsPosts()
+    var userEmail = auth.profile.email;
+
+    djMainFactory.getAllFriendsPosts(userEmail)
     .then(function(data){
       $scope.postsData  = data;
       $scope.friendData = data;
       console.log($scope.postsData);
 
+      if($scope.friendData === undefined){
+        return;
+      }
       for(var i = 0; i < $scope.friendData.length; i++){
         var key = $scope.friendData[i].email;
 
@@ -29,9 +33,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
           $scope.friendList.push($scope.friendData[i]);
         }
       }
-
-
-
 
     }); 
   };

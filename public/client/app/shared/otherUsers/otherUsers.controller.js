@@ -2,16 +2,25 @@
 
 angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
-.controller('otherUsersController', ['$scope', 'auth', '$http', 'djMainFactory', function ($scope, auth, $http, djMainFactory) {
+.controller('otherUsersController', ['$scope', 'auth', '$http', 'djMainFactory', '$location', function ($scope, auth, $http, djMainFactory, location) {
   
   $scope.postsData; 
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email; 
   $scope.isUserFollowing; 
   $scope.alreadyFollowing = true;
+  $scope.isUser = true;
+  $scope.userEmail = auth.profile.email;
+  $scope.alreadyFoundFriend = {};
+  $scope.friendData;
+  $scope.friendList = [];    
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
+      console.log('on other user: ', $scope.userEmail);
+    if($scope.userEmail == djMainFactory.setUserEmail){
+      $scope.isUser = false;
+    }
 
     djMainFactory.isUserFollowing().then(function(data){
       $scope.isUserFollowing = data;
@@ -34,11 +43,36 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
     });
 
 
+//==========================get all user's friends post, to populate friends list
 
+    djMainFactory.getAllFriendsPosts(djMainFactory.setUserEmail)
+    .then(function(data){
+      $scope.friendData = data;
+      console.log($scope.postsData);
+
+      if($scope.friendData === undefined){
+        return;
+      }
+      
+      for(var i = 0; i < $scope.friendData.length; i++){
+        var key = $scope.friendData[i].email;
+
+        if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
+          $scope.alreadyFoundFriend[key] = key;
+          $scope.friendList.push($scope.friendData[i]);
+        }
+      }
+
+    }); 
 
   };
 
   $scope.init();
+
+
+  $scope.getUserEmail = function(email){
+    djMainFactory.getUserEmail(email);
+  };  
 //=============================Follow Button===========================
 
   $scope.followButton = function(email, follow){

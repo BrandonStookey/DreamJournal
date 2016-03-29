@@ -26,10 +26,10 @@
 	  <div class="blog-post"> 
 			<div class ="mainDiv"> 
 				<div class ="blogDiv"> 
-					 <div class="individualPostDiv" ng-repeat="post in postsData | filter: searchBox" > 
+					 <div class="individualPostDiv" ng-repeat="post in userList | filter: searchBox" > 
 
 
-						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"><img ng-src= '{{ post.image }}' alt="Smiley face" height="70" width="70" style = "border-radius: 50%"> {{ post.name }} </p></a>
+						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class ="searchBoxResult"><img ng-src= '{{ post.image }}' alt="Smiley face" height="70" width="70" style = "border-radius: 50%"> {{ post.name }} </p></a>
 
 						</div> 
 				  </div> 

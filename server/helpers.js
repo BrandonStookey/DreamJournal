@@ -288,13 +288,18 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
 
 var findAllFriendsPosts = function(userEmail, callback){
   var friends;
-  
+  console.log('userEmail: ', userEmail);  
   db.User.find({email: userEmail}, function(err, posts){
     if(err){
       console.log('findAllPosts Error ', err);
       return callback(err);
     }
-    friends = posts[0].friendList;
+
+    console.log('posts: on findallfrineds ', posts);
+
+    if(posts.length > 0){
+      friends = posts[0].friendList;
+    }
   })
 
   db.User.find({}, function(err, posts){
@@ -304,23 +309,23 @@ var findAllFriendsPosts = function(userEmail, callback){
     }
     // console.log('posts: ', posts);
     var postMap = [];
+    if(friends !== undefined){
+      for(var i = 0; i < posts.length; i++){
+        for(var j = 0; j < friends.length; j++){
 
-    for(var i = 0; i < posts.length; i++){
-      for(var j = 0; j < friends.length; j++){
-
-        if(friends[j].userEmail === undefined && j === friends.length + 1){
-          break;
-        }
-        if(posts[i].email === friends[j].userEmail || posts[i].email === userEmail){
-          console.log('one helpers looking at each post: ', posts[i].post);
-            posts[i].post.forEach(function(post){
-              postMap.unshift(post);
-            });
-          break;
+          if(friends[j].userEmail === undefined && j === friends.length + 1){
+            break;
+          }
+          if(posts[i].email === friends[j].userEmail || posts[i].email === userEmail){
+            console.log('one helpers looking at each post: ', posts[i].post);
+              posts[i].post.forEach(function(post){
+                postMap.unshift(post);
+              });
+            break;
+          }
         }
       }
     }
-
     postMap.sort(function(p1, p2) {return p1.date - p2.date });
     postMap.reverse();
     callback(null, postMap);  

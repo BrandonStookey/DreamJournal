@@ -34,6 +34,19 @@ angular.module('dreamjournal.graphservices', [])
     });       
   };
 
+    var getAllFriendsPosts = function(){
+    return $http({
+      method: 'GET',
+      url: '/friends/' + userEmail,
+    })
+    .then(function(result) {
+      return result.data;
+    }, function(err) {
+        console.error('Post GET error:', err);
+    });
+  }; 
+
+
 
   console.log('on graph factory dreamcount: ', dreamCount);
   console.log('on graph factory ngihtmarecount: ', nightmareCount);
@@ -45,7 +58,8 @@ angular.module('dreamjournal.graphservices', [])
     dreamCount: dreamCount, 
     nightmareCount: nightmareCount,
     getDreams: getDreams,
-    getNightmares: getNightmares
+    getNightmares: getNightmares,
+    getAllFriendsPosts: getAllFriendsPosts
   } 
  
 }]);

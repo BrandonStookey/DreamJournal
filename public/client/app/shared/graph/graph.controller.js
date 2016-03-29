@@ -6,14 +6,39 @@ angular.module('dreamjournal.graph', [])
 
   $scope.dreamCount;
   $scope.nightmareCount;
+  $scope.alreadyFoundFriend = {};
+  $scope.friendData;
+  $scope.friendList = [];
 
   $scope.init = function(){
+
     GraphFactory.getDreams().then(function(data){
       $scope.dreamCount = data;
     })
     GraphFactory.getNightmares().then(function(data){
       $scope.nightmareCount = data;
     })
+
+    GraphFactory.getAllFriendsPosts()
+    .then(function(data){
+      $scope.postsData  = data;
+      $scope.friendData = data;
+      console.log($scope.postsData);
+
+      if($scope.friendData === undefined){
+        return;
+      }
+      for(var i = 0; i < $scope.friendData.length; i++){
+        var key = $scope.friendData[i].email;
+
+        if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
+          $scope.alreadyFoundFriend[key] = key;
+          $scope.friendList.push($scope.friendData[i]);
+        }
+      }
+
+    }); 
+
   };
 
   $scope.init();
