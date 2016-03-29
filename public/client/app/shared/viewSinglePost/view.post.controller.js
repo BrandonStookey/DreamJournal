@@ -22,6 +22,13 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
     });      
 
 
+//==========================Get All User Posts========================== 
+
+  $scope.getUserEmail = function(email){
+    djMainFactory.getUserEmail(email);
+  };
+
+
 //=======================================================Show Delete Button and Edit Button if Post Belongs to User=================================================
    
     $scope.showDeleteEditPostButton = function(){
