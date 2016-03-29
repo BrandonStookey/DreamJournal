@@ -7,8 +7,10 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email;
   $scope.postsData;
+  $scope.alreadyFoundFriend = {};
+  $scope.friendData;
+  $scope.friendList = [];
   $scope.isUserSignedIn = $rootScope.signedIn;
-
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
@@ -16,7 +18,21 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     djMainFactory.getAllFriendsPosts()
     .then(function(data){
       $scope.postsData  = data;
+      $scope.friendData = data;
       console.log($scope.postsData);
+
+      for(var i = 0; i < $scope.friendData.length; i++){
+        var key = $scope.friendData[i].email;
+
+        if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
+          $scope.alreadyFoundFriend[key] = key;
+          $scope.friendList.push($scope.friendData[i]);
+        }
+      }
+
+
+
+
     }); 
   };
 

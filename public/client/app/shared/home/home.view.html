@@ -1,9 +1,9 @@
 
+
+<div class="container"> 
 	<div class="blog-header">
 		<h1 class="blog-title">Dream Journal</h1>
 	</div>  
-
-<div class="container"> 
       <div class="row">
         <div class="col-md-8 blog-main">
 					<div class="individualPostDiv"  ng-repeat="post in postsData"> 
@@ -11,11 +11,15 @@
 					  	<h3 class="blog-post-title"> <a href = "#/viewPost"  ng-click = "getSinglePostID(post._id)"><img ng-src= '{{ post.image }}' alt="Smiley face" height="35" width="35" style = "border-radius: 50%">{{ post.postTitle }} </h3></a>
 
 
-						  	<p id = "test" class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
+						  	<p  class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>
 
 
 						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class="blog-post-meta"> {{ post.name }} </p></a>
-						    <p  ng-bind-html="post.post"></p>
+						   
+						   <div class = "blogBoxSize">
+						    <p   class ="read-more" ng-bind-html="post.post"></p>
+						   </div>
+							 
 							  <div ng-show='isUserSignedIn'>
 
 						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button> 
@@ -29,9 +33,11 @@
 
 
 						    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id); commentInput = null" ng-show = "post._id === viewComments" novalidate required></textarea>
+						<hr>
 						</div>
+
 				</div>
-			<hr>
+			
 			</div>
 
 
@@ -40,8 +46,8 @@
             <h4>Following</h4>
             <input type="text" class="form-control" ng-model="searchBox" placeholder="Search for...">
 
-					 <div  ng-repeat="post in postsData | filter: searchBox" > 
-						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class ="searchBoxResult"><img ng-src= '{{ post.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ post.name }} </p></a>
+					 <div  ng-repeat="friend in friendList | filter: searchBox" > 
+						  	<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p class ="searchBoxResult"><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
 						</div> 
 
           </div>

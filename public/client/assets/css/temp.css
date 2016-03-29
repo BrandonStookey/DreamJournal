@@ -29,10 +29,7 @@ h6, .h6 {
     width: 970px;
   }
 }
- #test{
-  height: 100px !important;
 
- };
 
 /*
  * Masthead for nav
@@ -104,6 +101,27 @@ h6, .h6 {
 .blog-main {
   font-size: 18px;
   line-height: 1.5;
+}
+
+ .blogBoxSize{
+  max-height: 100px ;
+  position: relative;
+  overflow: hidden;
+  /*word-wrap: break-word;*/
+  margin: 20px;
+
+ };
+
+ .blogBoxSize .read-more { 
+  position: absolute; 
+  bottom: 0; 
+  left: 0;
+  width: 100%; 
+  text-align: center; 
+  margin: 0; padding: 30px 0; 
+  
+  /* "transparent" only works here because == rgba(0,0,0,0) */
+  background-image: linear-gradient(to bottom, white 80%, white);
 }
 
 /* Sidebar modules for boxing content */
