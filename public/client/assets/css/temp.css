@@ -178,6 +178,8 @@ h6, .h6 {
  */
 
 .blog-footer {
+  position:fixed;
+  height:30px;
   padding: 40px 0;
   color: #999;
   text-align: center;
@@ -192,9 +194,20 @@ h6, .h6 {
     width: 500px;
 }
 
-.searchBoxResult{
+
+
+
+.searchPageBoxResult{
   padding-top: 10px;
   padding-bottom: 10px;
+  padding-left: 45px;
+}
+
+.searchBoxResult{
+  max-height: 400px;
+  overflow: scroll;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 hr {

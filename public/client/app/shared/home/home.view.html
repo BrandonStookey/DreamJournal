@@ -35,6 +35,7 @@
 
 						    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id); commentInput = null" ng-show = "post._id === viewComments" novalidate required></textarea>
 						<hr>
+						
 						</div>
 
 				</div>
@@ -47,10 +48,12 @@
             <h4>Following</h4>
             <input type="text" class="form-control" ng-model="searchBox" placeholder="Search for...">
 
-					 <div  ng-repeat="friend in friendList | filter: searchBox" > 
-						  	<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p class ="searchBoxResult"><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
-						</div> 
+          
+					 		<div  ng-repeat="friend in friendList | filter: searchBox" > 
+						  		<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p class ="searchBoxResult" ><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
+				
 
+						</div>
           </div>
 
         </div><!-- /.blog-sidebar -->

@@ -33,7 +33,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
           $scope.friendList.push($scope.friendData[i]);
         }
       }
-
     }); 
   };
 

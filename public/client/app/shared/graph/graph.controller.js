@@ -11,7 +11,8 @@ angular.module('dreamjournal.graph', [])
   $scope.friendList = [];
 
   $scope.init = function(){
-
+    var userEmail = auth.profile.email;
+    var userName = auth.profile.name;
     GraphFactory.getDreams().then(function(data){
       $scope.dreamCount = data;
     })
@@ -78,10 +79,10 @@ angular.module('dreamjournal.graph', [])
 
 //====================================================Below you can change the color and wave timings
       var dream = liquidFillGaugeDefaultSettings();
-      dream.circleColor = "#A190FF";
-      dream.textColor = "#7680FF";
-      dream.waveTextColor = "#7680FF";
-      dream.waveColor = "#A190FF";
+      dream.circleColor = "#1DAFE8";
+      dream.textColor = "#71D5E8";
+      dream.waveTextColor = "#71D5E8";
+      dream.waveColor = "#1DAFE8";
       dream.circleThickness = 0.1;
       dream.circleFillGap = 0.2;
       dream.textVertPosition = 0.8;
