@@ -8,11 +8,11 @@ angular.module('dreamjournal.login', [])
   $scope.login = function () {
     auth.signin({}, function (profile, token) {
       // Success callback
+      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.picture);
       $rootScope.signedIn = true;  
-      $scope.found = false;
       store.set('profile', profile);
       store.set('token', token);
-      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.picture);
+      $scope.found = false;
       $location.path('/home');
     }, function () {
       // Error callback

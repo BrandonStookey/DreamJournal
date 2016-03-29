@@ -84,7 +84,10 @@ angular.module('dreamjournal', [
 .run(function($rootScope, auth, store, jwtHelper, $location) {
   // This events gets triggered on refresh or URL change
   $rootScope.$on('$locationChangeStart', function() {
-
+    // if(!$rootScope.signIn){
+    //  LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.picture);
+    // }
+    
     var token = store.get('token');
     if (token) {
       if (!jwtHelper.isTokenExpired(token)) {
@@ -95,7 +98,7 @@ angular.module('dreamjournal', [
       } else {
         // Either show the login page or use the refresh token to get a new idToken
         $rootScope.signedIn = false;        
-        $location.path('/home');
+        // $location.path('/home');
       }
     }
   });

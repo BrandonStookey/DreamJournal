@@ -29,7 +29,10 @@ h6, .h6 {
     width: 970px;
   }
 }
+ #test{
+  height: 100px !important;
 
+ };
 
 /*
  * Masthead for nav
@@ -169,4 +172,8 @@ h6, .h6 {
     width: 500px;
 }
 
+.searchBoxResult{
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
