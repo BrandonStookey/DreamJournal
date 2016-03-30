@@ -3,8 +3,11 @@
         <img ng-src= './../assets/img/officialLogo2.png' alt="Dream Journal" height="100" width="350">
         <p class="lead blog-description">{{ postsData[0].name }}</p>
         	<div ng-show = "isUser">
-        	<a href = '#/home'><button ng-click = 'followButton(postsData[0].email, true)' ng-show = "alreadyFollowing"> Follow </button></a>
-					<a href = '#/home'><button ng-click = 'followButton(postsData[0].email, false)' ng-hide = "alreadyFollowing"> UnFollow </button></a>
+        	
+        	<button ng-click = 'followButton(postsData[0].email, true)' ng-show = "alreadyFollowing"> Follow </button>
+
+					<button ng-click = 'followButton(postsData[0].email, false)' ng-hide = "alreadyFollowing"> UnFollow </button>
+
       		</div>
       </div>  
       <div class="row">

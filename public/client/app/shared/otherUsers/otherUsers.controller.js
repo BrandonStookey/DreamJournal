@@ -17,7 +17,6 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
-      console.log('on other user: ', $scope.userEmail);
     if($scope.userEmail == djMainFactory.setUserEmail){
       $scope.isUser = false;
     }
@@ -36,10 +35,7 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
     djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
     .then(function(data){
-      console.log('DATA On otherUSer Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result on otherUsersController: ', $scope.result);
-      console.log('otherusers images?!?!: ', $scope.postsData);
     });
 
 
@@ -48,7 +44,6 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
     djMainFactory.getAllFriendsPosts(djMainFactory.setUserEmail)
     .then(function(data){
       $scope.friendData = data;
-      console.log($scope.postsData);
 
       if($scope.friendData === undefined){
         return;
@@ -71,10 +66,8 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
   djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
   .then(function(data){
-    console.log('DATA On otherUSer Controller!!!: ', data);
+
     $scope.postsData  = data;
-    console.log('$scope.result on otherUsersController: ', $scope.result);
-    console.log('otherusers images?!?!: ', $scope.postsData);
   });
     
   $scope.getUserEmail = function(email){
@@ -83,8 +76,16 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 //=============================Follow Button===========================
 
   $scope.followButton = function(email, follow){
+
     console.log('Follow button being called: ', email);
     djMainFactory.followButton(email, follow);
+    
+    if($scope.alreadyFollowing === false){
+      $scope.alreadyFollowing = true;
+    } else{
+      $scope.init();
+    }
+
   }
 
 

@@ -32,7 +32,7 @@ angular.module('dreamjournal.services', ['textAngular'])
   var followButton = function(otherUserEmail, followUser){
     if(followUser){
       console.log('on appmodule.js otherUserEmail: ', otherUserEmail);
-      $http({
+      return $http({
         method: 'PUT',
         url: '/user',
         data: {email: userEmail, otherUserEmail: otherUserEmail}
@@ -44,7 +44,7 @@ angular.module('dreamjournal.services', ['textAngular'])
       });    
     } else{   
       console.log('delete user from friends lits being called on app.module!');
-     $http({
+     return $http({
         method: 'DELETE',
         url: '/user/' + userEmail + '/' + otherUserEmail,
       })
