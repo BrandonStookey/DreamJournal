@@ -36,8 +36,13 @@ var createNewUser = function(name, email, image, callback){
 //===============================================================Add New Post To DataBase===========================================================================
 
 var createPostDB = function (name, email, postTitle, post, dreamType, image, callback) {
-    var date = moment().format('dddd, MMMM Do YYYY, h:mm:ss a');
-    db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: date, dreamType: dreamType, image: 'https://graph.facebook.com/' + image + '/picture?width=9999' } } }, function(err, success) {
+    var date = moment.utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
+
+    var localTime = moment(localTime).format('YYYY-MM-DD h:mm:ss');
+
+
+
+    db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: localTime, dreamType: dreamType, image: 'https://graph.facebook.com/' + image + '/picture?width=9999' } } }, function(err, success) {
         if (err) {
           console.log('createPostDB error ', err);
           return callback(err);
