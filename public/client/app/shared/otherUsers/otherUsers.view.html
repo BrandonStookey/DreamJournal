@@ -28,6 +28,7 @@
 
 						  	<!-- <button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button>  -->
 
+						  	<div ng-hide = "alreadyFollowing">
 						  	<button title = "Comment" class="fa fa-comment-o comment" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
 
 							  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
@@ -37,6 +38,7 @@
 
 
 						    <textarea type = "text"  id ="commentBox" class = "postTitle" ng-model="commentInput" placeholder= "Write Comment"  dl-enter-key="commentOnPost(commentInput, post._id); commentInput = null" ng-show = "post._id === viewComments" novalidate required></textarea>
+						</div>
 						</div>
 						<hr>
 
