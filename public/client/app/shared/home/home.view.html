@@ -54,7 +54,7 @@
             	<div class ="searchBoxResult">
 
 					 		<div  ng-repeat="friend in friendList | filter: searchBox" > 
-						  		<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p  ><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
+						  		<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><div><img class = "firendBoxImage"  ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </li></div>
 						</div>
 						</div>
           </div>

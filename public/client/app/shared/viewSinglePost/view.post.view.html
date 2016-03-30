@@ -45,6 +45,7 @@
 	<div class ="graphFooter"	ng-show = 'viewEditOptions'></div>
 <!-- Below is the textAngular editing tool, it is not visible unless a user clicks on the edit button, it will then show this and hide the above information
  -->
+ <div class = "container">
 <div ng-hide = "viewEditOptions"  ng-show = "showButton()">
   <div class="blog-header">
 <!--     <img ng-src= './../assets/img/officialLogo2.png' alt="Dream Journal" height="100" width="350"> -->
@@ -52,7 +53,7 @@
   </div>  
 		<form name ="myForm">
 
-			<input type = "text" class = "postTitle" ng-model="postForEditPostTitle" placeholder= "Place Blog Title Here" novalidate required></input>
+			<input type = "text" class = "postTitleTextBox" ng-model="postForEditPostTitle" placeholder= "Place Blog Title Here" novalidate required></input>
 		
 			<div type="text" text-angular ng-model="postForEditPostBody" required></div>
 
@@ -67,6 +68,7 @@
 		</form>
 
 	<a href ="#/profile" ng-hide = "viewEditOptions" ><button ng-click ="updatePost(postForEditPostTitle, postForEditPostBody, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Update Blog post</button></a>		
+	</div>
 
 </div>
     <footer class="blog-footer">

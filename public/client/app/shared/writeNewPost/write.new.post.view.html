@@ -1,10 +1,12 @@
+  <div class = "container">
   <div class="blog-header">
 <!--     <img ng-src= './../assets/img/officialLogo2.png' alt="Dream Journal" height="100" width="350"> -->
     <p class="lead blog-description"> Write New Post</p>
   </div>  
 <form name ="myForm">
-	<input type = "text" class = "postTitle" ng-model="postTitle" placeholder= "Place Blog Title Here" novalidate required></input>
-	
+
+	<input type = "text" class = "postTitleTextBox" ng-model="postTitle" placeholder= "Place Blog Title Here" novalidate required></input>
+
 	<div type="text" text-angular ng-model="htmlVariable" required></div>
 
 <label for="singleSelect"> Was it a Dream or Nightmare? </label><br>
@@ -14,7 +16,7 @@
     </select><br>
 </form>
 <button ng-click ="createPost(postTitle, htmlVariable, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Submit Blog post</button>
-
+</div>
     <footer class="blog-footer">
         <a>Dream Journal</a>
       </p>
