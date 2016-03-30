@@ -69,7 +69,14 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
   $scope.init();
 
-
+  djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
+  .then(function(data){
+    console.log('DATA On otherUSer Controller!!!: ', data);
+    $scope.postsData  = data;
+    console.log('$scope.result on otherUsersController: ', $scope.result);
+    console.log('otherusers images?!?!: ', $scope.postsData);
+  });
+    
   $scope.getUserEmail = function(email){
     djMainFactory.getUserEmail(email);
   };  
@@ -77,7 +84,21 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
   $scope.followButton = function(email, follow){
     console.log('Follow button being called: ', email);
-    djMainFactory.followButton(email, follow);
+    djMainFactory.followButton(email, follow).then(function(){
+
+    // if($scope.alreadyFollowing === false){
+    //   $scope.alreadyFollowing = true;
+    //   return $scope.alreadyFollowing;
+    // } 
+    // if($scope.alreadyFollowing === true) {
+    //   $scope.alreadyFollowing = false;
+    //   return $scope.alreadyFollowing;
+    // }
+
+    });
+
+
+
   };  
 
 
