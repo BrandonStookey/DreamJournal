@@ -105,6 +105,9 @@ h6, .h6 {
   color: #999;
 }
 
+#bootstrap-overrides{
+  color: #337ab7 ;
+}
 
 /*
  * Main column and sidebar layout
