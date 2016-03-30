@@ -33,7 +33,7 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
    
     $scope.showDeleteEditPostButton = function(){
       var isUserPost = false;
-      if($scope.singlePost[0].name === $scope.userName ){
+      if($scope.singlePost[0].email === $scope.userEmail ){
         return isUserPost = true;
       }
       return isUserPost;

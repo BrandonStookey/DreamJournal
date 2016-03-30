@@ -42,7 +42,7 @@
 			</div>		
 		</div>
 </div>
-
+	<div class ="graphFooter"	ng-show = 'viewEditOptions'></div>
 <!-- Below is the textAngular editing tool, it is not visible unless a user clicks on the edit button, it will then show this and hide the above information
  -->
 <div ng-hide = "viewEditOptions"  ng-show = "showButton()">
@@ -69,6 +69,9 @@
 	<a href ="#/profile" ng-hide = "viewEditOptions" ><button ng-click ="updatePost(postForEditPostTitle, postForEditPostBody, dreamNightmare)" class ="blogBoxSubmit" ng-disabled="myForm.$invalid">Update Blog post</button></a>		
 
 </div>
-
+    <footer class="blog-footer">
+        <a>Dream Journal</a>
+      </p>
+    </footer>
 
 
