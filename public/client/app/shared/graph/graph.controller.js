@@ -9,10 +9,10 @@ angular.module('dreamjournal.graph', [])
   $scope.alreadyFoundFriend = {};
   $scope.friendData;
   $scope.friendList = [];
+  $scope.userName = auth.profile.name;
 
   $scope.init = function(){
     var userEmail = auth.profile.email;
-    var userName = auth.profile.name;
     GraphFactory.getDreams().then(function(data){
       $scope.dreamCount = data;
     })
