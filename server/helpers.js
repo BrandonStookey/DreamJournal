@@ -13,7 +13,7 @@ var createNewUser = function(name, email, image, callback){
     var user = new db.User({
       email: email,    
       name: name,
-      image: image,
+      image: 'https://graph.facebook.com/' + image + '/picture?width=9999',
       friendList:{ 
         type: [{
           userEmail: email,

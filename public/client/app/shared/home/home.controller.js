@@ -3,18 +3,23 @@
 angular.module('dreamjournal.home', ['ngSanitize'])
 
 .controller('homeController', ['$scope', '$rootScope', 'djMainFactory', '$http', 'auth', '$interval', function ($scope, $rootScope, djMainFactory,  $http, auth, $interval) {
-
   $scope.isUserSignedIn = $rootScope.signedIn;
   $scope.userName = auth.profile.name;
   $scope.postsData;
   $scope.alreadyFoundFriend = {};
   $scope.friendData;
   $scope.friendList = [];
-
+  $scope.faceBook;
+  $scope.facebookImageUrl = 'https://graph.facebook.com/' + auth.profile.identities[0].user_id + '/picture?width=9999';
+  
   $scope.init= function() {
+  console.log('Facebook Image: ', $scope.facebookImageUrl);
 //======================Get All Blog Posts On Init=====================
     // djMainFactory.getAllPosts();
     var userEmail = auth.profile.email;
+
+    $scope.faceBook = auth.profile.identities[0].user_id;
+    console.log('$scope.faceBook: ', $scope.faceBook);
 
     djMainFactory.getAllFriendsPosts(userEmail)
     .then(function(data){

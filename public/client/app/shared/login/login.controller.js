@@ -8,7 +8,7 @@ angular.module('dreamjournal.login', [])
   $scope.login = function () {
     auth.signin({}, function (profile, token) {
       // Success callback
-      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.picture);
+      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.identities[0].user_id);
       $rootScope.signedIn = true;  
       store.set('profile', profile);
       store.set('token', token);
