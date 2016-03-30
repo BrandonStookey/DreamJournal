@@ -259,3 +259,8 @@ hr {
 .blog-footer p:last-child {
   margin-bottom: 0;
 }
+
+button.comment{
+  background:none;
+  border:none;
+}

@@ -18,19 +18,19 @@
 						    <p  ng-bind-html="post.post"></p>
 
 
-						  	<a href ="#/profile"><button title="Delete Post" class="fa fa-times-circle" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button></a>
+						  	<a href ="#/profile"><button title="Delete Post" class="fa fa-times-circle comment" ng-click= "deletePost()" ng-show = "showDeleteEditPostButton()"></button></a>
 						  	
-								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showDeleteEditPostButton()"></button>		
+								<button title="Edit" class="fa fa-pencil comment" ng-click= "editPost()" ng-show = "showDeleteEditPostButton()"></button>		
 
 
 						  	<!-- <button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)"> {{ post.like.length }}</button>  -->
 
-						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
+						  	<button title = "Comment" class="fa fa-comment-o comment" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
 
 					  	<div ng-repeat ="comment in post.postComment" ng-show = "post._id === viewComments">
 						  	<h5 class="blog-post-meta"> {{ comment.userName }} {{ comment.commentDate}}
 						  	
-						  	<button class="fa fa-times-circle" ng-click= "deleteComment(post._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
+						  	<button class="fa fa-times-circle comment" ng-click= "deleteComment(post._id, comment._id);" ng-show ="comment.userName === isUser"></button></h5> 
 
 						  	<h6 class="blog-post-meta"> {{ comment.comment }}  </h6>
 						  </div>
