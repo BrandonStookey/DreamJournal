@@ -36,9 +36,9 @@ var createNewUser = function(name, email, image, callback){
 //===============================================================Add New Post To DataBase===========================================================================
 
 var createPostDB = function (name, email, postTitle, post, dreamType, image, callback) {
-    var date = moment.utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
-
-    var localTime = moment(localTime).format('YYYY-MM-DD h:mm:ss');
+    // var date = moment.utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
+    var date = new Date;
+    var localTime = moment.utc(date).toDate();
 
 
 
