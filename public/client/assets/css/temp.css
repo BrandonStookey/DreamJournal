@@ -21,7 +21,7 @@ h6, .h6 {
   margin-top: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: normal;
-  color: #333;
+  color: ##333;
 }
 
 
@@ -178,23 +178,6 @@ h6, .h6 {
 }
 
 
-/*
- * Footer
- */
-
-.blog-footer {
-  position:fixed;
-  height:30px;
-  padding: 40px 0;
-  color: #999;
-  text-align: center;
-  background-color: #f9f9f9;
-  border-top: 1px solid #e5e5e5;
-}
-.blog-footer p:last-child {
-  margin-bottom: 0;
-}
-
 .postTitle{
     width: 500px;
 }
@@ -223,3 +206,22 @@ hr {
     background-color: #999; /* Modern Browsers */
 }
 
+
+.graphFooter{
+  padding-bottom: 200px;
+}
+
+/*
+ * Footer
+ */
+
+.blog-footer {
+  padding: 40px 0;
+  color: #999;
+  text-align: center;
+  background-color: #f9f9f9;
+  border-top: 1px solid #e5e5e5;
+}
+.blog-footer p:last-child {
+  margin-bottom: 0;
+}

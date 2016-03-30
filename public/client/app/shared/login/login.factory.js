@@ -20,30 +20,17 @@ angular.module('dreamjournal.loginservices', [])
 //=====================================================================Get All Blog Posts=============================================================
 
 	  var getAllPosts = function(postTitle, post, dreamNightmare){
-    $http({
-      method: 'GET',
-      url: '/post',
-    })
-    .then(function(result) {
-      if(allPostsData.length < 1 && result.data[0] !== undefined){
-        allPostsData.unshift(result.data[0]);
-      };
-      for(var i = 0; i < result.data.length; i++){
-          for(var j = 0; j < result.data.length; j++){
-            if(allPostsData[j] === undefined){
-              allPostsData.unshift(result.data[i]);
-              break;
-            }
-            if(result.data[i]._id == allPostsData[j]._id) {
-              allPostsData[j] = result.data[i];
-              break;
-            } 
-          } 
-        }
-    }, function(err) {
-        console.error('Post GET error:', err);
-    });
-  }; 
+      return $http({
+        method: 'GET',
+        url: '/post',
+      })
+      .then(function(result) {
+        return result.data;
+      }, function(err) {
+          console.error('Post GET error:', err);
+      });
+  };
+
 
   return {
   	allPostsData: allPostsData,

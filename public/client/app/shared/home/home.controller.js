@@ -49,7 +49,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.commentOnPost = function(comment, postID){
     djMainFactory.commentOnPost(comment, postID);
 
-    djMainFactory.getAllFriendsPosts()
+    djMainFactory.getAllFriendsPosts(auth.profile.email)
     .then(function(data){
       $scope.postsData  = data;
       console.log($scope.postsData);
@@ -60,7 +60,7 @@ angular.module('dreamjournal.home', ['ngSanitize'])
 $scope.deleteComment = function(postID, commentID){
     djMainFactory.deleteComment(postID, commentID);
 
-    djMainFactory.getAllFriendsPosts()
+    djMainFactory.getAllFriendsPosts(auth.profile.email)
     .then(function(data){
       $scope.postsData  = data;
       console.log($scope.postsData);

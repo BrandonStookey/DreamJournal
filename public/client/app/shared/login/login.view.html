@@ -11,7 +11,7 @@
 					<div class ="blogDiv"> 
 						 <div class="individualPostDiv" ng-repeat="post in allPostsData" > 
 
-					  		<h3 class="blog-post-title"> {{ post.postTitle }} </h3>
+					  		<h3 class="blog-post-title"><img ng-src= '{{ post.image }}' alt="Smiley face" height="35" width="35" style = "border-radius: 50%"> {{ post.postTitle }} </h3>
 
 
 						  	<p class="blog-post-meta"> {{ post.dreamType }} {{ post.postDate }} </p>

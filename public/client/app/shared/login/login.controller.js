@@ -27,7 +27,6 @@ angular.module('dreamjournal.login', [])
     store.remove('token');
   };
 
-  $scope.allPostsData = LoginFactory.allPostsData;
   
   $scope.init= function(){
     $scope.showButton = function(){
@@ -37,7 +36,15 @@ angular.module('dreamjournal.login', [])
       return $scope.found;
     }    
   //======Get All Blog Posts On Init======================
-    LoginFactory.getAllPosts();
+  $scope.allPostsData;
+
+  LoginFactory.getAllPosts().then(function(data){
+    $scope.allPostsData = data;
+  });
+
+
+
+
 
   };
 

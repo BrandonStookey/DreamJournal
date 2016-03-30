@@ -23,7 +23,7 @@
 								<button title="Edit" class="fa fa-pencil" ng-click= "editPost()" ng-show = "showDeleteEditPostButton()"></button>		
 
 
-						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)"> {{ post.like.length }}</button> 
+						  	<!-- <button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)"> {{ post.like.length }}</button>  -->
 
 						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
 
@@ -46,7 +46,10 @@
 <!-- Below is the textAngular editing tool, it is not visible unless a user clicks on the edit button, it will then show this and hide the above information
  -->
 <div ng-hide = "viewEditOptions"  ng-show = "showButton()">
-	<h1>Edit Post</h1>
+  <div class="blog-header">
+<!--     <img ng-src= './../assets/img/officialLogo2.png' alt="Dream Journal" height="100" width="350"> -->
+    <p class="lead blog-description"> Edit Post </p>
+  </div>  
 		<form name ="myForm">
 
 			<input type = "text" class = "postTitle" ng-model="postForEditPostTitle" placeholder= "Place Blog Title Here" novalidate required></input>

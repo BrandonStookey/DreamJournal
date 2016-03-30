@@ -24,7 +24,7 @@
 							 
 							  <div ng-show='isUserSignedIn'>
 
-						  	<button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button> 
+						  	<!-- <button title = "Thumbs Up" class="fa fa-thumbs-o-up" ng-click = "likePost(post._id)">{{ post.like.like }} {{ post.like.length }}</button>  -->
 
 						  	<button title = "Comment" class="fa fa-comment-o" ng-click ="showComments(post._id); showDeleteCommentButton()"> {{ post.postComment.length }}</button><br>
 
@@ -49,7 +49,6 @@
             <h4>Following</h4>
             <input type="text" class="form-control" ng-model="searchBox" placeholder="Search for...">
 
-          
 					 		<div  ng-repeat="friend in friendList | filter: searchBox" > 
 						  		<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p class ="searchBoxResult" ><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
 				
