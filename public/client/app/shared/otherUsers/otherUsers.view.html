@@ -3,7 +3,7 @@
         <img ng-src= './../assets/img/officialLogo2.png' alt="Dream Journal" height="100" width="350">
         <p class="lead blog-description">{{ postsData[0].name }}</p>
         	<div ng-show = "isUser">
-        	
+
         	<button ng-click = 'followButton(postsData[0].email, true)' ng-show = "alreadyFollowing"> Follow </button>
 
 					<button ng-click = 'followButton(postsData[0].email, false)' ng-hide = "alreadyFollowing"> UnFollow </button>
@@ -57,7 +57,7 @@
             <div class ="searchBoxResult">
 
 					 <div  ng-repeat="friend in friendList | filter: searchBox" > 
-						  	<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
+						  	<p><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p>
 						</div> 
 						</div>
           </div>

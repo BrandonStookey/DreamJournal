@@ -19,6 +19,7 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 //======================Get All Blog Posts On Init=====================
     if($scope.userEmail == djMainFactory.setUserEmail){
       $scope.isUser = false;
+      $scope.alreadyFollowing = false;
     }
 
     djMainFactory.isUserFollowing().then(function(data){
@@ -71,7 +72,8 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
   });
     
   $scope.getUserEmail = function(email){
-    djMainFactory.getUserEmail(email);
+    djMainFactory.setUserEmail = email;
+    $scope.init();
   };  
 //=============================Follow Button===========================
 
@@ -79,7 +81,7 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
     console.log('Follow button being called: ', email);
     djMainFactory.followButton(email, follow);
-    
+
     if($scope.alreadyFollowing === false){
       $scope.alreadyFollowing = true;
     } else{

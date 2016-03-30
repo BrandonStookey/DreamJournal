@@ -74,6 +74,11 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/user/' + email,
     })
    .then(function(result) {
+
+      if(email == userEmail){
+        $location.path('/profile');
+      }
+
       return result.data;
     }, function(err) {
       console.error('Post GET error:', err);

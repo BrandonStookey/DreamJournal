@@ -11,6 +11,9 @@ body {
 img{
   margin-right: 10px;
   margin-bottom: 10px;
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
 }
 
 h1, .h1,
