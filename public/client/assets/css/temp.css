@@ -5,6 +5,7 @@
 body {
   font-family: Georgia, "Times New Roman", Times, serif;
   color: #555;
+  padding-top: 30px;
 }
 
 img{
@@ -38,6 +39,11 @@ h6, .h6 {
 /*
  * Masthead for nav
  */
+.navbar{
+  min-height: 35px;
+  margin-bottom: 0px;
+}
+
 
 .blog-masthead {
   background-color: #1DAFE8;
