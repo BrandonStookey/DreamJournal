@@ -38,7 +38,7 @@ var createNewUser = function(name, email, image, callback){
 var createPostDB = function (name, email, postTitle, post, dreamType, image, callback) {
     // var date = moment.utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
     var date = new Date;
-    var localTime = moment.utc(date).toDate();
+    var localTime = moment.utc(date).format();
 
 
 
