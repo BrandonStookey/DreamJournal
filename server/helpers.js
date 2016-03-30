@@ -38,7 +38,7 @@ var createNewUser = function(name, email, image, callback){
 var createPostDB = function (name, email, postTitle, post, dreamType, image, callback) {
     // var date = moment.utc().format('dddd, MMMM Do YYYY, h:mm:ss a');
     var date = new Date;
-    var localTime = moment.utc().format('llll');
+    var localTime = moment().format('llll');
 
 
 
@@ -194,7 +194,7 @@ var createNewComment = function(postID, userName, userComment, callback){
   console.log('createNewComment on Helpers!');
   console.log('allDataOnHelpers: ', postID, userName, userComment, callback);
 
-    var date = moment().format('MMMM Do YYYY, h:mm:ss a');
+    var date = moment().format('llll');
 
     db.User.update( { 'post._id': postID }, { $push: { 'post.$.postComment': {  comment: userComment, userName: userName, commentDate: date } } }, function(err, success) {
         if (err) {
