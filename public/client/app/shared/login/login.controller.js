@@ -1,21 +1,41 @@
 angular.module('dreamjournal.login', [])
 
-.controller('loginController', ['$scope', 'LoginFactory', '$rootScope', '$http', 'auth', 'store', '$location',
-  function ($scope, LoginFactory, $rootScope, $http, auth, store, $location) {
+.controller('loginController', ['$scope', 'LoginFactory', '$rootScope', '$http', 'auth', 'store', '$location', '$timeout',
+  function ($scope, LoginFactory, $rootScope, $http, auth, store, $location, $timeout) {
   /////////User will login using Auth0///////////////
   $scope.found;
-
+  console.log('$rootScope.signedIn: ', $rootScope.signedIn);
   $scope.login = function () {
     auth.signin({}, function (profile, token) {
-      // Success callback
-      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.identities[0].user_id);
-      $rootScope.signedIn = true;  
       store.set('profile', profile);
       store.set('token', token);
-      $scope.found = false;
-      $location.path('/home');
-    }, function () {
-      // Error callback
+      // Success callback
+
+    // $http({
+    //     method: 'POST',
+    //     url: '/user',
+    //     data: { email: auth.profile.email, name: auth.profile.name, image: auth.profile.identities[0].user_id}
+    //   })
+    //   .then(function(resp){
+    //     userData.unshift(resp);
+    //     return resp;
+    //   }, function(err){
+    //     console.log('error', err);
+    //   });
+
+
+
+
+
+      LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.identities[0].user_id).then(function(resp){
+        console.log('Hello????, response on createuser on login page');
+        $rootScope.signedIn = true;  
+        $scope.found = false;
+          $location.path('/home');
+      })
+    }, function (error) {
+        console.log(error);
+        return;
     });
   },    
 ///////////User logs out using Auth0////////////////
@@ -25,6 +45,10 @@ angular.module('dreamjournal.login', [])
     auth.signout();
     store.remove('profile');
     store.remove('token');
+    // Timeout for logout function to complete before path change
+    $timeout(function () {
+      $location.path('/');
+    }, 1);    
   };
 
   

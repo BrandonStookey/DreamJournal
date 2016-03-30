@@ -43,12 +43,12 @@
     <div class="blog-masthead navbar navbar-default navbar-fixed-top">
       <div class="container">
       <a title = 'Home' class="blog-nav-item active fa fa-home" href="#/home"></a>     
-      <a title = 'Profile' class="blog-nav-item active fa fa-user" href="#/profile" ng-hide = "found"></a>      
-      <a title = 'Graph' class="blog-nav-item active fa fa-bar-chart" href="#/graph" ng-hide = "found"></a>      
-      <a title = 'Write New Post' class="blog-nav-item active fa fa-file-text" href="#/newPost" ng-hide = "found"></a> 
-      <a title = 'Search' class="blog-nav-item active fa fa-search" href="#/search" ng-hide = "found"></a> 
-      <a title = 'Login' class="blog-nav-item active fa fa-sign-in" href="#/" ng-click="login()" ng-show = "found">Login</a>      
-      <a title = 'Log out' class="blog-nav-item active fa fa-sign-in" href="#/" ng-click="logout()" ng-hide = "found"></a>       
+      <a title = 'Profile' class="blog-nav-item active fa fa-user" href="#/profile" ng-show = "signedIn"></a>      
+      <a title = 'Graph' class="blog-nav-item active fa fa-bar-chart" href="#/graph" ng-show = "signedIn"></a>      
+      <a title = 'Write New Post' class="blog-nav-item active fa fa-file-text" href="#/newPost" ng-show = "signedIn"></a> 
+      <a title = 'Search' class="blog-nav-item active fa fa-search" href="#/search" ng-show = "signedIn"></a> 
+      <a title = 'Login' class="blog-nav-item active fa fa-sign-in" href="#/" ng-click="login()" ng-hide = "signedIn">Login</a>      
+      <a title = 'Log out' class="blog-nav-item active fa fa-sign-in" href="#/" ng-click="logout()" ng-show = "signedIn"></a>       
       </div>
     </div>    
 

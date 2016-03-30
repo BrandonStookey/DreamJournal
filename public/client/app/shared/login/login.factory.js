@@ -1,18 +1,25 @@
 angular.module('dreamjournal.loginservices', [])
 
-.factory('LoginFactory', ['$http', 'auth', '$location', function($http, auth, $location ){
+.factory('LoginFactory', ['$http', 'auth', '$location', '$rootScope', function($http, auth, $location, $rootScope ){
 	var allPostsData = [];
   var userData = [];
 //===================================================================Create New User===============================================================
   var createUser = function(email, name, image){    
-  	$http({
+    console.log("Am I even being called, create uesr!?!?!");
+  	return $http({
         method: 'POST',
         url: '/user',
         data: { email: email, name: name, image: image}
       })
       .then(function(resp){
+        console.log('create user on login factory response', resp);
         userData.unshift(resp);
+        $rootScope.signedIn = true; 
+        $location.path('/home');
+        return resp;
       }, function(err){
+        $rootScope.signedIn = true; 
+        $location.path('/home');
         console.log('error', err);
       });
 	};

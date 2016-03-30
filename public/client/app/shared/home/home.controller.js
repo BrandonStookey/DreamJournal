@@ -11,6 +11,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.friendList = [];
   $scope.faceBook;
   $scope.facebookImageUrl = 'https://graph.facebook.com/' + auth.profile.identities[0].user_id + '/picture?width=9999';
+
+  console.log('$rootScope.signedIn: ', $rootScope.signedIn);
   
   $scope.init= function() {
   console.log('Facebook Image: ', $scope.facebookImageUrl);
