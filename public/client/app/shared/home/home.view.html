@@ -48,12 +48,14 @@
         <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
           <div class="sidebar-module sidebar-module-inset">
             <h4>Following</h4>
+
             <input type="text" class="form-control" ng-model="searchBox" placeholder="Search for...">
 
-					 		<div  ng-repeat="friend in friendList | filter: searchBox" > 
-						  		<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p class ="searchBoxResult" ><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
-				
+            	<div class ="searchBoxResult">
 
+					 		<div  ng-repeat="friend in friendList | filter: searchBox" > 
+						  		<a href = "#/otherusers" ng-click="getUserEmail(friend.email)"><p  ><img ng-src= '{{ friend.image }}' alt="Smiley face" height="25" width="25" style = "border-radius: 50%"> {{ friend.name }} </p></a>
+						</div>
 						</div>
           </div>
 

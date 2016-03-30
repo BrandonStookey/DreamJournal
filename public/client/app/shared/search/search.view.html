@@ -1,4 +1,4 @@
-<div class="container"> 
+
 
 
 	<div class="blog-header">
@@ -8,7 +8,7 @@
 
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-lg-10">
     <div class="input-group">
       <span class="input-group-btn">
         <button class="btn btn-default" type="button">Go!</button>
@@ -24,19 +24,19 @@
 
 
 	<div class="row"> 
-	  <div class="blog-post"> 
-			<div class ="mainDiv"> 
-				<div class ="blogDiv"> 
-					 <div class="individualPostDiv" ng-repeat="post in userList | filter: searchBox" > 
+	  	<div class="blog-post"> 
+				<div class ="mainDiv"> 
+					<div class ="blogDiv"> 
+						 <div class="individualPostDiv" ng-repeat="post in userList | filter: searchBox" > 
 
-
+					 		<div class = 'searchPageSearchBoxPadding'></div>
 						  	<a href = "#/otherusers" ng-click="getUserEmail(post.email)"><p class ="searchPageBoxResult"><img ng-src= '{{ post.image }}' alt="Smiley face" height="70" width="70" style = "border-radius: 50%"> {{ post.name }} </p></a>
+						</div>
 
-						</div> 
-				  </div> 
-				</div> 
-			</div>		
-		</div>
+				 </div> 
+			</div> 
+		</div>		
+	</div>
 </div>
 
 

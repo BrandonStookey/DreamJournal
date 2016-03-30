@@ -84,23 +84,8 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
   $scope.followButton = function(email, follow){
     console.log('Follow button being called: ', email);
-    djMainFactory.followButton(email, follow).then(function(){
-
-    // if($scope.alreadyFollowing === false){
-    //   $scope.alreadyFollowing = true;
-    //   return $scope.alreadyFollowing;
-    // } 
-    // if($scope.alreadyFollowing === true) {
-    //   $scope.alreadyFollowing = false;
-    //   return $scope.alreadyFollowing;
-    // }
-
-    });
-
-
-
-  };  
-
+    djMainFactory.followButton(email, follow);
+  }
 
 
 
