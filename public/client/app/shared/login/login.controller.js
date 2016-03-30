@@ -10,23 +10,6 @@ angular.module('dreamjournal.login', [])
       store.set('profile', profile);
       store.set('token', token);
       // Success callback
-
-    // $http({
-    //     method: 'POST',
-    //     url: '/user',
-    //     data: { email: auth.profile.email, name: auth.profile.name, image: auth.profile.identities[0].user_id}
-    //   })
-    //   .then(function(resp){
-    //     userData.unshift(resp);
-    //     return resp;
-    //   }, function(err){
-    //     console.log('error', err);
-    //   });
-
-
-
-
-
       LoginFactory.createUser(auth.profile.email, auth.profile.name, auth.profile.identities[0].user_id).then(function(resp){
         console.log('Hello????, response on createuser on login page');
         $rootScope.signedIn = true;  
