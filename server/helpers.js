@@ -15,7 +15,7 @@ var createNewUser = function(name, email, image, callback){
       }
       console.log('post on helpers create user: ', user[0].email);
       if(user[0].email == email){
-        return callback(null, 200);
+        return callback(null, user);
       }
 
     })

@@ -28,7 +28,7 @@ describe('http://localhost:4568/user', function () {
         request(app)
           .post('/user')
           .send(newUser)
-          .expect(201, done);
+          .expect(200, done);
       });
   	});
   });

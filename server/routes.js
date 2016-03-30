@@ -31,7 +31,7 @@ app.route('/user')
   helpers.createNewUser(userName, userEmail, image,
   function(err, data) {  
     if(err){
-      res.status(200).send(data);
+      res.status(404).send(data);
     }
     res.status(200).send(data);
   });
