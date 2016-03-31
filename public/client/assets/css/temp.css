@@ -228,7 +228,7 @@ h6, .h6 {
   position: absolute;
   max-height: 400px;
   width: 215px;
-  overflow-y: scroll;
+  /*overflow-y: scroll;*/
   padding-top: 20px;
   padding-bottom: 20px;
 }
