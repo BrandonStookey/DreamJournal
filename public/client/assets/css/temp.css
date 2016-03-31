@@ -227,7 +227,8 @@ h6, .h6 {
 .searchBoxResult{
   position: absolute;
   max-height: 400px;
-  overflow: scroll;
+  width: 215px;
+  overflow-y: scroll;
   padding-top: 20px;
   padding-bottom: 20px;
 }
