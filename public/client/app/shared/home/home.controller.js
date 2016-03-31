@@ -10,7 +10,8 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.friendData;
   $scope.friendList = [];
   $scope.faceBook;
-  $scope.facebookImageUrl = 'https://graph.facebook.com/' + auth.profile.identities[0].user_id + '/picture?width=9999';
+
+  $scope.loading = true;
 
   console.log('$rootScope.signedIn: ', $rootScope.signedIn);
   
@@ -27,7 +28,10 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     .then(function(data){
       $scope.postsData  = data;
       $scope.friendData = data;
-      console.log($scope.postsData);
+
+
+      $scope.loading = true;
+
 
       if($scope.friendData === undefined){
         return;
@@ -132,17 +136,3 @@ $scope.deleteComment = function(postID, commentID){
   };
 
 }]);
-
-
-
-
-
-
-
-
-
-
-
-
-
-

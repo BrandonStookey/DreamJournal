@@ -12,6 +12,7 @@ angular.module('dreamjournal.services', ['textAngular'])
   var singlePost = [];
   var getUserLikeData = [];
   var friendList;
+
 //=======================================================================Get all User Posts===========================================================
   
   var isUserFollowing = function(){
@@ -319,5 +320,6 @@ angular.module('dreamjournal.services', ['textAngular'])
             }
         });
     };
-});
+})
+
 

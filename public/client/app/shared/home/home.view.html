@@ -10,6 +10,8 @@
         <div class="col-md-8 blog-main">
 					<div class="individualPostDiv"  ng-repeat="post in postsData"> 
 
+					<spinner name="mySpinner" show="loading"></spinner>
+
 					  	<h3 class="blog-post-title"> <a href = "#/viewPost"  ng-click = "getSinglePostID(post._id)"><img ng-src= '{{ post.image }}' alt="Smiley face" height="70" width="70" style = "border-radius: 50%">{{ post.postTitle }} </h3></a>
 
 
