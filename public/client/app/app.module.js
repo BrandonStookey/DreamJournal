@@ -113,6 +113,13 @@ angular.module('dreamjournal.services', ['textAngular'])
     });
   };
 
+
+
+  var alreadyFoundFriend = {};
+  var friendData;
+  var friendList = [];  
+  
+
   var getAllFriendsPosts = function(email){
     return $http({
       method: 'GET',
@@ -120,6 +127,15 @@ angular.module('dreamjournal.services', ['textAngular'])
     })
     .then(function(result) {
       console.log('on appmodule.js: ', friendList);
+      friendData = result.data
+      for(var i = 0; i < friendData.length; i++){
+        var key = friendData[i].email;
+
+        if(!alreadyFoundFriend[key] && friendData[i].email !== auth.profile.email){
+          alreadyFoundFriend[key] = key;
+          friendList.push(friendData[i]);
+        }
+      }   
       return result.data;
     }, function(err) {
         console.error('Post GET error:', err);
@@ -244,6 +260,9 @@ angular.module('dreamjournal.services', ['textAngular'])
   // };
 
 	return {
+    alreadyFoundFriend:alreadyFoundFriend,
+    friendData: friendData,
+    friendList: friendList,    
 		allPostsData: allPostsData,
     userPostsData: userPostsData,
     singlePost: singlePost,
