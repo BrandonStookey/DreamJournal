@@ -9,17 +9,6 @@ var createNewUser = function(name, email, image, callback){
     console.log('createNewUser on helpers called!');
     console.log('helpers create user image: ', image);
 
-    db.User.find({email: email}, function(err, user){
-      if(err){
-        console.log(err);
-      }
-      console.log('post on helpers create user: ', user[0].email);
-      if(user[0].email == email){
-        return callback(null, user);
-      }
-
-    })
-
     console.log('callback: ', callback);
     var user = new db.User({
       email: email,    
