@@ -33,9 +33,9 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
       $scope.friendData = data;
       console.log($scope.postsData);
 
-      if($scope.friendData === undefined){
-        return;
-      }
+      // if($scope.friendData === undefined){
+      //   return;
+      // }
       
       for(var i = 0; i < $scope.friendData.length; i++){
         var key = $scope.friendData[i].email;
