@@ -13,9 +13,11 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
   console.log('image on profile: ', $scope.userImage);
   $scope.postsData; 
   $scope.result;
-  $scope.alreadyFoundFriend = {};
-  $scope.friendData;
-  $scope.friendList = [];  
+  $scope.alreadyFoundFriend = djMainFactory.alreadyFoundFriend;
+  $scope.friendData = djMainFactory.friendData;
+  $scope.friendList = djMainFactory.friendList;
+  $scope.faceBook = djMainFactory.faceBook;
+
 
 //======================Get All Blog Posts On Init=====================
   $scope.init = function(){
@@ -30,21 +32,21 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
 
     djMainFactory.getAllFriendsPosts(userEmail)
     .then(function(data){
-      $scope.friendData = data;
-      console.log($scope.postsData);
+      // $scope.friendData = data;
+      // console.log($scope.postsData);
 
-      // if($scope.friendData === undefined){
-      //   return;
-      // }
+      // // if($scope.friendData === undefined){
+      // //   return;
+      // // }
       
-      for(var i = 0; i < $scope.friendData.length; i++){
-        var key = $scope.friendData[i].email;
+      // for(var i = 0; i < $scope.friendData.length; i++){
+      //   var key = $scope.friendData[i].email;
 
-        if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
-          $scope.alreadyFoundFriend[key] = key;
-          $scope.friendList.push($scope.friendData[i]);
-        }
-      }
+      //   if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
+      //     $scope.alreadyFoundFriend[key] = key;
+      //     $scope.friendList.push($scope.friendData[i]);
+      //   }
+      // }
 
     }); 
 
