@@ -6,12 +6,14 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.isUserSignedIn = $rootScope.signedIn;
   $scope.userName = auth.profile.name;
   $scope.postsData;
-  $scope.alreadyFoundFriend = djMainFactory.alreadyFoundFriend;
-  $scope.friendData = djMainFactory.friendData;
-  $scope.friendList = djMainFactory.friendList;
+  $scope.alreadyFoundFriend = {};
+  $scope.friendData;
+  $scope.friendList = [];
+  // $scope.alreadyFoundFriend = djMainFactory.alreadyFoundFriend;
+  // $scope.friendData = djMainFactory.friendData;
+  // $scope.friendList = djMainFactory.friendList;
 
 
-  $scope.loading = true;
   
   $scope.init= function() {
 //======================Get All Blog Posts On Init=====================
@@ -24,23 +26,22 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     djMainFactory.getAllFriendsPosts(userEmail)
     .then(function(data){
       $scope.postsData  = data;
-      // $scope.friendData = data;
+      $scope.friendData = data;
 
 
-      // $scope.loading = true;
 
 
-      // if($scope.friendData === undefined){
-      //   return;
-      // }
-      // for(var i = 0; i < $scope.friendData.length; i++){
-      //   var key = $scope.friendData[i].email;
+      if($scope.friendData === undefined){
+        return;
+      }
+      for(var i = 0; i < $scope.friendData.length; i++){
+        var key = $scope.friendData[i].email;
 
-      //   if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
-      //     $scope.alreadyFoundFriend[key] = key;
-      //     $scope.friendList.push($scope.friendData[i]);
-      //   }
-      // }
+        if(!$scope.alreadyFoundFriend[key] && $scope.friendData[i].email !== auth.profile.email){
+          $scope.alreadyFoundFriend[key] = key;
+          $scope.friendList.push($scope.friendData[i]);
+        }
+      }
     }); 
   };
 

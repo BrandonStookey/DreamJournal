@@ -110,11 +110,11 @@ angular.module('dreamjournal.services', ['textAngular'])
 
 
 
-  var alreadyFoundFriend = {};
+  // var alreadyFoundFriend = {};
 
-  var friendData;
+  // var friendData;
   
-  var friendList = [];  
+  // var friendList = [];  
   
 
   var getAllFriendsPosts = function(email){
@@ -123,17 +123,17 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/friends/' + email,
     })
     .then(function(result) {
-      friendData = result.data
+      // friendData = result.data
 
-      for(var i = 0; i < friendData.length; i++){
+      // for(var i = 0; i < friendData.length; i++){
 
-        var key = friendData[i].email;
-        if(!alreadyFoundFriend[key] && friendData[i].email !== auth.profile.email){
-          alreadyFoundFriend[key] = key;
+      //   var key = friendData[i].email;
+      //   if(!alreadyFoundFriend[key] && friendData[i].email !== auth.profile.email){
+      //     alreadyFoundFriend[key] = key;
 
-          friendList.push(friendData[i]);
-        }
-      }   
+      //     friendList.push(friendData[i]);
+      //   }
+      // }   
       return result.data;
     }, function(err) {
         console.error('Post GET error:', err);
@@ -257,9 +257,9 @@ angular.module('dreamjournal.services', ['textAngular'])
   // };
 
 	return {
-    alreadyFoundFriend:alreadyFoundFriend,
-    friendData: friendData,
-    friendList: friendList,    
+    // alreadyFoundFriend:alreadyFoundFriend,
+    // friendData: friendData,
+    // friendList: friendList,    
 		allPostsData: allPostsData,
     userPostsData: userPostsData,
     singlePost: singlePost,
