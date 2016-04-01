@@ -18,8 +18,6 @@ angular.module('dreamjournal.search', ['ngSanitize'])
 
       for(var i = 0; i < $scope.postsData.length; i++){
         var key = $scope.postsData[i].email;
-        console.log(auth.profile.email);
-        console.log($scope.postsData[i].email)
         if(!$scope.userAlreadyFound[key]){
           if(key != auth.profile.email){
             $scope.userAlreadyFound[key] = key;

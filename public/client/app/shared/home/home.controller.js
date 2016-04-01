@@ -9,21 +9,17 @@ angular.module('dreamjournal.home', ['ngSanitize'])
   $scope.alreadyFoundFriend = djMainFactory.alreadyFoundFriend;
   $scope.friendData = djMainFactory.friendData;
   $scope.friendList = djMainFactory.friendList;
-  $scope.faceBook = djMainFactory.faceBook;
-  $scope.faceBook;
+
 
   $scope.loading = true;
-
-  console.log('$rootScope.signedIn: ', $rootScope.signedIn);
   
   $scope.init= function() {
-  console.log('Facebook Image: ', $scope.facebookImageUrl);
 //======================Get All Blog Posts On Init=====================
     // djMainFactory.getAllPosts();
     var userEmail = auth.profile.email;
 
     $scope.faceBook = auth.profile.identities[0].user_id;
-    console.log('$scope.faceBook: ', $scope.faceBook);
+
 
     djMainFactory.getAllFriendsPosts(userEmail)
     .then(function(data){
@@ -64,7 +60,6 @@ angular.module('dreamjournal.home', ['ngSanitize'])
     djMainFactory.getAllFriendsPosts(auth.profile.email)
     .then(function(data){
       $scope.postsData  = data;
-      console.log($scope.postsData);
     });     
   };
 //==========================Delete Comment==============================
@@ -75,7 +70,6 @@ $scope.deleteComment = function(postID, commentID){
     djMainFactory.getAllFriendsPosts(auth.profile.email)
     .then(function(data){
       $scope.postsData  = data;
-      console.log($scope.postsData);
     });    
 };
 
@@ -132,7 +126,6 @@ $scope.deleteComment = function(postID, commentID){
 
   $scope.showDeleteCommentButton = function(){
     $scope.isUser = $scope.userName;
-    console.log('showButton ', $scope.isUser);
     return $scope.isUser;
   };
 

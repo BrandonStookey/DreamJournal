@@ -16,13 +16,11 @@ angular.module('dreamjournal.services', ['textAngular'])
 //=======================================================================Get all User Posts===========================================================
   
   var isUserFollowing = function(){
-    console.log('appmodule isUserFollowing!: ');
     return $http({
       method: 'GET',
       url: '/followers/' + userEmail + '/' + setUserEmail,
     })
    .then(function(result) {
-
       return result.data;
     }, function(err) {
       console.error('Post GET error:', err);
@@ -32,7 +30,6 @@ angular.module('dreamjournal.services', ['textAngular'])
 
   var followButton = function(otherUserEmail, followUser){
     if(followUser){
-      console.log('on appmodule.js otherUserEmail: ', otherUserEmail);
       return $http({
         method: 'PUT',
         url: '/user',
@@ -44,7 +41,6 @@ angular.module('dreamjournal.services', ['textAngular'])
         console.log(error);
       });    
     } else{   
-      console.log('delete user from friends lits being called on app.module!');
      return $http({
         method: 'DELETE',
         url: '/user/' + userEmail + '/' + otherUserEmail,
@@ -69,7 +65,6 @@ angular.module('dreamjournal.services', ['textAngular'])
   }
 
   var getAllUserPosts = function(email){
-    console.log('getAllUserPOsts EMAIL!: ', email);
     return $http({
       method: 'GET',
       url: '/user/' + email,
@@ -116,7 +111,9 @@ angular.module('dreamjournal.services', ['textAngular'])
 
 
   var alreadyFoundFriend = {};
+
   var friendData;
+  
   var friendList = [];  
   
 
@@ -126,13 +123,14 @@ angular.module('dreamjournal.services', ['textAngular'])
       url: '/friends/' + email,
     })
     .then(function(result) {
-      console.log('on appmodule.js: ', friendList);
       friendData = result.data
-      for(var i = 0; i < friendData.length; i++){
-        var key = friendData[i].email;
 
+      for(var i = 0; i < friendData.length; i++){
+
+        var key = friendData[i].email;
         if(!alreadyFoundFriend[key] && friendData[i].email !== auth.profile.email){
           alreadyFoundFriend[key] = key;
+
           friendList.push(friendData[i]);
         }
       }   
@@ -204,7 +202,6 @@ angular.module('dreamjournal.services', ['textAngular'])
   };
 //================================================Delete Comment
 	var deleteComment = function(postID, commentID){
-      console.log('controllers: ', commentID);
      $http({
       method: 'PUT',
       url: '/comment',

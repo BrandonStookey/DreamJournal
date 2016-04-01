@@ -74,7 +74,7 @@ beforeEach(function (done) {
         {
           name: 'The Mad Hatter',
           email: 'hatter@hatter.com',
-          image: 'http://anitasnotebook.com/wp-content/uploads/2013/11/Mad-Hatter-True-Story-Disney.jpg',
+          image: 'http://images2.fanpop.com/image/photos/12700000/Awsome-painting-of-JOHNNY-DEPP-as-Madd-Hatter-from-Alice-and-Wonderland-by-artist-Justin-Pok-madhatter-alice-fanclub-12755902-1400-696.jpg',
           post:[{
             image: 'http://anitasnotebook.com/wp-content/uploads/2013/11/Mad-Hatter-True-Story-Disney.jpg',
             postTitle: 'I am a little mad',

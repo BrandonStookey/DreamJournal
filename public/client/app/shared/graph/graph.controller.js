@@ -24,7 +24,6 @@ angular.module('dreamjournal.graph', [])
     .then(function(data){
       $scope.postsData  = data;
       $scope.friendData = data;
-      console.log($scope.postsData);
 
       if($scope.friendData === undefined){
         return;

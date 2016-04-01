@@ -79,7 +79,6 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
   $scope.followButton = function(email, follow){
 
-    console.log('Follow button being called: ', email);
     djMainFactory.followButton(email, follow);
 
     if($scope.alreadyFollowing === false){
@@ -101,9 +100,7 @@ angular.module('dreamjournal.otherusers', ['ngSanitize'])
 
     djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
     .then(function(data){
-      console.log('DATA On otherUSer Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result on otherUsersController: ', $scope.result);
     });    
   };
 //==========================Delete Comment==============================
@@ -113,9 +110,7 @@ $scope.deleteComment = function(postID, commentID){
 
     djMainFactory.getAllUserPosts(djMainFactory.setUserEmail)
     .then(function(data){
-      console.log('DATA On otherUSer Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result on otherUsersController: ', $scope.result);
     });    
 };
 
@@ -166,7 +161,6 @@ $scope.deleteComment = function(postID, commentID){
 
   $scope.showDeleteCommentButton = function(){
     $scope.isUser = $scope.userName;
-    console.log('showButton ', $scope.isUser);
     return $scope.isUser;
   };
 

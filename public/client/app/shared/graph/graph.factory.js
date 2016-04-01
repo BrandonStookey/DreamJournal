@@ -46,10 +46,6 @@ angular.module('dreamjournal.graphservices', [])
     });
   }; 
 
-
-
-  console.log('on graph factory dreamcount: ', dreamCount);
-  console.log('on graph factory ngihtmarecount: ', nightmareCount);
   return {
     userName: userName, 
     userEmail: userEmail,
@@ -63,24 +59,6 @@ angular.module('dreamjournal.graphservices', [])
   } 
  
 }]);
-
-//=========For Graph Controller
-
-//   $scope.dreamCount = GraphFactory.dreamCount;
-//   $scope.nightmareCount = GraphFactory.nightmareCount;
-
-//   console.log($scope.dreamCount = GraphFactory.dreamCount);
-//   console.log($scope.nightmareCount = GraphFactory.nightmareCount);
-
-
-//   $scope.init = function(){
-// //========Gets all post with a dreamType of 'Dream'
-//   GraphFactory.getDreams();
-// //=====Gets all post with a dreamType of 'Nightmare'
-//   GraphFactory.getNightmares();
-
-//   };
-//   $scope.init();  
 
 
 

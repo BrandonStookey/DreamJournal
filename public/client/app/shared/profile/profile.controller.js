@@ -10,7 +10,6 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
   $scope.userName = auth.profile.name;
   $scope.userEmail = auth.profile.email; 
   $scope.userImage = auth.profile.picture;
-  console.log('image on profile: ', $scope.userImage);
   $scope.postsData; 
   $scope.result;
   $scope.alreadyFoundFriend = djMainFactory.alreadyFoundFriend;
@@ -69,9 +68,7 @@ angular.module('dreamjournal.profile', ['ngSanitize'])
 
     djMainFactory.getAllUserPosts(auth.profile.email)
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
     });    
   };
 //==========================Delete Comment==============================
@@ -81,9 +78,7 @@ $scope.deleteComment = function(postID, commentID){
 
     djMainFactory.getAllUserPosts(auth.profile.email)
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
     });      
 };
 
@@ -104,9 +99,7 @@ $scope.deleteComment = function(postID, commentID){
 
      djMainFactory.getAllUserPosts(auth.profile.email)
     .then(function(data){
-      console.log('DATA On Controller!!!: ', data);
       $scope.postsData  = data;
-      console.log('$scope.result: ', $scope.result);
     });       
   };  
 
@@ -134,7 +127,6 @@ $scope.deleteComment = function(postID, commentID){
 
   $scope.showDeleteCommentButton = function(){
     $scope.isUser = $scope.userName;
-    console.log('showButton ', $scope.isUser);
     return $scope.isUser;
   };
 

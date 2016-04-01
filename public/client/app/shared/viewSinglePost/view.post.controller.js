@@ -15,7 +15,6 @@ angular.module('dreamjournal.viewPost', ['ngSanitize', 'textAngular'])
     djMainFactory.viewSinglePost(djMainFactory.setSinglePostID)
     .then(function(data){
       $scope.singlePost[0] = (data);
-      console.log('$scope.singlePost[0]: ', $scope.singlePost[0]);
       $scope.postForEditPostBody = $scope.singlePost[0].post;
       $scope.postForEditPostTitle = $scope.singlePost[0].postTitle;
       $scope.singlePostID = $scope.singlePost[0]._id;
