@@ -25,9 +25,6 @@ app.route('/user')
   var userEmail = req.body.email;    
   var image = req.body.image;
  
-  console.log('routes create user image: ', image);
-
-
   helpers.createNewUser(userName, userEmail, image,
   function(err, data) {  
     if(err){
@@ -37,10 +34,8 @@ app.route('/user')
   });
 })
   .put(function(req, res){
-    console.log('routes being called for otherUsers put request!');
     var userEmail = req.body.email;     
     var otherUserEmail = req.body.otherUserEmail;     
-   
 
     helpers.followUser(userEmail, otherUserEmail,
     function(err, data) {
@@ -65,7 +60,6 @@ app.get('/user/:email', function(req, res) {
 })
 
 app.get('/followers/:email/:otherUserEmail', function(req, res) {
-  console.log('on followers route!');
   var userEmail = req.params.email;     
   var otherUserEmail = req.params.otherUserEmail;  
 
@@ -82,12 +76,8 @@ app.get('/followers/:email/:otherUserEmail', function(req, res) {
 
 
 app.delete('/user/:userEmail/:otherUserEmail', function( req, res) {  
-    console.log('Delete user from frineds list being called!');
-
     var userEmail = req.params.userEmail;     
     var otherUserEmail = req.params.otherUserEmail;
-
-    console.log('on routes delete friendsList: ', userEmail);
 
     helpers.deleteUserFromFriendsList(userEmail, otherUserEmail,
     function(err, data) {
@@ -256,7 +246,6 @@ app.route('/like')
   })
 //========================Delete Like Post
   .put(function(req, res) { 
-    console.log('delete like Comment on routes');
 
     var postID = req.body.postID;
     var userEmail = req.body.userEmail; 

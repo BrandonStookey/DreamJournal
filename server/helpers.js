@@ -6,28 +6,27 @@ var moment = require ('moment');
 //==============================================================Add New User to Database================================================================
 
 var createNewUser = function(name, email, image, callback){
-    console.log('createNewUser on helpers called!');
-    console.log('helpers create user image: ', image);
+    var imageResult;
+    if(image === undefined ){
+      imageResult = 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQHERUTBxQSFhUWFxYbGRYYFBUaGRgbHxcdFiAYHxckHCgjJBonJxYZJj0lKCwsLi8zIx8zOjcvQys5LisBCgoKDA0ODgwNFCwZFBkrKysrKysrLCsrKysrKysrKysrKystKysrKysrKysrKysrKysrKysrKysrKysrKysrK//AABEIAGYAZgMBIgACEQEDEQH/xAAcAAEAAwEBAQEBAAAAAAAAAAAAAwYHBQgBBAL/xAA7EAABAwIDBQUDCQkAAAAAAAABAAIDBREEEjEGByFBUSJhcYGRQpKxEzI0NVJyocHCFCUzYnOisrPR/8QAFQEBAQAAAAAAAAAAAAAAAAAAAAH/xAAUEQEAAAAAAAAAAAAAAAAAAAAA/9oADAMBAAIRAxEAPwDcUREBEVE3p7RGmwjD4U2fMDmI1bHofe08ig/LtbvGGFcYqDlcRwdKeLQejRz8dPFZ3j6xPUjfHSyP7i4293Rc66XVEl10abXsRTCDgppG29nMS33TwXKul0Gv7H7wW1RwhqwayQ8GvHzHnp3O/Aq9rzLmW07tNojWsOY8Wbyw2BPNzfZce/l5X5qC4oiICIiAiIgLCd5eLOJqMt/YysHk2/5lbsvPm3xtUsT/AFP0tQcS6XUd0uqJLpdR3S6CS6t+6vGHD1FjBpKyRp8mmQf4FUy6su7U/vTDeMv+iRBvqIigIiICIiAsB3lxmGpT355XerQt+WNb6qeYMVFO0dmWPKT/ADMP/HD0KDPsyZlHdLqiTMmZR3S6CTMrfupi+WqcRHsMld/YWfrVMutP3I0/PJPiHDg0CMHvPaPwaoNbREQEREBERAXC2z2dbtLhXQuIDx2o3dHjTyOh8V3UQeW6pT5aTK6GoMLHt1B+IPMHqvy3W2b5qOzFYMYiwEkLgA7q1xsWnu0Kw+6Kkul1HdLoOjR6XLWpmw05pc93oBzcTyaOq9E7J0JuzmFZBCbkXL3faeeJP5DuAVU3K0tuHwRxFu3M94v0ax2QD1DitDRBERAREQEXD2q2qw+y8YfUndp18kbeL326Dp3ngslrG+DGYpxFLZFCzldud/mT2fK3mg3ZfxNM2BpdO5rWjiS4gADqSV5yl3j1KTXEuHgyMfBq4dTreIq31lNLJ3OcSPd0QaHvU28jq7P2SikPjuDJKNHW0a3qOd9NLLMsyjul0VJmTMo7pdBqG6jbmKjtOErDgyMuLo5D81pOrXHkCeN+VzdbPFK2YB0JDgdCCCD5ryRddGl17E0n6tnljHRrjb3dEHqlF5xi3k1KO1sSTbrHEf0qybP745oXBtfjZIzm+MFrx3ltyD5WRG1IvxUiqxVqJs1Me18btCOuhBHIjoUQeZdrK6/aLFyTzkkFxDB9lgPZHpx8brkXVy293fz7OyvfgmOkwziS17RmMYv8x414ddCqQHX0RUt0uosyZkEt0uosyZkEt0uosyZkEt0uosyZkEt0uosy/uGN2IcGQNc5x0a0Ek+ACC5budtTspJIJ7uhe35g5PBFnDyzA+S+qybAbqnYprpdq2OYCLMhvZ+o7braacB38UQbQRfVVeubvafWyXYvDta8+3GXRuv1OUgHzBX1ERT6huRhfc07Eys6B7WuHqLFV3G7l8XB9HxGGf8AeEjPgHIiCp1PY/EUv6U6A/de893Ng6LgyN+TJDuS+Iivl1+vAU9+O/glou4DiSOPoeqIirTSt2WMqYvC/Cgd8kt/T5Lu6qy4HcjK+xxuLjA6MjcT6kj4IiIsdO3MYGD6c+ebuz5AfdsfxV2ouzuFoQtSYIo+8N7R8XntE+JXxER1UREH/9k=';
+    } else {
+      imageResult = 'https://graph.facebook.com/' + image + '/picture?width=9999';
+    }
 
-    console.log('callback: ', callback);
     var user = new db.User({
       email: email,    
       name: name,
-      image: 'https://graph.facebook.com/' + image + '/picture?width=9999',
+      image: imageResult,
       friendList:{ 
         type: [{
           userEmail: email,
       }]},
     })
     .save(function(err, data) {
-  ////Later check to see what your second parameter is sending back
-  ////for example .save(function(err, INFO){}) Will be needed for testing purposes     
       if(err){
         console.log('createNewUser error', err);
         // return callback(err);
       } else {
-        console.log('Added New User!');
-        console.log('callback on createNewUser: ', callback);
         return callback(null, data);
       }
     });  
@@ -40,14 +39,10 @@ var createPostDB = function (name, email, postTitle, post, dreamType, image, cal
     var date = new Date;
     var localTime = moment().format('llll');
 
-
-
     db.User.findOneAndUpdate( {email: email}, { $push: { post:  { postTitle : postTitle, post: post, name: name, email: email, postDate: localTime, dreamType: dreamType, image: 'https://graph.facebook.com/' + image + '/picture?width=9999' } } }, function(err, success) {
         if (err) {
-          console.log('createPostDB error ', err);
           return callback(err);
         } else {
-          console.log('Added New Post! ', success);
           callback(null, 200);
         }   
     });
@@ -60,7 +55,6 @@ var createPostDB = function (name, email, postTitle, post, dreamType, image, cal
 var findAllPosts = function(callback){
   db.User.find({}, function(err, posts){
     if(err){
-      console.log('findAllPosts Error ', err);
       return callback(err);
     }
     var postMap = [];
@@ -85,7 +79,6 @@ var findAllPosts = function(callback){
 var findAllUserPosts = function(email, callback){
   db.User.find({ email: email }, function(err, posts){
     if(err){
-      console.log('findAllUserPosts Error ', err);
       return callback(err);
     }
     var postMap = [];
@@ -132,8 +125,6 @@ var findSinglePost = function(postID, callback){
 //==========================================================================Delete Single Post================================================================
 
 var deleteSinglePost = function(postID, callback){
-  console.log('helpers delete SINGLE post request!'); 
-  // console.log('helpers postTitle ', postTitle);
   db.User.update({}, 
                 { $pull: { post: { _id: postID } } },{multi:true}, function(err, posts){
                     if(err){
@@ -147,12 +138,9 @@ var deleteSinglePost = function(postID, callback){
 //=============================================================================Update Single Post===========================================================
 
 var updateSinglePost = function(email, postID, postTitle, post, dreamType, callback){
-  console.log('helpers update SINGLE post request!'); 
-  console.log('postID ', postID);
   // http://tech-blog.maddyzone.com/node/add-update-delete-object-array-schema-mongoosemongodb <-----Might be my answer 
   db.User.update({'post._id': postID}, {$set: { 'post.$.postTitle': postTitle, 'post.$.post': post, 'post.$.dreamType': dreamType }  }, function(err, model) {
       if(err){
-          console.log(err);
           return callback(err);
         }
         callback(null, model);
@@ -166,7 +154,6 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
   db.User.find({ email: email }, function(err, posts){
 
     if(err){
-      console.log('findAllUserPosts Error ', err);
       callback(err);
     }
 
@@ -191,17 +178,13 @@ var findAllDreamsNightmares = function(email, dreamType, callback){
 //===================================================================Create new comment========================================================================
 
 var createNewComment = function(postID, userName, userComment, callback){
-  console.log('createNewComment on Helpers!');
-  console.log('allDataOnHelpers: ', postID, userName, userComment, callback);
 
     var date = moment().format('llll');
 
     db.User.update( { 'post._id': postID }, { $push: { 'post.$.postComment': {  comment: userComment, userName: userName, commentDate: date } } }, function(err, success) {
         if (err) {
-          console.log('comment on post error ', err);
           return callback(err);
         } else {
-          console.log('Added New Comment! ', success);
           callback(null, 200);
         }   
     });
@@ -210,16 +193,11 @@ var createNewComment = function(postID, userName, userComment, callback){
 //=========================================================================Delete Single Comment=======================================================================
 
 var deleteComment = function(postID, commentID, callback){
-  console.log('helpers deleteComment postID ', postID);
-  console.log('helpers deleteComment commentID ', commentID);
-  console.log('deleteComment on helpers!');
 
   db.User.update({'post._id': postID}, { $pull: { 'post.$.postComment': { _id: commentID } } },{multi:true}, function(err, posts){
                     if(err){
-                      console.log('delete single post error: ', err);
                       return callback(err);
                     }
-                    console.log('deleteComment Posts: ', posts);
                     callback(null, 200);
                 });
 
@@ -232,10 +210,8 @@ var likeComment = function(postID, userEmail, userName, likeComment, callback){
 
     db.User.update( { 'post._id': postID }, { $push: { 'post.$.like': {  userEmail: userEmail, userName: userName, like: likeComment } } }, function(err, success) {
         if (err) {
-          console.log('comment on post error ', err);
           return callback(err);
         } else {
-          console.log('Added New Like! ', success);
           callback(null, 200);
         }   
     });
@@ -246,7 +222,6 @@ var likeComment = function(postID, userEmail, userName, likeComment, callback){
 //==============================================================================Delete Like Comment======================================================================
 
 var deleteLikeComment = function(postID, userEmail, likeComment, callback){
-  console.log('deletelikeComment Helpers userEmail: ', userEmail);
 
   db.User.update({'post._id': postID }, { $pull: { 'post.$.like': {userEmail: userEmail } } },{multi:true}, function(err, posts){
       if(err){
@@ -276,9 +251,6 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
 
 
   var deleteUserFromFriendsList = function(userEmail, otherUserEmail, callback){
-    console.log('deleteUser from friends list on helpers!');
-    console.log('deleteuser from freinds list helpers userEmail: ', userEmail);
-    console.log('deleteuser from friends list helpers otehr userEmail:' , otherUserEmail);
 
     db.User.update({email: userEmail}, { $pull: { friendList: { userEmail: otherUserEmail } } },{multi:true}, function(err, posts){
                   if(err){
@@ -293,14 +265,10 @@ var deleteLikeComment = function(postID, userEmail, likeComment, callback){
 
 var findAllFriendsPosts = function(userEmail, callback){
   var friends;
-  console.log('userEmail: ', userEmail);  
   db.User.find({email: userEmail}, function(err, posts){
     if(err){
-      console.log('findAllPosts Error ', err);
       return callback(err);
     }
-
-    console.log('posts: on findallfrineds ', posts);
 
     if(posts.length > 0){
       friends = posts[0].friendList;
@@ -309,7 +277,6 @@ var findAllFriendsPosts = function(userEmail, callback){
 
   db.User.find({}, function(err, posts){
     if(err){
-      console.log('findAllPosts Error ', err);
       return callback(err);
     }
     // console.log('posts: ', posts);
@@ -322,7 +289,6 @@ var findAllFriendsPosts = function(userEmail, callback){
             break;
           }
           if(posts[i].email === friends[j].userEmail || posts[i].email === userEmail){
-            console.log('one helpers looking at each post: ', posts[i].post);
               posts[i].post.forEach(function(post){
                 postMap.unshift(post);
               });
@@ -343,10 +309,9 @@ var findAllFriendsPosts = function(userEmail, callback){
 
 
   var isUserFollowing = function(userEmail, otherUserEmail, callback){
-    console.log('on isuserfollowing helpers!')
+
     db.User.find({}, function(err, posts){
     if(err){
-      console.log('isUserFollowing Error ', err);
       return callback(err);
     }
       var postMap = [];
