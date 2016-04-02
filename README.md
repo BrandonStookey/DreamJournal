@@ -9,7 +9,6 @@
 ## Table of Contents
 - Usage
 - Requirements
-- Development
 - Installing Dependencies
 - Contributing
 
@@ -19,8 +18,6 @@
 ##Requirements
 - Node 0.12.7
 - Mongo
-
-##Development
 
 
 ##Installing Dependencies
@@ -47,9 +44,11 @@ From within the root directory:
 	- Auth0: Create an [Auth0](https://auth0.com/) account
 		Make sure your allowed callback URLs are set up appropriately on Auth0 (include at least http://localhost:4568/ and http://127.0.0.1:4568/).	
 
+#Testing
+Tests are made with Karma and Jasmine for client side testing and Mocha for server side testing. Tests are located in ./test directory. To run the test just run npm test in your terminal. 
 
-##Contributing
-	See _CONTRIBUTING.md for contribution guidelines.
+#Contributing
+- See _CONTRIBUTING.md for contribution guidelines.
 
 
 
