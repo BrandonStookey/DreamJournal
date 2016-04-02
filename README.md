@@ -48,7 +48,7 @@ From within the root directory:
 Tests are made with Karma and Jasmine for client side testing and Mocha for server side testing. Tests are located in ./test directory. To run the test just run npm test in your terminal. 
 
 #Contributing
-- See _CONTRIBUTING.md for contribution guidelines.
+- See _CONTRIBUTING.md for contribution guidelines
 
 
 
